@@ -1,0 +1,276 @@
+@import "tailwindcss";
+
+/* ==============================================================
+ *  scadaMtto web - tablero de celdas
+ *
+ *  Criterio de pantalla de planta (ISA-101 / "high performance HMI"):
+ *  la base es gris y callada, y el COLOR SE RESERVA PARA LO ANORMAL.
+ *  Rojo = falla o emergencia, ambar = manual, teach o dato viejo.
+ *  "Produciendo" va en un verde apagado: es el estado normal y no tiene
+ *  que gritar. Si todo esta bien, la pantalla se ve casi gris.
+ *
+ *  - Dos temas por tokens: claro (gris papel) y oscuro (carbon, no negro
+ *    puro). El layout fija data-theme antes de pintar.
+ *  - Tipografia del sistema: el build del servidor puede no tener
+ *    internet y una fuente que no baja rompe la compilacion.
+ *  - Numeros en monoespaciada tabular: que no bailen al refrescar.
+ * ============================================================== */
+
+:root {
+  --fondo: #e4e5e6;
+  --panel: #f2f3f3;
+  --panel-alt: #eaebec;
+  --linea: #c8cbce;
+  --linea-fuerte: #a9aeb3;
+  --tinta: #1c2024;
+  --tenue: #59616a;
+  --apagado: #8a9199;
+
+  --marcha: #3d7a47;
+  --marcha-fondo: #dfe9e0;
+  --aviso: #a8650b;
+  --aviso-fondo: #f3e6cf;
+  --falla: #c0261f;
+  --falla-fondo: #f6dad8;
+  --lampara-off: #c3c7cb;
+
+  --barra-j1: #59636d;
+  --barra-j2: #9aa3ac;
+  color-scheme: light;
+}
+
+:root[data-theme="dark"] {
+  --fondo: #17191c;
+  --panel: #202327;
+  --panel-alt: #1b1e21;
+  --linea: #30353b;
+  --linea-fuerte: #454c54;
+  --tinta: #dfe3e6;
+  --tenue: #949ca5;
+  --apagado: #646c75;
+
+  --marcha: #6aa874;
+  --marcha-fondo: #1f2d22;
+  --aviso: #e0a145;
+  --aviso-fondo: #33281a;
+  --falla: #ff5a4f;
+  --falla-fondo: #3a1d1c;
+  --lampara-off: #3a4047;
+
+  --barra-j1: #a9b2bb;
+  --barra-j2: #66707a;
+  color-scheme: dark;
+}
+
+@theme inline {
+  --color-fondo: var(--fondo);
+  --color-panel: var(--panel);
+  --color-panel-alt: var(--panel-alt);
+  --color-linea: var(--linea);
+  --color-tinta: var(--tinta);
+  --color-tenue: var(--tenue);
+  --color-apagado: var(--apagado);
+  --color-marcha: var(--marcha);
+  --color-aviso: var(--aviso);
+  --color-falla: var(--falla);
+
+  --font-sans: ui-sans-serif, system-ui, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --font-mono: ui-monospace, "Cascadia Mono", "Segoe UI Mono", Consolas, "Liberation Mono", monospace;
+}
+
+html,
+body {
+  min-height: 100%;
+}
+
+body {
+  background-color: var(--fondo);
+  color: var(--tinta);
+  font-family: var(--font-sans);
+  font-size: 14px;
+  line-height: 1.45;
+  -webkit-font-smoothing: antialiased;
+}
+
+:focus-visible {
+  outline: 2px solid var(--tinta);
+  outline-offset: 2px;
+}
+
+@layer components {
+  .panel {
+    background-color: var(--panel);
+    border: 1px solid var(--linea);
+    border-radius: 3px;
+  }
+
+  .rotulo {
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.09em;
+    text-transform: uppercase;
+    color: var(--tenue);
+  }
+
+  .num {
+    font-family: var(--font-mono);
+    font-variant-numeric: tabular-nums;
+    letter-spacing: -0.01em;
+  }
+
+  /* -- Barra superior y solapas ------------------------------ */
+  .barra {
+    background-color: var(--panel);
+    border-bottom: 1px solid var(--linea-fuerte);
+  }
+
+  .solapa {
+    display: inline-flex;
+    align-items: center;
+    height: 2.6rem;
+    padding: 0 1rem;
+    font-size: 0.82rem;
+    font-weight: 600;
+    letter-spacing: 0.03em;
+    color: var(--tenue);
+    border-bottom: 3px solid transparent;
+    margin-bottom: -1px;
+    white-space: nowrap;
+  }
+  .solapa:hover {
+    color: var(--tinta);
+  }
+  .solapa[aria-current="page"] {
+    color: var(--tinta);
+    border-bottom-color: var(--tinta);
+  }
+
+  .boton {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    height: 1.9rem;
+    padding: 0 0.7rem;
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--tenue);
+    background: transparent;
+    border: 1px solid var(--linea-fuerte);
+    border-radius: 3px;
+    cursor: pointer;
+  }
+  .boton:hover {
+    color: var(--tinta);
+    background-color: var(--panel-alt);
+  }
+
+  /* -- Estados: franja con borde izquierdo de color ----------- */
+  .estado {
+    border-left: 6px solid var(--linea-fuerte);
+  }
+  .estado[data-tono="marcha"] {
+    border-left-color: var(--marcha);
+  }
+  .estado[data-tono="aviso"] {
+    border-left-color: var(--aviso);
+    background-color: var(--aviso-fondo);
+  }
+  .estado[data-tono="falla"] {
+    border-left-color: var(--falla);
+    background-color: var(--falla-fondo);
+  }
+
+  .texto-tono[data-tono="neutro"] {
+    color: var(--tinta);
+  }
+  .texto-tono[data-tono="marcha"] {
+    color: var(--marcha);
+  }
+  .texto-tono[data-tono="aviso"] {
+    color: var(--aviso);
+  }
+  .texto-tono[data-tono="falla"] {
+    color: var(--falla);
+  }
+
+  /* -- Lamparas ---------------------------------------------- */
+  .lampara {
+    display: inline-block;
+    width: 0.7rem;
+    height: 0.7rem;
+    flex: none;
+    border-radius: 1px;
+    background-color: var(--lampara-off);
+  }
+  .lampara[data-on="true"][data-tono="neutro"] {
+    background-color: var(--tenue);
+  }
+  .lampara[data-on="true"][data-tono="marcha"] {
+    background-color: var(--marcha);
+  }
+  .lampara[data-on="true"][data-tono="aviso"] {
+    background-color: var(--aviso);
+  }
+  .lampara[data-on="true"][data-tono="falla"] {
+    background-color: var(--falla);
+    animation: parpadeo 1s steps(2, start) infinite;
+  }
+
+  /* -- Tabla ------------------------------------------------- */
+  .tabla {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.8rem;
+  }
+  .tabla th {
+    text-align: right;
+    padding: 0.3rem 0.5rem;
+    font-size: 0.65rem;
+    font-weight: 700;
+    letter-spacing: 0.07em;
+    text-transform: uppercase;
+    color: var(--tenue);
+    border-bottom: 1px solid var(--linea-fuerte);
+    white-space: nowrap;
+  }
+  .tabla th:first-child,
+  .tabla td:first-child {
+    text-align: left;
+  }
+  .tabla td {
+    text-align: right;
+    padding: 0.25rem 0.5rem;
+    border-bottom: 1px solid var(--linea);
+  }
+  .tabla tr[data-actual="true"] td {
+    font-weight: 700;
+  }
+  .tabla tr[data-valido="false"] td {
+    color: var(--apagado);
+  }
+
+  /* -- Avisos de pantalla ------------------------------------ */
+  .aviso-franja {
+    border: 1px solid var(--aviso);
+    background-color: var(--aviso-fondo);
+    color: var(--aviso);
+    border-radius: 3px;
+    font-weight: 600;
+  }
+  .viejo {
+    opacity: 0.5;
+    filter: grayscale(1);
+  }
+}
+
+@keyframes parpadeo {
+  to {
+    visibility: hidden;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .lampara {
+    animation: none !important;
+  }
+}

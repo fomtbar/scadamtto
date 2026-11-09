@@ -1,0 +1,180 @@
+; =============================================================================
+; Programa SCADA  -  celda de soldadura FCA-2,3  (Q03UDE)
+; Para cargar en GX Developer en modo Lista (Alt+F1) como programa NUEVO.
+; Las lineas que empiezan con ';' son comentarios: NO se tipean.
+;
+; Solo LEE dispositivos del programa existente y solo ESCRIBE en:
+;   D6000-D6219  (dentro del latch D0-D7000: no se borra con corte de luz)
+;   M6000-M6024
+;   Z10
+; =============================================================================
+
+; --- 1. Pulsos de tiempo -----------------------------------------------------
+; M6000 = 1 scan cada 1 s     M6001 = 1 scan cada 0,1 s
+LDP     SM412
+OUT     M6000
+LDP     SM410
+OUT     M6001
+
+; --- 2. Reloj del PLC y copias -----------------------------------------------
+; D6090..D6096 = anio, mes, dia, hora, minuto, segundo, dia de semana
+; D6007 = fecha MMDD (ej. 1031)   D6008 = hora HHMM (ej. 1415)
+; D6004 = tipo de auto seleccionado (copia de D44)
+LD      SM400
+DATERD  D6090
+*       D6091   K100    D6098
++       D6098   D6092   D6007
+*       D6093   K100    D6098
++       D6098   D6094   D6008
+MOV     D44     D6004
+
+; --- 3. Vida: suma 1 por segundo (si deja de cambiar, el PLC no corre) -------
+LD      M6000
+INC     D6000
+
+; --- 4. Condiciones auxiliares -----------------------------------------------
+; M6004 = algun jig produciendo     M6005 = celda en falla o emergencia
+; M6002 / M6003 = pieza terminada en JIG1 / JIG2 (fin de ciclo, sin dry run)
+LD      M2210
+OR      M3210
+OUT     M6004
+LD      M1980
+OR      M1843
+OUT     M6005
+LDP     M2230
+ANI     M2701
+OUT     M6002
+LDP     M3230
+ANI     M3701
+OUT     M6003
+
+; --- 5. Palabras de estado ---------------------------------------------------
+; Se escriben de menor a mayor prioridad: gana la ultima que se cumple.
+; D6001 celda / D6002 JIG1 / D6003 JIG2:
+;   0 sin modo   1 manual   2 auto esperando   3 produciendo
+;   4 falla      5 emergencia   6 dry run (solo jigs)
+LD      SM400
+MOV     K0      D6001
+MOV     K0      D6002
+MOV     K0      D6003
+LD      M1002
+MOV     K1      D6001
+MOV     K1      D6002
+MOV     K1      D6003
+LD      M1000
+MOV     K2      D6001
+MOV     K2      D6002
+MOV     K2      D6003
+LD      M6004
+MOV     K3      D6001
+LD      M2210
+MOV     K3      D6002
+LD      M3210
+MOV     K3      D6003
+LD      M2701
+MOV     K6      D6002
+LD      M3701
+MOV     K6      D6003
+LD      M1974
+MOV     K4      D6002
+LD      M1975
+MOV     K4      D6003
+LD      M1980
+MOV     K4      D6001
+LD      M1843
+MOV     K5      D6001
+MOV     K5      D6002
+MOV     K5      D6003
+
+; --- 6. Senales para mantenimiento (copias, en vivo) -------------------------
+LD      M1843
+OUT     M6010
+LD      M1980
+OUT     M6011
+LD      M1974
+OUT     M6012
+LD      M1975
+OUT     M6013
+LD      M1977
+OUT     M6014
+LD      M1978
+OUT     M6015
+LD      B83
+OUT     M6016
+LD      B183
+OUT     M6017
+LD      B87
+OUT     M6018
+LD      B187
+OUT     M6019
+LD      B81
+OUT     M6020
+LD      B181
+OUT     M6021
+LD      M3979
+OUT     M6022
+LD      M3978
+OUT     M6023
+LD      M1000
+OUT     M6024
+
+; --- 7. Contadores totales de 32 bits (nadie los resetea) -------------------
+LD      M6002
+DINC    D6010
+LD      M6003
+DINC    D6012
+LD      M6000
+AND     M6004
+DINC    D6014
+LD      M6000
+AND     M6005
+DINC    D6016
+LDP     M1980
+DINC    D6018
+LDP     B0C3
+DINC    D6020
+LDP     B1C3
+DINC    D6022
+LDP     B0C1
+DINC    D6024
+LDP     B1C1
+DINC    D6026
+
+; --- 8. Tiempo entre piezas, en decimas de segundo (tope 3200 s) ------------
+LD      M6001
+AND<    D6040   K32000
+INC     D6040
+LD      M6001
+AND<    D6041   K32000
+INC     D6041
+LD      M6002
+MOV     D6040   D6005
+MOV     K0      D6040
+LD      M6003
+MOV     D6041   D6006
+MOV     K0      D6041
+
+; --- 9. Tabla de 24 horas: D6100 + hora*5 ------------------------------------
+; Cada hora tiene 5 palabras: fecha MMDD, piezas JIG1, piezas JIG2,
+; segundos produciendo, segundos en falla.
+; Al cambiar la hora se limpia el renglon de la hora nueva y se le pone fecha.
+LD<>    D6093   D6097
+MOV     D6093   D6097
+*       D6097   K5      D6098
+MOV     D6098   Z10
+FMOV    K0      D6100Z10        K5
+MOV     D6007   D6100Z10
+; Indice del renglon de la hora en curso (todos los scans)
+LD      SM400
+*       D6097   K5      D6098
+MOV     D6098   Z10
+LD      M6002
+INC     D6101Z10
+LD      M6003
+INC     D6102Z10
+LD      M6000
+AND     M6004
+INC     D6103Z10
+LD      M6000
+AND     M6005
+INC     D6104Z10

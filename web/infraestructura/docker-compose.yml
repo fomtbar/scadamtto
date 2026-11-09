@@ -1,0 +1,41 @@
+# ==============================================================
+#  scadaMtto web - compose base (produccion)
+#
+#  En desarrollo se le suma docker-compose.override.yml (./dev.sh).
+#  deploy.sh pasa -f docker-compose.yml para que el override nunca
+#  llegue al servidor.
+#
+#  La base Mantenimiento es la de la compania y vive fuera de Docker.
+#  Esta app SOLO LEE test.ValorActual, que mantiene el adquisidor.
+# ==============================================================
+
+# OBLIGATORIO: sin esto Compose toma el nombre de la carpeta
+# ("infraestructura"), el mismo que usan examenesWeb, viandasWeb,
+# gestorDoc, trazabilidad y SGMIv2. Un "up" desde aca les recrearia
+# los contenedores.
+name: scadamttoweb
+
+services:
+  app:
+    build:
+      context: ..
+      dockerfile: Dockerfile
+      target: runner
+    image: scadamttoweb/web:latest
+    container_name: scadamttoweb-web
+    # Adentro siempre 3108; APP_PUERTO es solo el del host.
+    ports:
+      - "${APP_PUERTO:-3108}:3108"
+    env_file: [.env]
+    environment:
+      NODE_ENV: production
+      TZ: "${TZ:-America/Argentina/Buenos_Aires}"
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    healthcheck:
+      test: ["CMD", "curl", "-fsS", "http://localhost:3108/api/health"]
+      interval: 15s
+      timeout: 5s
+      retries: 5
+      start_period: 40s
+    restart: always

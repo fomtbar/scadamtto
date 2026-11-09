@@ -1,0 +1,25 @@
+# ==============================================================
+#  docker-compose.override.yml  -  SOLO DESARROLLO (./dev.sh)
+#  En produccion NO va: deploy.sh usa -f docker-compose.yml.
+# ==============================================================
+
+services:
+  app:
+    build:
+      target: dev
+    # Etiqueta propia para no pisar el :latest de produccion.
+    image: scadamttoweb/web:dev
+    # Se montan las rutas del codigo y no ".." entero: taparia el
+    # node_modules de la imagen.
+    volumes:
+      - ../src:/app/src
+      - ../public:/app/public
+      - ../next.config.ts:/app/next.config.ts:ro
+      - ../postcss.config.mjs:/app/postcss.config.mjs:ro
+      - ../tsconfig.json:/app/tsconfig.json:ro
+    environment:
+      NODE_ENV: development
+    # La imagen dev no lleva curl.
+    healthcheck:
+      disable: true
+    restart: "no"

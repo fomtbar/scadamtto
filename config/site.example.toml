@@ -1,0 +1,35 @@
+# Configuracion de ESTA maquina. Copiar a site.toml y completar.
+# site.toml no se versiona: sobrevive a los updates y no expone credenciales.
+
+[plc.mitsu_q1]
+marca      = "mitsubishi"   # mitsubishi | siemens | mock
+habilitado = true
+ip         = "192.168.0.103"
+puerto     = 8192           # OJO: GX Works muestra el puerto en HEX.
+                            # El 2000 de la tabla Open Settings es 8192 decimal.
+commtype   = "ascii"        # tiene que coincidir con 'Communication data code'
+plctype    = "Q"
+timeout_s  = 5.0
+network    = 0
+pc         = 255
+
+[plc.s71200]
+marca      = "siemens"
+habilitado = false
+ip         = "192.168.0.50"
+rack       = 0
+slot       = 1
+timeout_s  = 5.0
+
+[db]
+servidor  = "172.17.132.153"
+puerto    = 1433
+base      = "Mantenimiento"
+esquema   = "test"
+modo      = "actual"        # "actual"    -> una fila por tag, se actualiza en el lugar
+                            # "historial" -> una fila por muestra (la tabla crece siempre)
+tabla_actual = "ValorActual"   # usada en modo "actual"
+tabla     = "RegistroPLC"      # usada en modo "historial"
+usuario   = "fmasino"
+password  = "poner-aca"     # o dejar fuera y usar SCADAMTTO_DB_PASSWORD
+timeout_s = 30.0

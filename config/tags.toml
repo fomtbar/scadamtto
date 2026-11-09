@@ -1,0 +1,56 @@
+# Tabla de tags a recolectar.
+#
+# Se puede editar a mano o desde el dashboard (http://localhost:8080).
+# OJO: si lo edita el dashboard, los comentarios que agregues dentro de cada
+# [[tag]] se pierden al reescribir el archivo. Esta cabecera se conserva.
+#
+#   nombre       lo que va literal a la columna NombreTag (max 50 caracteres)
+#   plc          clave del PLC en site.toml
+#   direccion    D5002 / M1000 / W1A0 (Mitsubishi) | DB1.DBW0 / M100.0 (Siemens)
+#   tipo         bit | int16 | uint16 | int32 | uint32 | float32
+#   escala/offset  valor_final = crudo * escala + offset
+#   scan_ms      periodo de lectura
+#   registro     "intervalo" graba cada scan | "cambio" solo cuando cambia
+#   banda_muerta cuanto tiene que cambiar para grabar (solo con "cambio")
+#   heartbeat_s  fuerza un registro cada N segundos aunque no cambie (0 = nunca)
+
+
+[[tag]]
+nombre       = "D5002"
+plc          = "mitsu_q1"
+direccion    = "D5002"
+tipo         = "int16"
+escala       = 1.0
+offset       = 0.0
+scan_ms      = 1000
+registro     = "intervalo"
+
+[[tag]]
+nombre       = "M1000"
+plc          = "mitsu_q1"
+direccion    = "M1000"
+tipo         = "bit"
+escala       = 1.0
+offset       = 0.0
+scan_ms      = 1000
+registro     = "intervalo"
+
+[[tag]]
+nombre       = "m1645"
+plc          = "mitsu_q1"
+direccion    = "M1645"
+tipo         = "bit"
+escala       = 1.0
+offset       = 0.0
+scan_ms      = 1000
+registro     = "intervalo"
+
+[[tag]]
+nombre       = "x387"
+plc          = "mitsu_q1"
+direccion    = "X387"
+tipo         = "bit"
+escala       = 1.0
+offset       = 0.0
+scan_ms      = 1000
+registro     = "intervalo"

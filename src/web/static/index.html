@@ -1,0 +1,300 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>scadaMtto</title>
+<style>
+  :root {
+    --bg:#0f1419; --panel:#171d26; --borde:#232c3a; --txt:#dbe3ee;
+    --tenue:#7c8a9e; --ok:#3fb950; --mal:#f85149; --alerta:#d29922; --acento:#4493f8;
+  }
+  * { box-sizing:border-box; }
+  body { margin:0; padding:20px; background:var(--bg); color:var(--txt);
+         font:14px/1.5 "Segoe UI",system-ui,sans-serif; }
+  h1 { font-size:18px; margin:0 0 4px; letter-spacing:.3px; }
+  .sub { color:var(--tenue); font-size:12px; margin-bottom:14px; }
+
+  .tabs { display:flex; gap:4px; margin-bottom:16px; border-bottom:1px solid var(--borde); }
+  .tab { padding:8px 16px; cursor:pointer; border:none; background:none; color:var(--tenue);
+         font:600 13px/1 inherit; border-bottom:2px solid transparent; }
+  .tab:hover { color:var(--txt); }
+  .tab.activa { color:var(--acento); border-bottom-color:var(--acento); }
+
+  .grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:14px; }
+  .panel { background:var(--panel); border:1px solid var(--borde); border-radius:8px; padding:14px 16px; }
+  .panel h2 { font-size:12px; text-transform:uppercase; letter-spacing:.8px;
+              color:var(--tenue); margin:0 0 10px; font-weight:600; }
+  .fila { display:flex; justify-content:space-between; gap:12px; padding:3px 0; }
+  .pill { display:inline-flex; align-items:center; gap:6px; font-weight:600; }
+  .punto { width:8px; height:8px; border-radius:50%; display:inline-block; }
+  .ok { color:var(--ok); } .ok .punto { background:var(--ok); }
+  .mal { color:var(--mal); } .mal .punto { background:var(--mal); }
+
+  table { width:100%; border-collapse:collapse; margin-top:6px; }
+  th { text-align:left; font-size:11px; text-transform:uppercase; letter-spacing:.6px;
+       color:var(--tenue); font-weight:600; padding:6px 8px; border-bottom:1px solid var(--borde);
+       white-space:nowrap; }
+  td { padding:5px 8px; border-bottom:1px solid var(--borde); font-variant-numeric:tabular-nums; }
+  tr:last-child td { border-bottom:none; }
+  .val { font-size:15px; font-weight:600; }
+  .err { color:var(--mal); font-size:12px; margin-top:8px; word-break:break-word; }
+  .tenue { color:var(--tenue); font-size:12px; }
+
+  input, select { background:#0d1117; color:var(--txt); border:1px solid var(--borde);
+                  border-radius:4px; padding:5px 7px; font:13px/1 inherit; width:100%; }
+  input:focus, select:focus { outline:none; border-color:var(--acento); }
+  input.num { text-align:right; font-variant-numeric:tabular-nums; }
+  button { background:var(--acento); color:#fff; border:none; border-radius:5px;
+           padding:8px 16px; font:600 13px/1 inherit; cursor:pointer; }
+  button:hover { filter:brightness(1.12); }
+  button:disabled { opacity:.45; cursor:not-allowed; filter:none; }
+  button.sec { background:#26313f; color:var(--txt); }
+  button.borrar { background:none; color:var(--tenue); padding:4px 8px; font-size:16px; line-height:1; }
+  button.borrar:hover { color:var(--mal); }
+
+  .acciones { display:flex; gap:10px; align-items:center; margin-top:16px; flex-wrap:wrap; }
+  .aviso { padding:9px 13px; border-radius:6px; font-size:13px; margin-bottom:14px; display:none; }
+  .aviso.error { display:block; background:#3d1418; border:1px solid var(--mal); color:#ffb4ae; }
+  .aviso.exito { display:block; background:#10291a; border:1px solid var(--ok); color:#7ee787; }
+  .aviso.sucio { display:block; background:#33280c; border:1px solid var(--alerta); color:#e3b341; }
+  #caido { display:none; background:var(--mal); color:#fff; padding:8px 14px;
+           border-radius:6px; margin-bottom:14px; font-weight:600; }
+  .scroll { overflow-x:auto; }
+  .oculto { display:none !important; }
+</style>
+</head>
+<body>
+  <h1>scadaMtto</h1>
+  <div class="sub" id="cab">conectando...</div>
+  <div id="caido">Sin respuesta del adquisidor. ¿Se detuvo el proceso?</div>
+
+  <div class="tabs">
+    <button class="tab activa" data-vista="monitor">Monitor</button>
+    <button class="tab" data-vista="variables">Variables</button>
+  </div>
+
+  <div id="vista-monitor">
+    <div class="grid" id="paneles"></div>
+  </div>
+
+  <div id="vista-variables" class="oculto">
+    <div class="aviso" id="aviso"></div>
+    <div class="panel">
+      <h2>Variables a recolectar <span class="tenue" id="destino"></span></h2>
+      <div class="scroll">
+        <table id="tabla-tags">
+          <thead><tr>
+            <th style="min-width:150px">Nombre</th>
+            <th style="min-width:110px">PLC</th>
+            <th style="min-width:110px">Dirección</th>
+            <th style="min-width:105px">Tipo</th>
+            <th style="min-width:80px">Escala</th>
+            <th style="min-width:80px">Offset</th>
+            <th style="min-width:85px">Scan ms</th>
+            <th style="min-width:110px">Registro</th>
+            <th style="min-width:95px">B. muerta</th>
+            <th style="min-width:95px">Heartbeat s</th>
+            <th></th>
+          </tr></thead>
+          <tbody></tbody>
+        </table>
+      </div>
+      <div class="acciones">
+        <button class="sec" id="btn-agregar">+ Agregar variable</button>
+        <button id="btn-guardar" disabled>Guardar y aplicar</button>
+        <button class="sec" id="btn-descartar" disabled>Descartar cambios</button>
+        <span class="tenue" id="conteo"></span>
+      </div>
+      <div class="tenue" style="margin-top:12px">
+        Al guardar se reescribe <code>config/tags.toml</code> (queda copia en
+        <code>tags.toml.bak</code>) y los hilos de scan se recargan sin reiniciar el proceso.
+        Si algo no valida no se escribe nada.
+      </div>
+    </div>
+  </div>
+
+<script>
+const $ = id => document.getElementById(id);
+const esc = s => String(s ?? "").replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const pill = (ok, a, b) => `<span class="pill ${ok?"ok":"mal"}"><i class="punto"></i>${ok?a:b}</span>`;
+
+const TIPOS = ["bit","int16","uint16","int32","uint32","float32"];
+const REGISTROS = ["intervalo","cambio"];
+
+let plcs = [];
+let tags = [];        // lo que se está editando
+let sucio = false;
+
+function num(v) {
+  if (v === null || v === undefined) return "—";
+  return Number.isInteger(v) ? v : Number(v).toFixed(3).replace(/\.?0+$/, "");
+}
+
+/* ------------------------------------------------------------------ monitor */
+function renderMonitor(d) {
+  $("caido").style.display = "none";
+  $("cab").textContent = `arranque ${d.arranque} · ahora ${d.ahora}`;
+
+  let html = "";
+  for (const p of d.plcs) {
+    html += `<div class="panel">
+      <h2>PLC ${esc(p.nombre)} <span class="tenue">(${esc(p.marca)})</span></h2>
+      <div class="fila"><span>${esc(p.ip)}${p.puerto ? ":" + p.puerto : ""}</span>
+        ${pill(p.conectado, "conectado", "desconectado")}</div>
+      <div class="fila"><span class="tenue">lecturas ok / error</span>
+        <span>${p.lecturas_ok} / ${p.lecturas_error}</span></div>
+      <div class="fila"><span class="tenue">reconexiones</span><span>${p.reconexiones}</span></div>
+      ${p.ultimo_error && !p.conectado ? `<div class="err">${esc(p.ultimo_error)}</div>` : ""}
+      <table><thead><tr><th>Tag</th><th>Valor</th><th>Últ. registro</th></tr></thead><tbody>
+        ${p.tags.map(t => `<tr>
+          <td>${esc(t.nombre)}</td>
+          <td class="val ${t.buena ? "" : "mal"}">${t.buena ? num(t.valor) : "sin dato"}</td>
+          <td class="tenue">${esc(t.ultimo_registro ?? "—")}</td>
+        </tr>`).join("")}
+      </tbody></table>
+    </div>`;
+  }
+
+  html += `<div class="panel">
+    <h2>SQL Server</h2>
+    <div class="fila"><span class="tenue">estado</span>${pill(d.db.conectada,"conectada","sin conexión")}</div>
+    <div class="fila"><span class="tenue">escrituras</span><span>${d.db.filas_escritas}</span></div>
+    <div class="fila"><span class="tenue">última escritura</span><span>${esc(d.db.ultima_escritura ?? "—")}</span></div>
+    <div class="fila"><span class="tenue">pendientes en buffer</span>
+      <span class="${d.buffer_pendientes > 0 ? "mal" : ""}">${d.buffer_pendientes}</span></div>
+    ${d.db.ultimo_error && !d.db.conectada ? `<div class="err">${esc(d.db.ultimo_error)}</div>` : ""}
+  </div>`;
+
+  $("paneles").innerHTML = html;
+}
+
+/* ---------------------------------------------------------------- variables */
+function opciones(lista, sel) {
+  return lista.map(v => `<option value="${esc(v)}"${v === sel ? " selected" : ""}>${esc(v)}</option>`).join("");
+}
+
+function renderTags() {
+  const cuerpo = $("tabla-tags").querySelector("tbody");
+  cuerpo.innerHTML = tags.map((t, i) => `<tr data-i="${i}">
+    <td><input data-c="nombre" value="${esc(t.nombre)}" maxlength="50"></td>
+    <td><select data-c="plc">${opciones(plcs.map(p => p.nombre), t.plc)}</select></td>
+    <td><input data-c="direccion" value="${esc(t.direccion)}"></td>
+    <td><select data-c="tipo">${opciones(TIPOS, t.tipo)}</select></td>
+    <td><input class="num" data-c="escala" value="${esc(t.escala)}"></td>
+    <td><input class="num" data-c="offset" value="${esc(t.offset)}"></td>
+    <td><input class="num" data-c="scan_ms" value="${esc(t.scan_ms)}"></td>
+    <td><select data-c="registro">${opciones(REGISTROS, t.registro)}</select></td>
+    <td><input class="num" data-c="banda_muerta" value="${esc(t.banda_muerta)}"></td>
+    <td><input class="num" data-c="heartbeat_s" value="${esc(t.heartbeat_s)}"></td>
+    <td><button class="borrar" title="Eliminar">×</button></td>
+  </tr>`).join("");
+  $("conteo").textContent = `${tags.length} variable${tags.length === 1 ? "" : "s"}`;
+}
+
+function marcarSucio(v) {
+  sucio = v;
+  $("btn-guardar").disabled = !v;
+  $("btn-descartar").disabled = !v;
+  if (v) aviso("sucio", "Hay cambios sin aplicar.");
+}
+
+function aviso(clase, texto) {
+  const a = $("aviso");
+  a.className = "aviso " + clase;
+  a.textContent = texto;
+}
+
+$("tabla-tags").addEventListener("input", e => {
+  const campo = e.target.dataset.c;
+  if (!campo) return;
+  tags[+e.target.closest("tr").dataset.i][campo] = e.target.value;
+  marcarSucio(true);
+});
+
+$("tabla-tags").addEventListener("click", e => {
+  if (!e.target.classList.contains("borrar")) return;
+  tags.splice(+e.target.closest("tr").dataset.i, 1);
+  renderTags();
+  marcarSucio(true);
+});
+
+$("btn-agregar").addEventListener("click", () => {
+  const habilitado = plcs.find(p => p.habilitado) || plcs[0];
+  tags.push({
+    nombre: "", plc: habilitado ? habilitado.nombre : "", direccion: "",
+    tipo: "int16", escala: 1, offset: 0, scan_ms: 1000,
+    registro: "intervalo", banda_muerta: 0, heartbeat_s: 0,
+  });
+  renderTags();
+  marcarSucio(true);
+  const ultimo = $("tabla-tags").querySelector("tbody tr:last-child input");
+  if (ultimo) ultimo.focus();
+});
+
+$("btn-descartar").addEventListener("click", cargarTags);
+
+$("btn-guardar").addEventListener("click", async () => {
+  $("btn-guardar").disabled = true;
+  aviso("", "Guardando...");
+  try {
+    const r = await fetch("/api/tags", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ tags }),
+    });
+    const d = await r.json();
+    if (!r.ok) {
+      aviso("error", d.error || `Error ${r.status}`);
+      $("btn-guardar").disabled = false;
+      return;
+    }
+    tags = d.tags;
+    renderTags();
+    marcarSucio(false);
+    aviso("exito", `Guardado. ${tags.length} variable${tags.length === 1 ? "" : "s"} aplicadas sin reiniciar.`);
+  } catch (e) {
+    aviso("error", "No se pudo contactar al adquisidor: " + e);
+    $("btn-guardar").disabled = false;
+  }
+});
+
+async function cargarTags() {
+  const r = await fetch("/api/tags", { cache: "no-store" });
+  const d = await r.json();
+  plcs = d.plcs;
+  tags = d.tags;
+  $("destino").textContent = `· escribiendo en ${d.destino_db} (modo ${d.modo_db})`;
+  renderTags();
+  marcarSucio(false);
+  aviso("", "");
+  $("aviso").className = "aviso";
+}
+
+/* --------------------------------------------------------------------- tabs */
+document.querySelectorAll(".tab").forEach(b => b.addEventListener("click", () => {
+  document.querySelectorAll(".tab").forEach(x => x.classList.toggle("activa", x === b));
+  const esMonitor = b.dataset.vista === "monitor";
+  $("vista-monitor").classList.toggle("oculto", !esMonitor);
+  $("vista-variables").classList.toggle("oculto", esMonitor);
+  if (!esMonitor && !sucio) cargarTags();
+}));
+
+/* -------------------------------------------------------------------- ciclo */
+async function tick() {
+  try {
+    const r = await fetch("/api/estado", { cache: "no-store" });
+    renderMonitor(await r.json());
+  } catch {
+    $("caido").style.display = "block";
+  }
+}
+tick();
+setInterval(tick, 1000);
+cargarTags();
+
+// Evita perder ediciones a medio hacer por cerrar la pestaña sin querer.
+window.addEventListener("beforeunload", e => { if (sucio) e.preventDefault(); });
+</script>
+</body>
+</html>

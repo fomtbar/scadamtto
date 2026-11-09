@@ -1,0 +1,6 @@
+# Adquisidor scadaMtto - Python 3.15
+# Todo el arbol es puro Python o ctypes: no requiere compilador ni ODBC.
+python-tds==1.17.1      # SQL Server (protocolo TDS puro Python, reemplaza a pyodbc)
+pymcprotocol==0.3.0     # Mitsubishi MC Protocol 3E
+python-snap7==3.1.2     # Siemens S7 (ctypes + snap7 embebido en el wheel)
+loguru==0.7.3           # logging rotativo

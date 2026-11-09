@@ -1,0 +1,28 @@
+# Parametros de la aplicacion. Este archivo es la semilla versionada.
+# En el primer arranque se copia a config/app.toml, que es el editable.
+[app]
+
+# --- Lectura del PLC ---
+# Tope de palabras por lectura batch. El limite del frame 3E es 960; se deja
+# margen porque en ASCII cada palabra ocupa 4 caracteres en el frame.
+max_palabras_por_lectura = 480
+max_bits_por_lectura = 1024
+# Cuantos registros sin usar se toleran entre dos tags antes de cortar el bloque
+# y hacer dos lecturas. Leer de mas es mas barato que un round-trip extra.
+max_hueco = 16
+
+# --- Persistencia ---
+lote_db = 200                      # filas por transaccion contra SQL Server
+buffer_max_filas = 2000000         # tope del buffer local; se poda lo mas viejo
+buffer_ruta = "data/buffer.sqlite"
+
+# --- Reconexion (backoff exponencial) ---
+reconexion_min_s = 1.0
+reconexion_max_s = 30.0
+
+# --- Dashboard web local ---
+web_habilitado = true
+web_host = "127.0.0.1"             # 0.0.0.0 para verlo desde otra maquina
+web_puerto = 8080
+
+nivel_log = "INFO"

@@ -1,0 +1,22 @@
+.venv/
+__pycache__/
+*.pyc
+config/site.toml
+config/app.toml
+data/
+logs/
+*.sqlite
+*.sqlite-wal
+*.sqlite-shm
+
+release/
+build/
+dist/
+VERSION
+*.spec.bak
+.pytest_cache/
+config/*.bak
+config/*.bak.*
+
+# Material de referencia del PLC (PDFs del programa, ~8 MB): queda local.
+plcEnpdf/

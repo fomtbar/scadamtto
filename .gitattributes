@@ -1,0 +1,14 @@
+* text=auto
+
+# build.sh y web/*.sh corren con Git Bash: con CRLF fallan con
+# "bad interpreter: /usr/bin/env bash^M".
+*.sh  text eol=lf
+# cmd.exe y PowerShell 5.1 en la PC de adquisicion.
+*.cmd text eol=crlf
+*.ps1 text eol=crlf
+
+*.pdf  binary
+*.png  binary
+*.zip  binary
+# Exports de GX Works2: UTF-16, no tocarlos.
+plc/bloque_scada/*.csv binary

@@ -1,0 +1,17 @@
+node_modules
+.next
+.git
+.gitignore
+npm-debug.log*
+deploy.log
+
+# Nunca hornear secretos en la imagen.
+.env
+.env.*
+infraestructura/.env
+!infraestructura/.env.example
+
+# Docs y scripts de host
+README.md
+deploy.sh
+dev.sh

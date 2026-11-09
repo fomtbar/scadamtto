@@ -1,0 +1,12 @@
+* text=auto eol=lf
+
+# deploy.sh y dev.sh corren en el servidor con Git Bash: con CRLF fallan con
+# "bad interpreter: /usr/bin/env bash^M".
+*.sh  text eol=lf
+*.ps1 text eol=crlf
+*.bat text eol=crlf
+
+*.png  binary
+*.jpg  binary
+*.ico  binary
+*.woff2 binary

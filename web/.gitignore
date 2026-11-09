@@ -1,0 +1,21 @@
+node_modules/
+.next/
+next-env.d.ts
+*.tsbuildinfo
+
+# Nunca versionar credenciales. El .env.example si va.
+.env
+.env.*
+infraestructura/.env
+infraestructura/.env.bak-*
+!infraestructura/.env.example
+
+deploy.log
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# Salidas de las pruebas
+test-results/
+playwright-report/
