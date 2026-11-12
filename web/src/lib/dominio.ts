@@ -41,6 +41,11 @@ export type Hora = {
 
 export type Senal = { clave: string; texto: string; activa: boolean; tono: Tono; grupo: string };
 
+/** Referencia para seguir la falla en GX Works2: "M3841 · F073" (marca que la dispara y codigo del PLC). */
+export function refFalla(def: DefFalla): string {
+  return `${def.dispositivo} · F${String(def.codigo).padStart(3, "0")}`;
+}
+
 export type FallaAcumulada = { def: DefFalla; veces: number; seg: number; activa: boolean };
 
 export type FallaReciente = {

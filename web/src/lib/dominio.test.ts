@@ -1,5 +1,6 @@
 import { describe, expect, it } from "vitest";
-import { ayerMMDD, construirVista, cuandoFalla, estadoDe, sinPrefijo, tablaHoras, vistaFallas, type Tags } from "./dominio";
+import { ayerMMDD, construirVista, cuandoFalla, estadoDe, refFalla, sinPrefijo, tablaHoras, vistaFallas, type Tags } from "./dominio";
+import { FALLAS } from "./fallas";
 
 const leida = (valor: number | null, extra: Partial<Tags[string]> = {}) => ({
   valor,
@@ -142,6 +143,12 @@ describe("cuandoFalla", () => {
   it("arma dd/mm hh:mm del anio en curso", () => expect(cuandoFalla(1109, 705, 1110, 2026)).toBe("09/11 07:05"));
   it("si el MMDD es posterior a hoy, es del anio anterior", () =>
     expect(cuandoFalla(1230, 2359, 102, 2027)).toBe("30/12/26 23:59"));
+});
+
+describe("refFalla", () => {
+  it("marca y codigo de 3 digitos", () =>
+    expect(refFalla(FALLAS.find((f) => f.dispositivo === "M3841")!)).toBe("M3841 · F073"));
+  it("codigo de un digito", () => expect(refFalla(FALLAS[0])).toBe("M1840 · F001"));
 });
 
 describe("vistaFallas", () => {

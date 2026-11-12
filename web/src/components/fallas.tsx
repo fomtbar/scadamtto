@@ -1,8 +1,16 @@
 "use client";
 
 import { useState } from "react";
-import type { FallaAcumulada, Vista } from "@/lib/dominio";
+import { refFalla, type FallaAcumulada, type Vista } from "@/lib/dominio";
+import type { DefFalla } from "@/lib/fallas";
 import { horasMin, miles } from "./formato";
+
+/** "(M3841 · F073)": marca para buscar en GX Works2 y codigo de los contadores del PLC. */
+function Ref({ def }: { def: DefFalla }) {
+  return (
+    <span className="num ml-1.5 whitespace-nowrap text-[0.75rem] font-normal text-tenue">({refFalla(def)})</span>
+  );
+}
 
 /** 45 -> "45 s", 3010 -> "50 min", 5400 -> "1 h 30 min". */
 function duracion(seg: number): string {
@@ -28,6 +36,7 @@ function Barras({ filas, orden }: { filas: FallaAcumulada[]; orden: Orden }) {
             <span className={f.activa ? "texto-tono font-semibold" : ""} data-tono="falla">
               {f.def.texto}
             </span>
+            <Ref def={f.def} />
           </span>
           <span className="num text-right text-[0.8rem]">
             {orden === "veces" ? miles(f.veces) : duracion(f.seg)}
@@ -81,6 +90,7 @@ export function Fallas({ vista }: { vista: Vista }) {
                     <span className="lampara" data-on="true" data-tono="falla" aria-hidden />
                     <span className="rotulo">{f.grupo}</span>
                     {f.texto}
+                    <Ref def={f} />
                   </li>
                 ))}
               </ul>
@@ -107,7 +117,16 @@ export function Fallas({ vista }: { vista: Vista }) {
                       <tr key={u.orden}>
                         <td className="num whitespace-nowrap">{u.cuando}</td>
                         <td className="!text-left">{u.def?.grupo ?? "—"}</td>
-                        <td className="!text-left">{u.def?.texto ?? `Código ${u.codigo} (no está en el catálogo)`}</td>
+                        <td className="!text-left">
+                          {u.def ? (
+                            <>
+                              {u.def.texto}
+                              <Ref def={u.def} />
+                            </>
+                          ) : (
+                            `Código ${u.codigo} (no está en el catálogo)`
+                          )}
+                        </td>
                         <td>
                           {u.activa ? (
                             <span className="texto-tono font-semibold" data-tono="falla">
@@ -158,17 +177,18 @@ export function Fallas({ vista }: { vista: Vista }) {
                     <th className="!text-left">Equipo</th>
                     <th>Veces</th>
                     <th>Tiempo activa</th>
-                    <th className="hidden sm:table-cell">Dispositivo</th>
                   </tr>
                 </thead>
                 <tbody>
                   {fallas.acumulado.map((f) => (
                     <tr key={f.def.codigo}>
-                      <td className="font-sans">{f.def.texto}</td>
+                      <td className="font-sans">
+                        {f.def.texto}
+                        <Ref def={f.def} />
+                      </td>
                       <td className="!text-left font-sans">{f.def.grupo}</td>
                       <td>{miles(f.veces)}</td>
                       <td>{duracion(f.seg)}</td>
-                      <td className="hidden text-tenue sm:table-cell">{f.def.dispositivo}</td>
                     </tr>
                   ))}
                 </tbody>
