@@ -10,6 +10,8 @@ Uso:  python generar_tags.py [PREFIJO] [CLAVE_PLC]
 import sys
 from pathlib import Path
 
+import fallas
+
 AQUI = Path(__file__).parent
 PREFIJO = sys.argv[1] if len(sys.argv) > 1 else "FCA0203"
 PLC = sys.argv[2] if len(sys.argv) > 2 else "mitsu_q1"
@@ -58,13 +60,24 @@ registro     = "intervalo"
 
 
 partes = [f"# Tags del bloque SCADA de la celda {PREFIJO} "
-          f"(D6000-D6219, M6010-M6024) - agregar al final de config/tags.toml\n"]
+          f"(D6000-D6219, M6010-M6024, fallas D6300-D6859) - agregar al final de config/tags.toml\n"]
 partes += [tag(n, d, "int16", 1000) for n, d in PALABRAS]
 partes += [tag(n, d, "int32", 1000) for n, d in DOBLES]
 partes += [tag(n, d, "bit", 1000) for n, d in BITS]
 for h in range(24):
     for k, campo in enumerate(CAMPOS_HORA):
         partes.append(tag(f"Hora.{h:02d}.{campo}", f"D{6100 + h * 5 + k}", "int16", 5000))
+
+# Fallas (fallas.py). Activa = el bit original del programa (solo lectura).
+for codigo, dev, _, _ in fallas.catalogo():
+    f = f"Falla.F{codigo:03d}"
+    partes.append(tag(f"{f}.Activa", dev, "bit", 2000))
+    partes.append(tag(f"{f}.Veces", fallas.d_veces(codigo), "int16", 5000))
+    partes.append(tag(f"{f}.Seg", fallas.d_seg(codigo), "int32", 5000))
+for n in range(fallas.N_ULTIMAS):
+    base = fallas.D_ULTIMAS + n * fallas.CAMPOS_ULTIMA
+    for k, campo in enumerate(["Codigo", "Fecha", "Hora"]):
+        partes.append(tag(f"Falla.Ult.{n + 1:02d}.{campo}", f"D{base + k}", "int16", 5000))
 
 destino = AQUI / "tags_scada.toml"
 destino.write_text("".join(partes), encoding="utf-8", newline="\n")

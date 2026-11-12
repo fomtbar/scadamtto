@@ -11,6 +11,22 @@ export async function generateMetadata({ params }: { params: Promise<{ id: strin
   return { title: celda ? `${celda.nombre} · scadaMtto` : "scadaMtto" };
 }
 
+function Proximamente({ nombre }: { nombre: string }) {
+  return (
+    <div className="flex flex-col gap-3">
+      <h1 className="text-xl font-semibold tracking-tight">Celda {nombre}</h1>
+      <section className="panel estado px-6 py-10">
+        <div className="rotulo">Próximamente</div>
+        <p className="mt-1 text-lg font-semibold">En desarrollo</p>
+        <p className="mt-2 max-w-xl text-tenue">
+          Esta celda todavía no está conectada al adquisidor. Cuando su PLC tenga el bloque SCADA y sus tags estén cargadas
+          en la base, acá se va a ver su estado, producción, mantenimiento y fallas.
+        </p>
+      </section>
+    </div>
+  );
+}
+
 export default async function PaginaCelda({ params }: { params: Promise<{ id: string }> }) {
   const celda = buscarCelda((await params).id);
   if (!celda) notFound();
@@ -31,7 +47,7 @@ export default async function PaginaCelda({ params }: { params: Promise<{ id: st
       </header>
 
       <main className="mx-auto w-full max-w-[1600px] flex-1 px-4 py-4">
-        <Tablero celda={celda} />
+        {celda.enDesarrollo ? <Proximamente nombre={celda.nombre} /> : <Tablero celda={celda} />}
       </main>
     </div>
   );

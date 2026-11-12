@@ -7,6 +7,8 @@ Comentarios de hasta 32 caracteres, en ASCII.
 """
 from pathlib import Path
 
+import fallas
+
 AQUI = Path(__file__).parent
 
 C = {
@@ -70,6 +72,17 @@ campos = ["fecha MMDD", "pzas JIG1", "pzas JIG2", "seg prod", "seg falla"]
 for h in range(24):
     for k, campo in enumerate(campos):
         C[f"D{6100 + h*5 + k}"] = f"SCADA H{h:02d} {campo}"
+
+# Fallas (fallas.py): veces, segundos y registro de las ultimas 20
+for codigo, dev, _, _ in fallas.catalogo():
+    C[fallas.d_veces(codigo)] = f"SCADA F{codigo:03d} veces {dev}"
+    seg = fallas.d_seg(codigo)
+    C[seg] = f"SCADA F{codigo:03d} seg {dev}"
+    C[f"D{int(seg[1:]) + 1}"] = f"SCADA F{codigo:03d} seg (alta)"
+for n in range(fallas.N_ULTIMAS):
+    base = fallas.D_ULTIMAS + n * fallas.CAMPOS_ULTIMA
+    for k, campo in enumerate(["codigo", "fecha MMDD", "hora HHMM"]):
+        C[f"D{base + k}"] = f"SCADA ult falla {n + 1:02d} {campo}"
 
 def clave(dev):
     return (dev[0], int(dev[1:]))

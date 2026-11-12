@@ -4,7 +4,8 @@
 ; Las lineas que empiezan con ';' son comentarios: NO se tipean.
 ;
 ; Solo LEE dispositivos del programa existente y solo ESCRIBE en:
-;   D6000-D6219  (dentro del latch D0-D7000: no se borra con corte de luz)
+;   D6000-D6219, D6300-D6659 y D6800-D6859
+;                (dentro del latch D0-D7000: no se borra con corte de luz)
 ;   M6000-M6024
 ;   Z10
 ; =============================================================================
@@ -178,3 +179,937 @@ INC     D6103Z10
 LD      M6000
 AND     M6005
 INC     D6104Z10
+
+; >>> FALLAS: generado por generar_csv.py desde fallas.py, no editar a mano
+; --- 10. Fallas: veces, segundos y ultimas 20 (generado por fallas.py) ---
+; Por cada falla: al aparecer suma 1 en D6300+codigo, corre el registro
+; D6800.. un lugar y anota codigo, fecha MMDD y hora HHMM. Mientras
+; esta activa suma 1 por segundo en D6420+2*codigo (32 bits).
+; F001 Celda Aire bajo
+LDP     M1840
+INC     D6301
+BMOV    D6800   D6803   K57
+MOV     K1     D6800
+BMOV    D6007   D6801   K2
+LD      M6000
+AND     M1840
+DINC    D6422
+; F002 Celda Puerta / enchufe de seguridad
+LDP     M1841
+INC     D6302
+BMOV    D6800   D6803   K57
+MOV     K2     D6800
+BMOV    D6007   D6801   K2
+LD      M6000
+AND     M1841
+DINC    D6424
+; F003 Celda Ingreso no permitido (cortina 1)
+LDP     M1842
+INC     D6303
+BMOV    D6800   D6803   K57
+MOV     K3     D6800
+BMOV    D6007   D6801   K2
+LD      M6000
+AND     M1842
+DINC    D6426
+; F004 Celda Parada de emergencia
+LDP     M1843
+INC     D6304
+BMOV    D6800   D6803   K57
+MOV     K4     D6800
+BMOV    D6007   D6801   K2
+LD      M6000
+AND     M1843
+DINC    D6428
+; F005 Celda Falla rodillo 1
+LDP     M1844
+INC     D6305
+BMOV    D6800   D6803   K57
+MOV     K5     D6800
+BMOV    D6007   D6801   K2
+LD      M6000
+AND     M1844
+DINC    D6430
+; F006 Celda Falla rodillo 2
+LDP     M1845
+INC     D6306
+BMOV    D6800   D6803   K57
+MOV     K6     D6800
+BMOV    D6007   D6801   K2
+LD      M6000
+AND     M1845
+DINC    D6432
+; F007 Celda Cortina 1 interrumpida
+LDP     M1846
+INC     D6307
+BMOV    D6800   D6803   K57
+MOV     K7     D6800
+BMOV    D6007   D6801   K2
+LD      M6000
+AND     M1846
+DINC    D6434
+; F008 Celda Cortina 2 interrumpida
+LDP     M1847
+INC     D6308
+BMOV    D6800   D6803   K57
+MOV     K8     D6800
+BMOV    D6007   D6801   K2
+LD      M6000
+AND     M1847
+DINC    D6436
+; F009 Celda Cortina interrumpida
+LDP     M1848
+INC     D6309
+BMOV    D6800   D6803   K57
+MOV     K9     D6800
+BMOV    D6007   D6801   K2
+LD      M6000
+AND     M1848
+DINC    D6438
+; F010 Celda Ingreso no permitido (cortina 2)
+LDP     M1849
+INC     D6310
+BMOV    D6800   D6803   K57
+MOV     K10     D6800
+BMOV    D6007   D6801   K2
+LD      M6000
+AND     M1849
+DINC    D6440
+; F011 Celda Tiempo de ciclo excedido
+LDP     M1850
+INC     D6311
+BMOV    D6800   D6803   K57
+MOV     K11     D6800
+BMOV    D6007   D6801   K2
+LD      M6000
+AND     M1850
+DINC    D6442
+; F012 Celda Sin tipo de auto seleccionado
+LDP     M1851
+INC     D6312
+BMOV    D6800   D6803   K57
+MOV     K12     D6800
+BMOV    D6007   D6801   K2
+LD      M6000
+AND     M1851
+DINC    D6444
+; F013 JIG1 Alerta de calidad
+LDP     M1852
+INC     D6313
+BMOV    D6800   D6803   K57
+MOV     K13     D6800
+BMOV    D6007   D6801   K2
+LD      M6000
+AND     M1852
+DINC    D6446
+; F014 JIG2 Alerta de calidad
+LDP     M1853
+INC     D6314
+BMOV    D6800   D6803   K57
+MOV     K14     D6800
+BMOV    D6007   D6801   K2
+LD      M6000
+AND     M1853
+DINC    D6448
+; F015 JIG1 Sin tipo de auto seleccionado
+LDP     M1854
+INC     D6315
+BMOV    D6800   D6803   K57
+MOV     K15     D6800
+BMOV    D6007   D6801   K2
+LD      M6000
+AND     M1854
+DINC    D6450
+; F016 JIG2 Sin tipo de auto seleccionado
+LDP     M1855
+INC     D6316
+BMOV    D6800   D6803   K57
+MOV     K16     D6800
+BMOV    D6007   D6801   K2
+LD      M6000
+AND     M1855
+DINC    D6452
+; F017 Celda Cortina en operación manual
+LDP     M1983
+INC     D6317
+BMOV    D6800   D6803   K57
+MOV     K17     D6800
+BMOV    D6007   D6801   K2
+LD      M6000
+AND     M1983
+DINC    D6454
+; F018 Celda Batería del PLC baja
+LDP     M8000
+INC     D6318
+BMOV    D6800   D6803   K57
+MOV     K18     D6800
+BMOV    D6007   D6801   K2
+LD      M6000
+AND     M8000
+DINC    D6456
+; F019 Celda Falla CC-Link
+LDP     M8001
+INC     D6319
+BMOV    D6800   D6803   K57
+MOV     K19     D6800
+BMOV    D6007   D6801   K2
+LD      M6000
+AND     M8001
+DINC    D6458
+; F020 Celda Fusible cortado
+LDP     M8010
+INC     D6320
+BMOV    D6800   D6803   K57
+MOV     K20     D6800
+BMOV    D6007   D6801   K2
+LD      M6000
+AND     M8010
+DINC    D6460
+; F021 RB1 Alarma / error del robot
+LDP     M1864
+INC     D6321
+BMOV    D6800   D6803   K57
+MOV     K21     D6800
+BMOV    D6007   D6801   K2
+LD      M6000
+AND     M1864
+DINC    D6462
+; F022 RB1 Batería del robot baja
+LDP     M1865
+INC     D6322
+BMOV    D6800   D6803   K57
+MOV     K22     D6800
+BMOV    D6007   D6801   K2
+LD      M6000
+AND     M1865
+DINC    D6464
+; F023 RB1 Falta de gas
+LDP     M1866
+INC     D6323
+BMOV    D6800   D6803   K57
+MOV     K23     D6800
+BMOV    D6007   D6801   K2
+LD      M6000
+AND     M1866
+DINC    D6466
+; F024 RB1 Falta de alambre
+LDP     M1867
+INC     D6324
+BMOV    D6800   D6803   K57
+MOV     K24     D6800
+BMOV    D6007   D6801   K2
+LD      M6000
+AND     M1867
+DINC    D6468
+; F025 RB1 Alambre pegado
+LDP     M1868
+INC     D6325
+BMOV    D6800   D6803   K57
+MOV     K25     D6800
+BMOV    D6007   D6801   K2
+LD      M6000
+AND     M1868
+DINC    D6470
+; F026 RB1 Falla de arco
+LDP     M1869
+INC     D6326
+BMOV    D6800   D6803   K57
+MOV     K26     D6800
+BMOV    D6007   D6801   K2
+LD      M6000
+AND     M1869
+DINC    D6472
+; F027 RB1 Falla de JOB maestro
+LDP     M1870
+INC     D6327
+BMOV    D6800   D6803   K57
+MOV     K27     D6800
+BMOV    D6007   D6801   K2
+LD      M6000
+AND     M1870
+DINC    D6474
+; F028 RB1 Control de alambre
+LDP     M1871
+INC     D6328
+BMOV    D6800   D6803   K57
+MOV     K28     D6800
+BMOV    D6007   D6801   K2
+LD      M6000
+AND     M1871
+DINC    D6476
+; F029 RB1 Presión de gas
+LDP     M1872
+INC     D6329
+BMOV    D6800   D6803   K57
+MOV     K29     D6800
+BMOV    D6007   D6801   K2
+LD      M6000
+AND     M1872
+DINC    D6478
+; F030 RB1 Sensor de choque actuado
+LDP     M1873
+INC     D6330
+BMOV    D6800   D6803   K57
+MOV     K30     D6800
+BMOV    D6007   D6801   K2
+LD      M6000
+AND     M1873
+DINC    D6480
+; F031 RB1 Confirmación de posición
+LDP     M1874
+INC     D6331
+BMOV    D6800   D6803   K57
+MOV     K31     D6800
+BMOV    D6007   D6801   K2
+LD      M6000
+AND     M1874
+DINC    D6482
+; F032 RB1 Tipo de auto NG
+LDP     M1875
+INC     D6332
+BMOV    D6800   D6803   K57
+MOV     K32     D6800
+BMOV    D6007   D6801   K2
+LD      M6000
+AND     M1875
+DINC    D6484
+; F033 RB1 Alambre pegado (OT)
+LDP     M1876
+INC     D6333
+BMOV    D6800   D6803   K57
+MOV     K33     D6800
+BMOV    D6007   D6801   K2
+LD      M6000
+AND     M1876
+DINC    D6486
+; F034 RB1 Sirga NG
+LDP     M1877
+INC     D6334
+BMOV    D6800   D6803   K57
+MOV     K34     D6800
+BMOV    D6007   D6801   K2
+LD      M6000
+AND     M1877
+DINC    D6488
+; F035 RB2 Alarma / error del robot
+LDP     M1880
+INC     D6335
+BMOV    D6800   D6803   K57
+MOV     K35     D6800
+BMOV    D6007   D6801   K2
+LD      M6000
+AND     M1880
+DINC    D6490
+; F036 RB2 Batería del robot baja
+LDP     M1881
+INC     D6336
+BMOV    D6800   D6803   K57
+MOV     K36     D6800
+BMOV    D6007   D6801   K2
+LD      M6000
+AND     M1881
+DINC    D6492
+; F037 RB2 Falta de gas
+LDP     M1882
+INC     D6337
+BMOV    D6800   D6803   K57
+MOV     K37     D6800
+BMOV    D6007   D6801   K2
+LD      M6000
+AND     M1882
+DINC    D6494
+; F038 RB2 Falta de alambre
+LDP     M1883
+INC     D6338
+BMOV    D6800   D6803   K57
+MOV     K38     D6800
+BMOV    D6007   D6801   K2
+LD      M6000
+AND     M1883
+DINC    D6496
+; F039 RB2 Alambre pegado
+LDP     M1884
+INC     D6339
+BMOV    D6800   D6803   K57
+MOV     K39     D6800
+BMOV    D6007   D6801   K2
+LD      M6000
+AND     M1884
+DINC    D6498
+; F040 RB2 Falla de arco
+LDP     M1885
+INC     D6340
+BMOV    D6800   D6803   K57
+MOV     K40     D6800
+BMOV    D6007   D6801   K2
+LD      M6000
+AND     M1885
+DINC    D6500
+; F041 RB2 Falla de JOB maestro
+LDP     M1886
+INC     D6341
+BMOV    D6800   D6803   K57
+MOV     K41     D6800
+BMOV    D6007   D6801   K2
+LD      M6000
+AND     M1886
+DINC    D6502
+; F042 RB2 Control de alambre
+LDP     M1887
+INC     D6342
+BMOV    D6800   D6803   K57
+MOV     K42     D6800
+BMOV    D6007   D6801   K2
+LD      M6000
+AND     M1887
+DINC    D6504
+; F043 RB2 Presión de gas
+LDP     M1888
+INC     D6343
+BMOV    D6800   D6803   K57
+MOV     K43     D6800
+BMOV    D6007   D6801   K2
+LD      M6000
+AND     M1888
+DINC    D6506
+; F044 RB2 Sensor de choque actuado
+LDP     M1889
+INC     D6344
+BMOV    D6800   D6803   K57
+MOV     K44     D6800
+BMOV    D6007   D6801   K2
+LD      M6000
+AND     M1889
+DINC    D6508
+; F045 RB2 Confirmación de posición
+LDP     M1890
+INC     D6345
+BMOV    D6800   D6803   K57
+MOV     K45     D6800
+BMOV    D6007   D6801   K2
+LD      M6000
+AND     M1890
+DINC    D6510
+; F046 RB2 Tipo de auto NG
+LDP     M1891
+INC     D6346
+BMOV    D6800   D6803   K57
+MOV     K46     D6800
+BMOV    D6007   D6801   K2
+LD      M6000
+AND     M1891
+DINC    D6512
+; F047 RB2 Alambre pegado (OT)
+LDP     M1892
+INC     D6347
+BMOV    D6800   D6803   K57
+MOV     K47     D6800
+BMOV    D6007   D6801   K2
+LD      M6000
+AND     M1892
+DINC    D6514
+; F048 RB2 Sirga NG
+LDP     M1893
+INC     D6348
+BMOV    D6800   D6803   K57
+MOV     K48     D6800
+BMOV    D6007   D6801   K2
+LD      M6000
+AND     M1893
+DINC    D6516
+; F049 JIG1 Cilindro change
+LDP     M2840
+INC     D6349
+BMOV    D6800   D6803   K57
+MOV     K49     D6800
+BMOV    D6007   D6801   K2
+LD      M6000
+AND     M2840
+DINC    D6518
+; F050 JIG1 Clamp 1
+LDP     M2841
+INC     D6350
+BMOV    D6800   D6803   K57
+MOV     K50     D6800
+BMOV    D6007   D6801   K2
+LD      M6000
+AND     M2841
+DINC    D6520
+; F051 JIG1 Slide
+LDP     M2842
+INC     D6351
+BMOV    D6800   D6803   K57
+MOV     K51     D6800
+BMOV    D6007   D6801   K2
+LD      M6000
+AND     M2842
+DINC    D6522
+; F052 JIG1 Clamp 2
+LDP     M2843
+INC     D6352
+BMOV    D6800   D6803   K57
+MOV     K52     D6800
+BMOV    D6007   D6801   K2
+LD      M6000
+AND     M2843
+DINC    D6524
+; F053 JIG1 Clamp 3
+LDP     M2844
+INC     D6353
+BMOV    D6800   D6803   K57
+MOV     K53     D6800
+BMOV    D6007   D6801   K2
+LD      M6000
+AND     M2844
+DINC    D6526
+; F054 JIG1 Sin pieza en todo el jig
+LDP     M2860
+INC     D6354
+BMOV    D6800   D6803   K57
+MOV     K54     D6800
+BMOV    D6007   D6801   K2
+LD      M6000
+AND     M2860
+DINC    D6528
+; F055 JIG1 Confirmación pieza 1
+LDP     M2900
+INC     D6355
+BMOV    D6800   D6803   K57
+MOV     K55     D6800
+BMOV    D6007   D6801   K2
+LD      M6000
+AND     M2900
+DINC    D6530
+; F056 JIG1 Confirmación pieza 2
+LDP     M2901
+INC     D6356
+BMOV    D6800   D6803   K57
+MOV     K56     D6800
+BMOV    D6007   D6801   K2
+LD      M6000
+AND     M2901
+DINC    D6532
+; F057 JIG1 Confirmación pieza 3
+LDP     M2902
+INC     D6357
+BMOV    D6800   D6803   K57
+MOV     K57     D6800
+BMOV    D6007   D6801   K2
+LD      M6000
+AND     M2902
+DINC    D6534
+; F058 JIG1 Confirmación pieza 4
+LDP     M2903
+INC     D6358
+BMOV    D6800   D6803   K57
+MOV     K58     D6800
+BMOV    D6007   D6801   K2
+LD      M6000
+AND     M2903
+DINC    D6536
+; F059 JIG1 Confirmación pieza 5
+LDP     M2904
+INC     D6359
+BMOV    D6800   D6803   K57
+MOV     K59     D6800
+BMOV    D6007   D6801   K2
+LD      M6000
+AND     M2904
+DINC    D6538
+; F060 JIG1 Confirmación pieza 6
+LDP     M2905
+INC     D6360
+BMOV    D6800   D6803   K57
+MOV     K60     D6800
+BMOV    D6007   D6801   K2
+LD      M6000
+AND     M2905
+DINC    D6540
+; F061 JIG1 Confirmación pieza 7
+LDP     M2906
+INC     D6361
+BMOV    D6800   D6803   K57
+MOV     K61     D6800
+BMOV    D6007   D6801   K2
+LD      M6000
+AND     M2906
+DINC    D6542
+; F062 JIG1 Confirmación pieza 8
+LDP     M2907
+INC     D6362
+BMOV    D6800   D6803   K57
+MOV     K62     D6800
+BMOV    D6007   D6801   K2
+LD      M6000
+AND     M2907
+DINC    D6544
+; F063 JIG1 Confirmación pieza 9
+LDP     M2908
+INC     D6363
+BMOV    D6800   D6803   K57
+MOV     K63     D6800
+BMOV    D6007   D6801   K2
+LD      M6000
+AND     M2908
+DINC    D6546
+; F064 JIG1 Confirmación pieza 10
+LDP     M2909
+INC     D6364
+BMOV    D6800   D6803   K57
+MOV     K64     D6800
+BMOV    D6007   D6801   K2
+LD      M6000
+AND     M2909
+DINC    D6548
+; F065 JIG1 Confirmación pieza 11
+LDP     M2910
+INC     D6365
+BMOV    D6800   D6803   K57
+MOV     K65     D6800
+BMOV    D6007   D6801   K2
+LD      M6000
+AND     M2910
+DINC    D6550
+; F066 JIG1 Confirmación pieza 12
+LDP     M2911
+INC     D6366
+BMOV    D6800   D6803   K57
+MOV     K66     D6800
+BMOV    D6007   D6801   K2
+LD      M6000
+AND     M2911
+DINC    D6552
+; F067 JIG1 Confirmación pieza 13
+LDP     M2912
+INC     D6367
+BMOV    D6800   D6803   K57
+MOV     K67     D6800
+BMOV    D6007   D6801   K2
+LD      M6000
+AND     M2912
+DINC    D6554
+; F068 JIG1 Confirmación pieza 14
+LDP     M2913
+INC     D6368
+BMOV    D6800   D6803   K57
+MOV     K68     D6800
+BMOV    D6007   D6801   K2
+LD      M6000
+AND     M2913
+DINC    D6556
+; F069 JIG1 Confirmación pieza 15
+LDP     M2914
+INC     D6369
+BMOV    D6800   D6803   K57
+MOV     K69     D6800
+BMOV    D6007   D6801   K2
+LD      M6000
+AND     M2914
+DINC    D6558
+; F070 JIG1 Confirmación pieza 16
+LDP     M2915
+INC     D6370
+BMOV    D6800   D6803   K57
+MOV     K70     D6800
+BMOV    D6007   D6801   K2
+LD      M6000
+AND     M2915
+DINC    D6560
+; F071 JIG1 Pieza levantada
+LDP     M2976
+INC     D6371
+BMOV    D6800   D6803   K57
+MOV     K71     D6800
+BMOV    D6007   D6801   K2
+LD      M6000
+AND     M2976
+DINC    D6562
+; F072 JIG2 Cilindro change
+LDP     M3840
+INC     D6372
+BMOV    D6800   D6803   K57
+MOV     K72     D6800
+BMOV    D6007   D6801   K2
+LD      M6000
+AND     M3840
+DINC    D6564
+; F073 JIG2 Shift pin
+LDP     M3841
+INC     D6373
+BMOV    D6800   D6803   K57
+MOV     K73     D6800
+BMOV    D6007   D6801   K2
+LD      M6000
+AND     M3841
+DINC    D6566
+; F074 JIG2 Slide
+LDP     M3842
+INC     D6374
+BMOV    D6800   D6803   K57
+MOV     K74     D6800
+BMOV    D6007   D6801   K2
+LD      M6000
+AND     M3842
+DINC    D6568
+; F075 JIG2 Clamp 1
+LDP     M3843
+INC     D6375
+BMOV    D6800   D6803   K57
+MOV     K75     D6800
+BMOV    D6007   D6801   K2
+LD      M6000
+AND     M3843
+DINC    D6570
+; F076 JIG2 Clamp 2 (accion)
+LDP     M3844
+INC     D6376
+BMOV    D6800   D6803   K57
+MOV     K76     D6800
+BMOV    D6007   D6801   K2
+LD      M6000
+AND     M3844
+DINC    D6572
+; F077 JIG2 Clamp 2 (sensor 1)
+LDP     M3853
+INC     D6377
+BMOV    D6800   D6803   K57
+MOV     K77     D6800
+BMOV    D6007   D6801   K2
+LD      M6000
+AND     M3853
+DINC    D6574
+; F078 JIG2 Clamp 2 (sensor 2)
+LDP     M3854
+INC     D6378
+BMOV    D6800   D6803   K57
+MOV     K78     D6800
+BMOV    D6007   D6801   K2
+LD      M6000
+AND     M3854
+DINC    D6576
+; F079 JIG2 Change: cilindro izquierdo
+LDP     M3856
+INC     D6379
+BMOV    D6800   D6803   K57
+MOV     K79     D6800
+BMOV    D6007   D6801   K2
+LD      M6000
+AND     M3856
+DINC    D6578
+; F080 JIG2 Change: cilindro derecho
+LDP     M3857
+INC     D6380
+BMOV    D6800   D6803   K57
+MOV     K80     D6800
+BMOV    D6007   D6801   K2
+LD      M6000
+AND     M3857
+DINC    D6580
+; F081 JIG2 Change: electroválvula
+LDP     M3858
+INC     D6381
+BMOV    D6800   D6803   K57
+MOV     K81     D6800
+BMOV    D6007   D6801   K2
+LD      M6000
+AND     M3858
+DINC    D6582
+; F082 JIG2 Change: cil. 2 sensor avance
+LDP     M3500
+INC     D6382
+BMOV    D6800   D6803   K57
+MOV     K82     D6800
+BMOV    D6007   D6801   K2
+LD      M6000
+AND     M3500
+DINC    D6584
+; F083 JIG2 Change: cil. 1 sensor avance
+LDP     M3501
+INC     D6383
+BMOV    D6800   D6803   K57
+MOV     K83     D6800
+BMOV    D6007   D6801   K2
+LD      M6000
+AND     M3501
+DINC    D6586
+; F084 JIG2 Change: cil. 2 sensor retorno
+LDP     M3502
+INC     D6384
+BMOV    D6800   D6803   K57
+MOV     K84     D6800
+BMOV    D6007   D6801   K2
+LD      M6000
+AND     M3502
+DINC    D6588
+; F085 JIG2 Change: cil. 1 sensor retorno
+LDP     M3503
+INC     D6385
+BMOV    D6800   D6803   K57
+MOV     K85     D6800
+BMOV    D6007   D6801   K2
+LD      M6000
+AND     M3503
+DINC    D6590
+; F086 JIG2 Sin pieza en todo el jig
+LDP     M3860
+INC     D6386
+BMOV    D6800   D6803   K57
+MOV     K86     D6800
+BMOV    D6007   D6801   K2
+LD      M6000
+AND     M3860
+DINC    D6592
+; F087 JIG2 Confirmación pieza 1
+LDP     M3900
+INC     D6387
+BMOV    D6800   D6803   K57
+MOV     K87     D6800
+BMOV    D6007   D6801   K2
+LD      M6000
+AND     M3900
+DINC    D6594
+; F088 JIG2 Confirmación pieza 2
+LDP     M3901
+INC     D6388
+BMOV    D6800   D6803   K57
+MOV     K88     D6800
+BMOV    D6007   D6801   K2
+LD      M6000
+AND     M3901
+DINC    D6596
+; F089 JIG2 Confirmación pieza 3
+LDP     M3902
+INC     D6389
+BMOV    D6800   D6803   K57
+MOV     K89     D6800
+BMOV    D6007   D6801   K2
+LD      M6000
+AND     M3902
+DINC    D6598
+; F090 JIG2 Confirmación pieza 4
+LDP     M3903
+INC     D6390
+BMOV    D6800   D6803   K57
+MOV     K90     D6800
+BMOV    D6007   D6801   K2
+LD      M6000
+AND     M3903
+DINC    D6600
+; F091 JIG2 Confirmación pieza 5
+LDP     M3904
+INC     D6391
+BMOV    D6800   D6803   K57
+MOV     K91     D6800
+BMOV    D6007   D6801   K2
+LD      M6000
+AND     M3904
+DINC    D6602
+; F092 JIG2 Confirmación pieza 6
+LDP     M3905
+INC     D6392
+BMOV    D6800   D6803   K57
+MOV     K92     D6800
+BMOV    D6007   D6801   K2
+LD      M6000
+AND     M3905
+DINC    D6604
+; F093 JIG2 Confirmación pieza 7
+LDP     M3906
+INC     D6393
+BMOV    D6800   D6803   K57
+MOV     K93     D6800
+BMOV    D6007   D6801   K2
+LD      M6000
+AND     M3906
+DINC    D6606
+; F094 JIG2 Confirmación pieza 8
+LDP     M3907
+INC     D6394
+BMOV    D6800   D6803   K57
+MOV     K94     D6800
+BMOV    D6007   D6801   K2
+LD      M6000
+AND     M3907
+DINC    D6608
+; F095 JIG2 Confirmación pieza 9
+LDP     M3908
+INC     D6395
+BMOV    D6800   D6803   K57
+MOV     K95     D6800
+BMOV    D6007   D6801   K2
+LD      M6000
+AND     M3908
+DINC    D6610
+; F096 JIG2 Confirmación pieza 10
+LDP     M3909
+INC     D6396
+BMOV    D6800   D6803   K57
+MOV     K96     D6800
+BMOV    D6007   D6801   K2
+LD      M6000
+AND     M3909
+DINC    D6612
+; F097 JIG2 Confirmación pieza 11
+LDP     M3910
+INC     D6397
+BMOV    D6800   D6803   K57
+MOV     K97     D6800
+BMOV    D6007   D6801   K2
+LD      M6000
+AND     M3910
+DINC    D6614
+; F098 JIG2 Confirmación pieza 12
+LDP     M3911
+INC     D6398
+BMOV    D6800   D6803   K57
+MOV     K98     D6800
+BMOV    D6007   D6801   K2
+LD      M6000
+AND     M3911
+DINC    D6616
+; F099 JIG2 Confirmación pieza 13
+LDP     M3912
+INC     D6399
+BMOV    D6800   D6803   K57
+MOV     K99     D6800
+BMOV    D6007   D6801   K2
+LD      M6000
+AND     M3912
+DINC    D6618
+; F100 JIG2 Confirmación pieza 14
+LDP     M3913
+INC     D6400
+BMOV    D6800   D6803   K57
+MOV     K100     D6800
+BMOV    D6007   D6801   K2
+LD      M6000
+AND     M3913
+DINC    D6620
+; F101 JIG2 Confirmación pieza 15
+LDP     M3914
+INC     D6401
+BMOV    D6800   D6803   K57
+MOV     K101     D6800
+BMOV    D6007   D6801   K2
+LD      M6000
+AND     M3914
+DINC    D6622
+; F102 JIG2 Confirmación pieza 16
+LDP     M3915
+INC     D6402
+BMOV    D6800   D6803   K57
+MOV     K102     D6800
+BMOV    D6007   D6801   K2
+LD      M6000
+AND     M3915
+DINC    D6624
+; F103 JIG2 Pieza levantada
+LDP     M3976
+INC     D6403
+BMOV    D6800   D6803   K57
+MOV     K103     D6800
+BMOV    D6007   D6801   K2
+LD      M6000
+AND     M3976
+DINC    D6626
+; <<< FALLAS

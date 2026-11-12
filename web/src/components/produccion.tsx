@@ -133,9 +133,9 @@ export function Produccion({ vista }: { vista: Vista }) {
         <GraficoHoras horas={horas} />
       </div>
 
-      <details open className="border-t border-linea px-4 py-2">
+      <details className="border-t border-linea px-4 py-2">
         <summary className="rotulo cursor-pointer select-none">Detalle por hora</summary>
-        <div className="mt-2 max-h-80 overflow-auto">
+        <div className="mt-2">
           <table className="tabla num">
             <thead>
               <tr>
@@ -143,15 +143,16 @@ export function Produccion({ vista }: { vista: Vista }) {
                 <th>JIG1</th>
                 <th>JIG2</th>
                 <th>Total</th>
-                <th>Prod. (min)</th>
-                <th>Falla (min)</th>
+                <th>Prod.<span className="hidden sm:inline"> (min)</span></th>
+                <th>Falla<span className="hidden sm:inline"> (min)</span></th>
               </tr>
             </thead>
             <tbody>
               {reciente.map((h) => (
                 <tr key={h.hora} data-actual={h.enCurso} data-valido={h.valido}>
-                  <td>
-                    {String(h.hora).padStart(2, "0")}:00 {h.dia === "ayer" ? <span className="text-apagado">ayer</span> : null}
+                  <td className="whitespace-nowrap">
+                    {String(h.hora).padStart(2, "0")}:00{" "}
+                    {h.dia === "ayer" ? <span className="hidden text-apagado sm:inline">ayer</span> : null}
                   </td>
                   <td>{h.valido ? h.piezasJ1 : "—"}</td>
                   <td>{h.valido ? h.piezasJ2 : "—"}</td>

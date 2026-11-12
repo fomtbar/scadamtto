@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { ayerMMDD, construirVista, estadoDe, sinPrefijo, tablaHoras, type Tags } from "./dominio";
+import { ayerMMDD, construirVista, cuandoFalla, estadoDe, sinPrefijo, tablaHoras, vistaFallas, type Tags } from "./dominio";
 
 const leida = (valor: number | null, extra: Partial<Tags[string]> = {}) => ({
   valor,
@@ -135,5 +135,69 @@ describe("sinPrefijo", () => {
   it("separa la celda del nombre", () => {
     expect(sinPrefijo("FCA0203.Hora.07.PiezasJ1", "FCA0203")).toBe("Hora.07.PiezasJ1");
     expect(sinPrefijo("FCA0405.Celda.Estado", "FCA0203")).toBeNull();
+  });
+});
+
+describe("cuandoFalla", () => {
+  it("arma dd/mm hh:mm del anio en curso", () => expect(cuandoFalla(1109, 705, 1110, 2026)).toBe("09/11 07:05"));
+  it("si el MMDD es posterior a hoy, es del anio anterior", () =>
+    expect(cuandoFalla(1230, 2359, 102, 2027)).toBe("30/12/26 23:59"));
+});
+
+describe("vistaFallas", () => {
+  const ult = (tags: Tags, n: number, codigo: number, mmdd: number, hhmm: number) => {
+    const p = `Falla.Ult.${String(n).padStart(2, "0")}.`;
+    tags[p + "Codigo"] = leida(codigo);
+    tags[p + "Fecha"] = leida(mmdd);
+    tags[p + "Hora"] = leida(hhmm);
+  };
+
+  it("sin tags de fallas avisa que no estan cargadas", () => {
+    const v = vistaFallas({}, 1110, 2026);
+    expect(v.hayTags).toBe(false);
+    expect(v.ultimas).toEqual([]);
+    expect(v.acumulado).toEqual([]);
+  });
+
+  it("saltea renglones vacios y no rompe con codigos desconocidos", () => {
+    const tags: Tags = {};
+    ult(tags, 1, 5, 1110, 830);
+    ult(tags, 2, 0, 0, 0);
+    ult(tags, 3, 999, 1109, 2210);
+    tags["Falla.F005.Activa"] = leida(1);
+    const v = vistaFallas(tags, 1110, 2026);
+    expect(v.hayTags).toBe(true);
+    expect(v.ultimas.map((u) => u.orden)).toEqual([1, 3]);
+    expect(v.ultimas[0]).toMatchObject({ codigo: 5, activa: true, cuando: "10/11 08:30" });
+    expect(v.ultimas[0].def?.dispositivo).toBe("M1844");
+    expect(v.ultimas[1].def).toBeNull();
+    expect(v.activas.map((a) => a.codigo)).toEqual([5]);
+  });
+
+  it("acumulado: solo las que aparecieron, de mas veces a menos", () => {
+    const tags: Tags = {};
+    tags["Falla.F001.Veces"] = leida(3);
+    tags["Falla.F001.Seg"] = leida(100);
+    tags["Falla.F002.Veces"] = leida(9);
+    tags["Falla.F002.Seg"] = leida(10);
+    tags["Falla.F003.Veces"] = leida(0);
+    tags["Falla.F003.Seg"] = leida(0);
+    const v = vistaFallas(tags, 1110, 2026);
+    expect(v.acumulado.map((a) => [a.def.codigo, a.veces, a.seg])).toEqual([
+      [2, 9, 10],
+      [1, 3, 100],
+    ]);
+  });
+});
+
+describe("reloj del adquisidor", () => {
+  it("detecta lecturas fechadas en el futuro", () => {
+    const tags: Tags = { "Celda.Vida": leida(5, { segLectura: -1930, segCambio: -1930 }) };
+    const v = construirVista(tags, "2026-11-12 07:57:00");
+    expect(v.adquisidorAdelantadoSeg).toBe(1930);
+  });
+  it("tolera unos segundos de diferencia", () => {
+    const tags: Tags = { "Celda.Vida": leida(5, { segLectura: -3, segCambio: -3 }) };
+    expect(construirVista(tags, "2026-11-12 07:57:00").adquisidorAdelantadoSeg).toBeNull();
   });
 });

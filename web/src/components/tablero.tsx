@@ -6,6 +6,7 @@ import type { Vista } from "@/lib/dominio";
 import { FranjaEstado } from "./estado";
 import { Produccion } from "./produccion";
 import { Mantenimiento } from "./mantenimiento";
+import { Fallas } from "./fallas";
 import { antiguedad } from "./formato";
 
 const REFRESCO_MS = 5_000;
@@ -85,6 +86,14 @@ export function Tablero({ celda }: { celda: Celda }) {
         </div>
       ) : null}
 
+      {datos && datos.adquisidorAdelantadoSeg !== null ? (
+        <div className="aviso-franja px-3 py-2">
+          Relojes desincronizados: el adquisidor escribe con una hora {antiguedad(datos.adquisidorAdelantadoSeg)} adelantada
+          respecto del servidor de base. Mientras tanto no se puede detectar si deja de leer. Revisar la hora de la PC de
+          adquisición o usar hora_servidor = true en su site.toml.
+        </div>
+      ) : null}
+
       {datos && !datos.desactualizado && !datos.plcVivo ? (
         <div className="aviso-franja px-3 py-2">
           El contador de vida del PLC no cambia: el programa SCADA del PLC no está corriendo o el PLC está en STOP.
@@ -95,7 +104,10 @@ export function Tablero({ celda }: { celda: Celda }) {
         <div className={`flex flex-col gap-3 ${datos.desactualizado ? "viejo" : ""}`}>
           <FranjaEstado vista={datos} />
           <div className="grid items-start gap-3 xl:grid-cols-[minmax(0,1fr)_380px] [&>*]:min-w-0">
-            <Produccion vista={datos} />
+            <div className="flex flex-col gap-3 [&>*]:min-w-0">
+              <Produccion vista={datos} />
+              <Fallas vista={datos} />
+            </div>
             <Mantenimiento vista={datos} />
           </div>
         </div>

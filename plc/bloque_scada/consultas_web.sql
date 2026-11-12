@@ -64,3 +64,38 @@ WHERE (t.Hora <= a.HoraAhora AND t.Fecha = a.HoyMMDD)
    OR (t.Hora >  a.HoraAhora AND t.Fecha = a.AyerMMDD)
 ORDER BY CASE WHEN t.Hora <= a.HoraAhora THEN 1 ELSE 0 END, t.Hora;
 -- (ordena de la hora mas vieja a la actual)
+
+
+-- =============================================================================
+-- Fallas (seccion 10 del bloque SCADA). Los textos estan en fallas.py, aca
+-- sale el codigo. Codigo c -> tags FCA0203.Falla.Fccc.*
+-- =============================================================================
+
+-- Acumulado por falla, de mas veces a menos (solo las que aparecieron)
+SELECT CAST(SUBSTRING(v.NombreTag, 16, 3) AS int)           AS Codigo,
+       CAST(v.Valor AS int)                                  AS Veces,
+       CAST(s.Valor / 60.0 AS decimal(9,1))                  AS MinActiva,
+       CAST(a.Valor AS int)                                  AS ActivaAhora
+FROM test.ValorActual v
+JOIN test.ValorActual s ON s.NombreTag = REPLACE(v.NombreTag, '.Veces', '.Seg')
+JOIN test.ValorActual a ON a.NombreTag = REPLACE(v.NombreTag, '.Veces', '.Activa')
+WHERE v.NombreTag LIKE 'FCA0203.Falla.F[0-9][0-9][0-9].Veces'
+  AND (v.Valor > 0 OR s.Valor > 0)
+ORDER BY v.Valor DESC, s.Valor DESC;
+
+-- Ultimas 20 fallas (1 = la mas nueva). Codigo 0 = renglon vacio.
+WITH u AS (
+    SELECT CAST(SUBSTRING(NombreTag, 19, 2) AS int) AS Orden,
+           SUBSTRING(NombreTag, 22, 10)             AS Campo,
+           Valor
+    FROM test.ValorActual
+    WHERE NombreTag LIKE 'FCA0203.Falla.Ult.%'
+)
+SELECT Orden, CAST(Codigo AS int) AS Codigo,
+       RIGHT('0' + CAST(CAST(Fecha AS int) % 100 AS varchar), 2) + '/' +
+       RIGHT('0' + CAST(CAST(Fecha AS int) / 100 AS varchar), 2) + ' ' +
+       RIGHT('0' + CAST(CAST(Hora AS int) / 100 AS varchar), 2) + ':' +
+       RIGHT('0' + CAST(CAST(Hora AS int) % 100 AS varchar), 2) AS Cuando
+FROM u PIVOT (MAX(Valor) FOR Campo IN (Codigo, Fecha, Hora)) p
+WHERE Codigo > 0
+ORDER BY Orden;

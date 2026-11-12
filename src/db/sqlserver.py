@@ -8,10 +8,18 @@ no compila nada y tampoco depende de que este instalado el driver ODBC.
 Las filas se insertan con FechaHora explicita, nunca dejando actuar el
 DEFAULT getdate() de la tabla: una muestra bufferizada se escribe minutos (u
 horas) despues de haber sido tomada, y el timestamp que importa es el del scan.
+
+Reloj: por defecto (`[db] hora_servidor = true`) las fechas salen del reloj
+del SQL Server y no del de esta PC. Se manda la *antiguedad* de la muestra
+(ahora - momento del scan, medida con el reloj de la PC) y el servidor la
+resta de SYSDATETIME(). Una PC con la hora corrida ya no ensucia la base: lo
+unico que se usa de su reloj es una diferencia de pocos segundos. Las muestras
+bufferizadas durante un corte conservan su antiguedad real.
 """
 from __future__ import annotations
 
 import re
+from datetime import datetime
 
 import pytds
 from loguru import logger
@@ -32,6 +40,18 @@ def _ident(nombre: str, campo: str) -> str:
     return f"[{nombre}]"
 
 
+# Momento de la muestra en el reloj del SQL Server: SYSDATETIME() menos la
+# antiguedad, en segundos + milisegundos (DATEADD con int no llega a mas de
+# 24 dias en milisegundos; asi aguanta buffers de cualquier largo).
+_MOMENTO_SERVIDOR = "DATEADD(millisecond, -%s, DATEADD(second, -%s, SYSDATETIME()))"
+
+
+def _antiguedad(m: Muestra, ahora: datetime) -> tuple[int, int]:
+    """(milisegundos, segundos) desde el scan. Nunca negativa."""
+    ms_total = max(0, int((ahora - m.fecha_hora).total_seconds() * 1000))
+    return ms_total % 1000, ms_total // 1000
+
+
 class ErrorDb(Exception):
     """Falla al hablar con SQL Server."""
 
@@ -45,10 +65,14 @@ class SqlServerSink:
         self.tabla_historial = f"{esquema}.{_ident(cfg.get('tabla', 'RegistroPLC'), 'tabla')}"
         self.tabla_actual = f"{esquema}.{_ident(cfg.get('tabla_actual', 'ValorActual'), 'tabla_actual')}"
         self.destino = self.tabla_actual if self.modo == "actual" else self.tabla_historial
+        self.hora_servidor = bool(cfg.get("hora_servidor", True))
+        # Con hora del servidor, cada "%s" de fecha se reemplaza por la
+        # expresion (2 parametros: ms y s de antiguedad).
+        momento = _MOMENTO_SERVIDOR if self.hora_servidor else "%s"
 
         self._sql_insert = (
             f"INSERT INTO {self.tabla_historial} (FechaHora,NombreTag,Valor,Estado) "
-            "VALUES (%s,%s,%s,%s)"
+            f"VALUES ({momento},%s,%s,%s)"
         )
         # UPSERT sobre la tabla de valor actual, una fila por tag.
         #
@@ -62,14 +86,15 @@ class SqlServerSink:
         # (NULL) nunca compara igual a otra, y FechaHora se moveria en cada scan
         # durante toda una caida del PLC.
         self._sql_upsert = f"""
+DECLARE @momento datetime2(3) = {momento};
 UPDATE {self.tabla_actual} SET
     FechaHora = CASE WHEN EXISTS (SELECT Valor, Estado INTERSECT SELECT %s, %s)
-                     THEN FechaHora ELSE %s END,
-    Valor = %s, Estado = %s, FechaLectura = %s
+                     THEN FechaHora ELSE @momento END,
+    Valor = %s, Estado = %s, FechaLectura = @momento
 WHERE NombreTag = %s;
 IF @@ROWCOUNT = 0
     INSERT INTO {self.tabla_actual} (NombreTag, Valor, Estado, FechaHora, FechaLectura)
-    VALUES (%s, %s, %s, %s, %s);
+    VALUES (%s, %s, %s, @momento, @momento);
 """
 
     @property
@@ -123,10 +148,8 @@ IF @@ROWCOUNT = 0
             return 0
         if self._cn is None:
             raise ErrorDb("SQL Server no conectado")
-        filas = [
-            (m.fecha_hora, m.nombre_tag, m.valor, m.estado)
-            for m in muestras
-        ]
+        ahora = datetime.now()
+        filas = [(*self._momento(m, ahora), m.nombre_tag, m.valor, m.estado) for m in muestras]
         return self._ejecutar(self._sql_insert, filas, "insertando")
 
     def upsert(self, muestras: list[Muestra]) -> int:
@@ -140,15 +163,22 @@ IF @@ROWCOUNT = 0
             return 0
         if self._cn is None:
             raise ErrorDb("SQL Server no conectado")
+        ahora = datetime.now()
         filas = [
-            (m.valor, m.estado, m.fecha_hora,          # comparacion + FechaHora nueva
-             m.valor, m.estado, m.fecha_hora,          # SET del UPDATE
+            (*self._momento(m, ahora),                 # @momento
+             m.valor, m.estado,                        # comparacion null-safe
+             m.valor, m.estado,                        # SET del UPDATE
              m.nombre_tag,                             # WHERE
-             m.nombre_tag, m.valor, m.estado,          # INSERT si no existia
-             m.fecha_hora, m.fecha_hora)
+             m.nombre_tag, m.valor, m.estado)          # INSERT si no existia
             for m in muestras
         ]
         return self._ejecutar(self._sql_upsert, filas, "actualizando")
+
+    def _momento(self, m: Muestra, ahora: datetime) -> tuple:
+        """Parametros de la fecha de la muestra segun el reloj elegido."""
+        if self.hora_servidor:
+            return _antiguedad(m, ahora)
+        return (m.fecha_hora,)
 
     def _ejecutar(self, sql: str, filas: list[tuple], accion: str) -> int:
         try:

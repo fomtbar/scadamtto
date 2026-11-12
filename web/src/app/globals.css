@@ -163,6 +163,12 @@ body {
     color: var(--tinta);
     background-color: var(--panel-alt);
   }
+  .boton[aria-pressed="true"] {
+    color: var(--tinta);
+    background-color: var(--panel-alt);
+    border-color: var(--tinta);
+    position: relative;
+  }
 
   /* -- Estados: franja con borde izquierdo de color ----------- */
   .estado {

@@ -6,10 +6,20 @@ Programa aparte que junta en un rango propio los datos de producción y mantenim
 
 | Archivo | Para qué |
 |---|---|
-| `SCADA_lista.txt` | El programa en modo Lista, para tipear en GX Developer |
-| `tags_scada.toml` | Las 153 tags para agregar al final de `config/tags.toml`. Llevan el prefijo de la celda: `FCA0203.Celda.Estado` |
+| `SCADA_lista.txt` | El programa en modo Lista. La sección 10 (fallas) la escribe `generar_csv.py` |
+| `SCADA.csv` | El mismo programa para *Read from CSV File* de GX Works2 (`python generar_csv.py`) |
+| `COMMENT_con_SCADA.csv` | Comentarios originales (`COMMENT_bk.csv`) + los del bloque SCADA, para importar de una vez |
+| `fallas.py` | **Catálogo de fallas**: la única fuente. De acá salen la sección 10, los comentarios, las tags y la lista de la web |
+| `tags_scada.toml` | Las 522 tags para el final de `config/tags.toml`. Llevan el prefijo de la celda: `FCA0203.Celda.Estado` |
 | `generar_tags.py` | Regenera `tags_scada.toml`; para otra celda: `python generar_tags.py FCA0405` |
-| `consultas_web.sql` | Estado en vivo y tabla de 24 horas, solo lectura |
+| `generar_fallas_web.py` | Regenera `web/src/lib/fallas.ts` desde `fallas.py` |
+| `consultas_web.sql` | Estado en vivo, tabla de 24 horas y fallas, solo lectura |
+
+**Si se cambia `fallas.py`**, correr en orden:
+
+```
+python generar_csv.py && python generar_comentarios.py && python unir_comentarios.py && python generar_tags.py && python generar_fallas_web.py
+```
 
 ## Mapa de memoria
 
@@ -69,6 +79,38 @@ Al empezar cada hora, el PLC limpia ese renglón y le pone la fecha. El renglón
 
 Los renglones que quedaron de días anteriores (por ejemplo, si el PLC estuvo apagado) se reconocen por la fecha. La consulta `consultas_web.sql` los descarta.
 
+### Fallas (sección 10)
+
+Cada falla del catálogo (`fallas.py`, 103 hoy) es un bit del programa original que se autorretiene hasta el reset (`M1006`): fallas de robot `M1864`–`M1893`, de jig `M2840`…`M3976` y de celda `M1840`–`M1855`. Los resúmenes (`M1970`–`M1980`, `M2710`, `M3710`…) quedan afuera para no contar dos veces.
+
+Para la falla de código `c` (1..103):
+
+| Dirección | Tag | Significado |
+|---|---|---|
+| bit original (ej. `M1867`) | Falla.F`ccc`.Activa | activa ahora (se lee directo, el bloque no lo toca) |
+| `D6300 + c` | Falla.F`ccc`.Veces | veces que apareció (flancos), 16 bits |
+| `D6420 + 2c` | Falla.F`ccc`.Seg | segundos que estuvo activa, 32 bits |
+
+**Últimas 20 fallas:** `D6800`–`D6859`, de a 3 palabras: código, fecha MMDD, hora HHMM. La más nueva está en `D6800`. Cada falla nueva corre todo un lugar (`BMOV`) y la 21.ª se pierde. Tags: `Falla.Ult.01.Codigo` / `.Fecha` / `.Hora` … `Falla.Ult.20.*`.
+
+Todo está en el latch: sobrevive a un corte de luz. **Nadie lo resetea.** Para poner a cero, desde GX Works2 con el PLC en línea (*Online → Debug → Modify Value*, o una instrucción en un programa de prueba):
+
+- contadores y tiempos: `FMOV K0 D6300 K360`;
+- registro de últimas: `FMOV K0 D6800 K60`.
+
+**Códigos fijos:** el código queda grabado en el PLC. Para sumar una falla se agrega al final de `fallas.py`, nunca se reordena.
+
+## Actualización: agregar la sección de fallas (el bloque SCADA ya está cargado)
+
+No cambia parámetros, así que **no hace falta reset del CPU**.
+
+1. **Memoria:** suma unos 1900 pasos. Verlo en GX Works2 (*Online → Read from PLC → Free space* o *Tool → Check memory capacity*). El Q03UDE tiene 30 k pasos.
+2. **Confirmar rango libre:** *Find Device* de `D6300`–`D6659` y `D6800`–`D6859` en todo el proyecto y en la Proface. Revisé los PDF y los comentarios y no aparecen.
+3. Programa SCADA → *Project → Read from CSV File* → `SCADA.csv`. Reemplaza el programa SCADA entero. Convertir (`F4`).
+4. Comentarios → *Read from CSV File* → `COMMENT_con_SCADA.csv`. Reemplaza todos los comentarios: el archivo ya trae los originales.
+5. *Online → Write to PLC*: solo el programa `SCADA`. Mejor en una parada. Con el PLC en RUN, GX Works2 pregunta si escribe igual.
+6. **Probar:** provocar una falla conocida (por ejemplo, un sensor de clamp en manual). Tienen que subir `D6300 + c`, aparecer el código en `D6800` y, al resetear, el bit vuelve a 0.
+
 ## Cómo cargarlo (en una parada de producción)
 
 1. **Backup:** leer el proyecto del PLC y guardarlo con otro nombre antes de tocar nada.
@@ -97,6 +139,6 @@ Los renglones que quedaron de días anteriores (por ejemplo, si el PLC estuvo ap
 2. Agregar el contenido de `tags_scada.toml` al final de `C:\scadaMtto\config\tags.toml`.
 3. `iniciar.cmd`.
 
-Son 6 lecturas en bloque por segundo y una cada 5 s para la tabla horaria: carga despreciable para el PLC.
+Son unas 6 lecturas en bloque por segundo, más las de fallas cada 2 s (bits) y cada 5 s (contadores, registro y tabla horaria). La carga para el PLC es despreciable.
 
 Si se cargan las tags antes que el bloque, leen 0 y no pasa nada.

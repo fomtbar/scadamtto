@@ -8,16 +8,36 @@ otras columnas vacias.
 Los numeros de paso son una estimacion: GX Works2 recalcula los pasos al
 convertir. Si la importacion los rechazara, generar con --sin-pasos.
 
+La seccion 10 (fallas) se arma desde fallas.py y se reescribe dentro de
+SCADA_lista.txt, entre los marcadores, para que el listado quede completo.
+
 Uso:  python generar_csv.py [--sin-pasos]
 """
 import sys
 from pathlib import Path
 
+import fallas
+
 AQUI = Path(__file__).parent
 ORIGEN = AQUI / "SCADA_lista.txt"
 NOMBRE_PROGRAMA = "SCADA"
 PLC = "QCPU (Q mode) Q03UDE"
+INICIO_FALLAS = "; >>> FALLAS: generado por generar_csv.py desde fallas.py, no editar a mano"
+FIN_FALLAS = "; <<< FALLAS"
 COLUMNAS = ["Step No.", "Line Statement", "Instruction", "I/O(Device)", "Blank", "PI Statement", "Note"]
+
+
+def actualizar_fallas(ruta: Path) -> None:
+    """Reemplaza (o agrega al final) el bloque de fallas de SCADA_lista.txt."""
+    texto = ruta.read_text(encoding="utf-8")
+    bloque = f"{INICIO_FALLAS}\n{fallas.lista_il()}{FIN_FALLAS}\n"
+    if INICIO_FALLAS in texto:
+        antes = texto.split(INICIO_FALLAS, 1)[0]
+        despues = texto.split(FIN_FALLAS, 1)[1].lstrip("\n")
+        texto = antes + bloque + despues
+    else:
+        texto = texto.rstrip("\n") + "\n\n" + bloque
+    ruta.write_text(texto, encoding="utf-8", newline="\n")
 
 
 def leer_instrucciones(ruta: Path) -> list[list[str]]:
@@ -35,7 +55,7 @@ def pasos(partes: list[str]) -> int:
     base = {
         "LD": 1, "LDI": 1, "AND": 1, "ANI": 1, "OR": 1, "ORI": 1, "OUT": 1,
         "SET": 1, "RST": 1, "LDP": 2, "ANDP": 2, "ORP": 2,
-        "MOV": 2, "INC": 2, "DINC": 2, "DATERD": 2, "FMOV": 4, "*": 4, "+": 4,
+        "MOV": 2, "INC": 2, "DINC": 2, "DATERD": 2, "FMOV": 4, "BMOV": 4, "*": 4, "+": 4,
     }.get(instr, 3)  # comparaciones (LD<>, AND<, ...) = 3
     extra = sum(1 for o in operandos if o.startswith(("SM", "SD")) or "Z" in o[1:])
     return base + extra
@@ -53,11 +73,13 @@ def generar(sin_pasos: bool) -> Path:
         for op in operandos[1:]:
             filas.append([f'"{v}"' for v in ("", "", "", op, "", "", "")])
         paso += pasos(partes)
-    texto = "\r\n".join("\t".join(f) for f in filas) + "\r\n"
+    print(f"~{paso} pasos estimados (GX Works2 los recalcula al convertir)")
+    texto ="\r\n".join("\t".join(f) for f in filas) + "\r\n"
     destino = AQUI / ("SCADA_sin_pasos.csv" if sin_pasos else "SCADA.csv")
     destino.write_bytes(b"\xff\xfe" + texto.encode("utf-16-le"))
     return destino
 
 
 if __name__ == "__main__":
+    actualizar_fallas(ORIGEN)
     print(generar("--sin-pasos" in sys.argv))

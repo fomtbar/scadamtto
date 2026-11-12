@@ -10,6 +10,7 @@ export async function GET(_: Request, { params }: { params: Promise<{ id: string
   const { id } = await params;
   const celda = buscarCelda(id);
   if (!celda) return NextResponse.json({ error: `No existe la celda ${id}` }, { status: 404 });
+  if (celda.enDesarrollo) return NextResponse.json({ error: `La celda ${celda.nombre} está en desarrollo` }, { status: 404 });
 
   try {
     const { tags, ahora } = await leerCelda(celda);

@@ -1,4 +1,4 @@
-# Tags del bloque SCADA de la celda FCA0203 (D6000-D6219, M6010-M6024) - agregar al final de config/tags.toml
+# Tags del bloque SCADA de la celda FCA0203 (D6000-D6219, M6010-M6024, fallas D6300-D6859) - agregar al final de config/tags.toml
 
 [[tag]]
 nombre       = "FCA0203.Celda.Vida"
@@ -1524,6 +1524,3696 @@ registro     = "intervalo"
 nombre       = "FCA0203.Hora.23.SegFalla"
 plc          = "mitsu_q1"
 direccion    = "D6219"
+tipo         = "int16"
+escala       = 1.0
+offset       = 0.0
+scan_ms      = 5000
+registro     = "intervalo"
+
+[[tag]]
+nombre       = "FCA0203.Falla.F001.Activa"
+plc          = "mitsu_q1"
+direccion    = "M1840"
+tipo         = "bit"
+escala       = 1.0
+offset       = 0.0
+scan_ms      = 2000
+registro     = "intervalo"
+
+[[tag]]
+nombre       = "FCA0203.Falla.F001.Veces"
+plc          = "mitsu_q1"
+direccion    = "D6301"
+tipo         = "int16"
+escala       = 1.0
+offset       = 0.0
+scan_ms      = 5000
+registro     = "intervalo"
+
+[[tag]]
+nombre       = "FCA0203.Falla.F001.Seg"
+plc          = "mitsu_q1"
+direccion    = "D6422"
+tipo         = "int32"
+escala       = 1.0
+offset       = 0.0
+scan_ms      = 5000
+registro     = "intervalo"
+
+[[tag]]
+nombre       = "FCA0203.Falla.F002.Activa"
+plc          = "mitsu_q1"
+direccion    = "M1841"
+tipo         = "bit"
+escala       = 1.0
+offset       = 0.0
+scan_ms      = 2000
+registro     = "intervalo"
+
+[[tag]]
+nombre       = "FCA0203.Falla.F002.Veces"
+plc          = "mitsu_q1"
+direccion    = "D6302"
+tipo         = "int16"
+escala       = 1.0
+offset       = 0.0
+scan_ms      = 5000
+registro     = "intervalo"
+
+[[tag]]
+nombre       = "FCA0203.Falla.F002.Seg"
+plc          = "mitsu_q1"
+direccion    = "D6424"
+tipo         = "int32"
+escala       = 1.0
+offset       = 0.0
+scan_ms      = 5000
+registro     = "intervalo"
+
+[[tag]]
+nombre       = "FCA0203.Falla.F003.Activa"
+plc          = "mitsu_q1"
+direccion    = "M1842"
+tipo         = "bit"
+escala       = 1.0
+offset       = 0.0
+scan_ms      = 2000
+registro     = "intervalo"
+
+[[tag]]
+nombre       = "FCA0203.Falla.F003.Veces"
+plc          = "mitsu_q1"
+direccion    = "D6303"
+tipo         = "int16"
+escala       = 1.0
+offset       = 0.0
+scan_ms      = 5000
+registro     = "intervalo"
+
+[[tag]]
+nombre       = "FCA0203.Falla.F003.Seg"
+plc          = "mitsu_q1"
+direccion    = "D6426"
+tipo         = "int32"
+escala       = 1.0
+offset       = 0.0
+scan_ms      = 5000
+registro     = "intervalo"
+
+[[tag]]
+nombre       = "FCA0203.Falla.F004.Activa"
+plc          = "mitsu_q1"
+direccion    = "M1843"
+tipo         = "bit"
+escala       = 1.0
+offset       = 0.0
+scan_ms      = 2000
+registro     = "intervalo"
+
+[[tag]]
+nombre       = "FCA0203.Falla.F004.Veces"
+plc          = "mitsu_q1"
+direccion    = "D6304"
+tipo         = "int16"
+escala       = 1.0
+offset       = 0.0
+scan_ms      = 5000
+registro     = "intervalo"
+
+[[tag]]
+nombre       = "FCA0203.Falla.F004.Seg"
+plc          = "mitsu_q1"
+direccion    = "D6428"
+tipo         = "int32"
+escala       = 1.0
+offset       = 0.0
+scan_ms      = 5000
+registro     = "intervalo"
+
+[[tag]]
+nombre       = "FCA0203.Falla.F005.Activa"
+plc          = "mitsu_q1"
+direccion    = "M1844"
+tipo         = "bit"
+escala       = 1.0
+offset       = 0.0
+scan_ms      = 2000
+registro     = "intervalo"
+
+[[tag]]
+nombre       = "FCA0203.Falla.F005.Veces"
+plc          = "mitsu_q1"
+direccion    = "D6305"
+tipo         = "int16"
+escala       = 1.0
+offset       = 0.0
+scan_ms      = 5000
+registro     = "intervalo"
+
+[[tag]]
+nombre       = "FCA0203.Falla.F005.Seg"
+plc          = "mitsu_q1"
+direccion    = "D6430"
+tipo         = "int32"
+escala       = 1.0
+offset       = 0.0
+scan_ms      = 5000
+registro     = "intervalo"
+
+[[tag]]
+nombre       = "FCA0203.Falla.F006.Activa"
+plc          = "mitsu_q1"
+direccion    = "M1845"
+tipo         = "bit"
+escala       = 1.0
+offset       = 0.0
+scan_ms      = 2000
+registro     = "intervalo"
+
+[[tag]]
+nombre       = "FCA0203.Falla.F006.Veces"
+plc          = "mitsu_q1"
+direccion    = "D6306"
+tipo         = "int16"
+escala       = 1.0
+offset       = 0.0
+scan_ms      = 5000
+registro     = "intervalo"
+
+[[tag]]
+nombre       = "FCA0203.Falla.F006.Seg"
+plc          = "mitsu_q1"
+direccion    = "D6432"
+tipo         = "int32"
+escala       = 1.0
+offset       = 0.0
+scan_ms      = 5000
+registro     = "intervalo"
+
+[[tag]]
+nombre       = "FCA0203.Falla.F007.Activa"
+plc          = "mitsu_q1"
+direccion    = "M1846"
+tipo         = "bit"
+escala       = 1.0
+offset       = 0.0
+scan_ms      = 2000
+registro     = "intervalo"
+
+[[tag]]
+nombre       = "FCA0203.Falla.F007.Veces"
+plc          = "mitsu_q1"
+direccion    = "D6307"
+tipo         = "int16"
+escala       = 1.0
+offset       = 0.0
+scan_ms      = 5000
+registro     = "intervalo"
+
+[[tag]]
+nombre       = "FCA0203.Falla.F007.Seg"
+plc          = "mitsu_q1"
+direccion    = "D6434"
+tipo         = "int32"
+escala       = 1.0
+offset       = 0.0
+scan_ms      = 5000
+registro     = "intervalo"
+
+[[tag]]
+nombre       = "FCA0203.Falla.F008.Activa"
+plc          = "mitsu_q1"
+direccion    = "M1847"
+tipo         = "bit"
+escala       = 1.0
+offset       = 0.0
+scan_ms      = 2000
+registro     = "intervalo"
+
+[[tag]]
+nombre       = "FCA0203.Falla.F008.Veces"
+plc          = "mitsu_q1"
+direccion    = "D6308"
+tipo         = "int16"
+escala       = 1.0
+offset       = 0.0
+scan_ms      = 5000
+registro     = "intervalo"
+
+[[tag]]
+nombre       = "FCA0203.Falla.F008.Seg"
+plc          = "mitsu_q1"
+direccion    = "D6436"
+tipo         = "int32"
+escala       = 1.0
+offset       = 0.0
+scan_ms      = 5000
+registro     = "intervalo"
+
+[[tag]]
+nombre       = "FCA0203.Falla.F009.Activa"
+plc          = "mitsu_q1"
+direccion    = "M1848"
+tipo         = "bit"
+escala       = 1.0
+offset       = 0.0
+scan_ms      = 2000
+registro     = "intervalo"
+
+[[tag]]
+nombre       = "FCA0203.Falla.F009.Veces"
+plc          = "mitsu_q1"
+direccion    = "D6309"
+tipo         = "int16"
+escala       = 1.0
+offset       = 0.0
+scan_ms      = 5000
+registro     = "intervalo"
+
+[[tag]]
+nombre       = "FCA0203.Falla.F009.Seg"
+plc          = "mitsu_q1"
+direccion    = "D6438"
+tipo         = "int32"
+escala       = 1.0
+offset       = 0.0
+scan_ms      = 5000
+registro     = "intervalo"
+
+[[tag]]
+nombre       = "FCA0203.Falla.F010.Activa"
+plc          = "mitsu_q1"
+direccion    = "M1849"
+tipo         = "bit"
+escala       = 1.0
+offset       = 0.0
+scan_ms      = 2000
+registro     = "intervalo"
+
+[[tag]]
+nombre       = "FCA0203.Falla.F010.Veces"
+plc          = "mitsu_q1"
+direccion    = "D6310"
+tipo         = "int16"
+escala       = 1.0
+offset       = 0.0
+scan_ms      = 5000
+registro     = "intervalo"
+
+[[tag]]
+nombre       = "FCA0203.Falla.F010.Seg"
+plc          = "mitsu_q1"
+direccion    = "D6440"
+tipo         = "int32"
+escala       = 1.0
+offset       = 0.0
+scan_ms      = 5000
+registro     = "intervalo"
+
+[[tag]]
+nombre       = "FCA0203.Falla.F011.Activa"
+plc          = "mitsu_q1"
+direccion    = "M1850"
+tipo         = "bit"
+escala       = 1.0
+offset       = 0.0
+scan_ms      = 2000
+registro     = "intervalo"
+
+[[tag]]
+nombre       = "FCA0203.Falla.F011.Veces"
+plc          = "mitsu_q1"
+direccion    = "D6311"
+tipo         = "int16"
+escala       = 1.0
+offset       = 0.0
+scan_ms      = 5000
+registro     = "intervalo"
+
+[[tag]]
+nombre       = "FCA0203.Falla.F011.Seg"
+plc          = "mitsu_q1"
+direccion    = "D6442"
+tipo         = "int32"
+escala       = 1.0
+offset       = 0.0
+scan_ms      = 5000
+registro     = "intervalo"
+
+[[tag]]
+nombre       = "FCA0203.Falla.F012.Activa"
+plc          = "mitsu_q1"
+direccion    = "M1851"
+tipo         = "bit"
+escala       = 1.0
+offset       = 0.0
+scan_ms      = 2000
+registro     = "intervalo"
+
+[[tag]]
+nombre       = "FCA0203.Falla.F012.Veces"
+plc          = "mitsu_q1"
+direccion    = "D6312"
+tipo         = "int16"
+escala       = 1.0
+offset       = 0.0
+scan_ms      = 5000
+registro     = "intervalo"
+
+[[tag]]
+nombre       = "FCA0203.Falla.F012.Seg"
+plc          = "mitsu_q1"
+direccion    = "D6444"
+tipo         = "int32"
+escala       = 1.0
+offset       = 0.0
+scan_ms      = 5000
+registro     = "intervalo"
+
+[[tag]]
+nombre       = "FCA0203.Falla.F013.Activa"
+plc          = "mitsu_q1"
+direccion    = "M1852"
+tipo         = "bit"
+escala       = 1.0
+offset       = 0.0
+scan_ms      = 2000
+registro     = "intervalo"
+
+[[tag]]
+nombre       = "FCA0203.Falla.F013.Veces"
+plc          = "mitsu_q1"
+direccion    = "D6313"
+tipo         = "int16"
+escala       = 1.0
+offset       = 0.0
+scan_ms      = 5000
+registro     = "intervalo"
+
+[[tag]]
+nombre       = "FCA0203.Falla.F013.Seg"
+plc          = "mitsu_q1"
+direccion    = "D6446"
+tipo         = "int32"
+escala       = 1.0
+offset       = 0.0
+scan_ms      = 5000
+registro     = "intervalo"
+
+[[tag]]
+nombre       = "FCA0203.Falla.F014.Activa"
+plc          = "mitsu_q1"
+direccion    = "M1853"
+tipo         = "bit"
+escala       = 1.0
+offset       = 0.0
+scan_ms      = 2000
+registro     = "intervalo"
+
+[[tag]]
+nombre       = "FCA0203.Falla.F014.Veces"
+plc          = "mitsu_q1"
+direccion    = "D6314"
+tipo         = "int16"
+escala       = 1.0
+offset       = 0.0
+scan_ms      = 5000
+registro     = "intervalo"
+
+[[tag]]
+nombre       = "FCA0203.Falla.F014.Seg"
+plc          = "mitsu_q1"
+direccion    = "D6448"
+tipo         = "int32"
+escala       = 1.0
+offset       = 0.0
+scan_ms      = 5000
+registro     = "intervalo"
+
+[[tag]]
+nombre       = "FCA0203.Falla.F015.Activa"
+plc          = "mitsu_q1"
+direccion    = "M1854"
+tipo         = "bit"
+escala       = 1.0
+offset       = 0.0
+scan_ms      = 2000
+registro     = "intervalo"
+
+[[tag]]
+nombre       = "FCA0203.Falla.F015.Veces"
+plc          = "mitsu_q1"
+direccion    = "D6315"
+tipo         = "int16"
+escala       = 1.0
+offset       = 0.0
+scan_ms      = 5000
+registro     = "intervalo"
+
+[[tag]]
+nombre       = "FCA0203.Falla.F015.Seg"
+plc          = "mitsu_q1"
+direccion    = "D6450"
+tipo         = "int32"
+escala       = 1.0
+offset       = 0.0
+scan_ms      = 5000
+registro     = "intervalo"
+
+[[tag]]
+nombre       = "FCA0203.Falla.F016.Activa"
+plc          = "mitsu_q1"
+direccion    = "M1855"
+tipo         = "bit"
+escala       = 1.0
+offset       = 0.0
+scan_ms      = 2000
+registro     = "intervalo"
+
+[[tag]]
+nombre       = "FCA0203.Falla.F016.Veces"
+plc          = "mitsu_q1"
+direccion    = "D6316"
+tipo         = "int16"
+escala       = 1.0
+offset       = 0.0
+scan_ms      = 5000
+registro     = "intervalo"
+
+[[tag]]
+nombre       = "FCA0203.Falla.F016.Seg"
+plc          = "mitsu_q1"
+direccion    = "D6452"
+tipo         = "int32"
+escala       = 1.0
+offset       = 0.0
+scan_ms      = 5000
+registro     = "intervalo"
+
+[[tag]]
+nombre       = "FCA0203.Falla.F017.Activa"
+plc          = "mitsu_q1"
+direccion    = "M1983"
+tipo         = "bit"
+escala       = 1.0
+offset       = 0.0
+scan_ms      = 2000
+registro     = "intervalo"
+
+[[tag]]
+nombre       = "FCA0203.Falla.F017.Veces"
+plc          = "mitsu_q1"
+direccion    = "D6317"
+tipo         = "int16"
+escala       = 1.0
+offset       = 0.0
+scan_ms      = 5000
+registro     = "intervalo"
+
+[[tag]]
+nombre       = "FCA0203.Falla.F017.Seg"
+plc          = "mitsu_q1"
+direccion    = "D6454"
+tipo         = "int32"
+escala       = 1.0
+offset       = 0.0
+scan_ms      = 5000
+registro     = "intervalo"
+
+[[tag]]
+nombre       = "FCA0203.Falla.F018.Activa"
+plc          = "mitsu_q1"
+direccion    = "M8000"
+tipo         = "bit"
+escala       = 1.0
+offset       = 0.0
+scan_ms      = 2000
+registro     = "intervalo"
+
+[[tag]]
+nombre       = "FCA0203.Falla.F018.Veces"
+plc          = "mitsu_q1"
+direccion    = "D6318"
+tipo         = "int16"
+escala       = 1.0
+offset       = 0.0
+scan_ms      = 5000
+registro     = "intervalo"
+
+[[tag]]
+nombre       = "FCA0203.Falla.F018.Seg"
+plc          = "mitsu_q1"
+direccion    = "D6456"
+tipo         = "int32"
+escala       = 1.0
+offset       = 0.0
+scan_ms      = 5000
+registro     = "intervalo"
+
+[[tag]]
+nombre       = "FCA0203.Falla.F019.Activa"
+plc          = "mitsu_q1"
+direccion    = "M8001"
+tipo         = "bit"
+escala       = 1.0
+offset       = 0.0
+scan_ms      = 2000
+registro     = "intervalo"
+
+[[tag]]
+nombre       = "FCA0203.Falla.F019.Veces"
+plc          = "mitsu_q1"
+direccion    = "D6319"
+tipo         = "int16"
+escala       = 1.0
+offset       = 0.0
+scan_ms      = 5000
+registro     = "intervalo"
+
+[[tag]]
+nombre       = "FCA0203.Falla.F019.Seg"
+plc          = "mitsu_q1"
+direccion    = "D6458"
+tipo         = "int32"
+escala       = 1.0
+offset       = 0.0
+scan_ms      = 5000
+registro     = "intervalo"
+
+[[tag]]
+nombre       = "FCA0203.Falla.F020.Activa"
+plc          = "mitsu_q1"
+direccion    = "M8010"
+tipo         = "bit"
+escala       = 1.0
+offset       = 0.0
+scan_ms      = 2000
+registro     = "intervalo"
+
+[[tag]]
+nombre       = "FCA0203.Falla.F020.Veces"
+plc          = "mitsu_q1"
+direccion    = "D6320"
+tipo         = "int16"
+escala       = 1.0
+offset       = 0.0
+scan_ms      = 5000
+registro     = "intervalo"
+
+[[tag]]
+nombre       = "FCA0203.Falla.F020.Seg"
+plc          = "mitsu_q1"
+direccion    = "D6460"
+tipo         = "int32"
+escala       = 1.0
+offset       = 0.0
+scan_ms      = 5000
+registro     = "intervalo"
+
+[[tag]]
+nombre       = "FCA0203.Falla.F021.Activa"
+plc          = "mitsu_q1"
+direccion    = "M1864"
+tipo         = "bit"
+escala       = 1.0
+offset       = 0.0
+scan_ms      = 2000
+registro     = "intervalo"
+
+[[tag]]
+nombre       = "FCA0203.Falla.F021.Veces"
+plc          = "mitsu_q1"
+direccion    = "D6321"
+tipo         = "int16"
+escala       = 1.0
+offset       = 0.0
+scan_ms      = 5000
+registro     = "intervalo"
+
+[[tag]]
+nombre       = "FCA0203.Falla.F021.Seg"
+plc          = "mitsu_q1"
+direccion    = "D6462"
+tipo         = "int32"
+escala       = 1.0
+offset       = 0.0
+scan_ms      = 5000
+registro     = "intervalo"
+
+[[tag]]
+nombre       = "FCA0203.Falla.F022.Activa"
+plc          = "mitsu_q1"
+direccion    = "M1865"
+tipo         = "bit"
+escala       = 1.0
+offset       = 0.0
+scan_ms      = 2000
+registro     = "intervalo"
+
+[[tag]]
+nombre       = "FCA0203.Falla.F022.Veces"
+plc          = "mitsu_q1"
+direccion    = "D6322"
+tipo         = "int16"
+escala       = 1.0
+offset       = 0.0
+scan_ms      = 5000
+registro     = "intervalo"
+
+[[tag]]
+nombre       = "FCA0203.Falla.F022.Seg"
+plc          = "mitsu_q1"
+direccion    = "D6464"
+tipo         = "int32"
+escala       = 1.0
+offset       = 0.0
+scan_ms      = 5000
+registro     = "intervalo"
+
+[[tag]]
+nombre       = "FCA0203.Falla.F023.Activa"
+plc          = "mitsu_q1"
+direccion    = "M1866"
+tipo         = "bit"
+escala       = 1.0
+offset       = 0.0
+scan_ms      = 2000
+registro     = "intervalo"
+
+[[tag]]
+nombre       = "FCA0203.Falla.F023.Veces"
+plc          = "mitsu_q1"
+direccion    = "D6323"
+tipo         = "int16"
+escala       = 1.0
+offset       = 0.0
+scan_ms      = 5000
+registro     = "intervalo"
+
+[[tag]]
+nombre       = "FCA0203.Falla.F023.Seg"
+plc          = "mitsu_q1"
+direccion    = "D6466"
+tipo         = "int32"
+escala       = 1.0
+offset       = 0.0
+scan_ms      = 5000
+registro     = "intervalo"
+
+[[tag]]
+nombre       = "FCA0203.Falla.F024.Activa"
+plc          = "mitsu_q1"
+direccion    = "M1867"
+tipo         = "bit"
+escala       = 1.0
+offset       = 0.0
+scan_ms      = 2000
+registro     = "intervalo"
+
+[[tag]]
+nombre       = "FCA0203.Falla.F024.Veces"
+plc          = "mitsu_q1"
+direccion    = "D6324"
+tipo         = "int16"
+escala       = 1.0
+offset       = 0.0
+scan_ms      = 5000
+registro     = "intervalo"
+
+[[tag]]
+nombre       = "FCA0203.Falla.F024.Seg"
+plc          = "mitsu_q1"
+direccion    = "D6468"
+tipo         = "int32"
+escala       = 1.0
+offset       = 0.0
+scan_ms      = 5000
+registro     = "intervalo"
+
+[[tag]]
+nombre       = "FCA0203.Falla.F025.Activa"
+plc          = "mitsu_q1"
+direccion    = "M1868"
+tipo         = "bit"
+escala       = 1.0
+offset       = 0.0
+scan_ms      = 2000
+registro     = "intervalo"
+
+[[tag]]
+nombre       = "FCA0203.Falla.F025.Veces"
+plc          = "mitsu_q1"
+direccion    = "D6325"
+tipo         = "int16"
+escala       = 1.0
+offset       = 0.0
+scan_ms      = 5000
+registro     = "intervalo"
+
+[[tag]]
+nombre       = "FCA0203.Falla.F025.Seg"
+plc          = "mitsu_q1"
+direccion    = "D6470"
+tipo         = "int32"
+escala       = 1.0
+offset       = 0.0
+scan_ms      = 5000
+registro     = "intervalo"
+
+[[tag]]
+nombre       = "FCA0203.Falla.F026.Activa"
+plc          = "mitsu_q1"
+direccion    = "M1869"
+tipo         = "bit"
+escala       = 1.0
+offset       = 0.0
+scan_ms      = 2000
+registro     = "intervalo"
+
+[[tag]]
+nombre       = "FCA0203.Falla.F026.Veces"
+plc          = "mitsu_q1"
+direccion    = "D6326"
+tipo         = "int16"
+escala       = 1.0
+offset       = 0.0
+scan_ms      = 5000
+registro     = "intervalo"
+
+[[tag]]
+nombre       = "FCA0203.Falla.F026.Seg"
+plc          = "mitsu_q1"
+direccion    = "D6472"
+tipo         = "int32"
+escala       = 1.0
+offset       = 0.0
+scan_ms      = 5000
+registro     = "intervalo"
+
+[[tag]]
+nombre       = "FCA0203.Falla.F027.Activa"
+plc          = "mitsu_q1"
+direccion    = "M1870"
+tipo         = "bit"
+escala       = 1.0
+offset       = 0.0
+scan_ms      = 2000
+registro     = "intervalo"
+
+[[tag]]
+nombre       = "FCA0203.Falla.F027.Veces"
+plc          = "mitsu_q1"
+direccion    = "D6327"
+tipo         = "int16"
+escala       = 1.0
+offset       = 0.0
+scan_ms      = 5000
+registro     = "intervalo"
+
+[[tag]]
+nombre       = "FCA0203.Falla.F027.Seg"
+plc          = "mitsu_q1"
+direccion    = "D6474"
+tipo         = "int32"
+escala       = 1.0
+offset       = 0.0
+scan_ms      = 5000
+registro     = "intervalo"
+
+[[tag]]
+nombre       = "FCA0203.Falla.F028.Activa"
+plc          = "mitsu_q1"
+direccion    = "M1871"
+tipo         = "bit"
+escala       = 1.0
+offset       = 0.0
+scan_ms      = 2000
+registro     = "intervalo"
+
+[[tag]]
+nombre       = "FCA0203.Falla.F028.Veces"
+plc          = "mitsu_q1"
+direccion    = "D6328"
+tipo         = "int16"
+escala       = 1.0
+offset       = 0.0
+scan_ms      = 5000
+registro     = "intervalo"
+
+[[tag]]
+nombre       = "FCA0203.Falla.F028.Seg"
+plc          = "mitsu_q1"
+direccion    = "D6476"
+tipo         = "int32"
+escala       = 1.0
+offset       = 0.0
+scan_ms      = 5000
+registro     = "intervalo"
+
+[[tag]]
+nombre       = "FCA0203.Falla.F029.Activa"
+plc          = "mitsu_q1"
+direccion    = "M1872"
+tipo         = "bit"
+escala       = 1.0
+offset       = 0.0
+scan_ms      = 2000
+registro     = "intervalo"
+
+[[tag]]
+nombre       = "FCA0203.Falla.F029.Veces"
+plc          = "mitsu_q1"
+direccion    = "D6329"
+tipo         = "int16"
+escala       = 1.0
+offset       = 0.0
+scan_ms      = 5000
+registro     = "intervalo"
+
+[[tag]]
+nombre       = "FCA0203.Falla.F029.Seg"
+plc          = "mitsu_q1"
+direccion    = "D6478"
+tipo         = "int32"
+escala       = 1.0
+offset       = 0.0
+scan_ms      = 5000
+registro     = "intervalo"
+
+[[tag]]
+nombre       = "FCA0203.Falla.F030.Activa"
+plc          = "mitsu_q1"
+direccion    = "M1873"
+tipo         = "bit"
+escala       = 1.0
+offset       = 0.0
+scan_ms      = 2000
+registro     = "intervalo"
+
+[[tag]]
+nombre       = "FCA0203.Falla.F030.Veces"
+plc          = "mitsu_q1"
+direccion    = "D6330"
+tipo         = "int16"
+escala       = 1.0
+offset       = 0.0
+scan_ms      = 5000
+registro     = "intervalo"
+
+[[tag]]
+nombre       = "FCA0203.Falla.F030.Seg"
+plc          = "mitsu_q1"
+direccion    = "D6480"
+tipo         = "int32"
+escala       = 1.0
+offset       = 0.0
+scan_ms      = 5000
+registro     = "intervalo"
+
+[[tag]]
+nombre       = "FCA0203.Falla.F031.Activa"
+plc          = "mitsu_q1"
+direccion    = "M1874"
+tipo         = "bit"
+escala       = 1.0
+offset       = 0.0
+scan_ms      = 2000
+registro     = "intervalo"
+
+[[tag]]
+nombre       = "FCA0203.Falla.F031.Veces"
+plc          = "mitsu_q1"
+direccion    = "D6331"
+tipo         = "int16"
+escala       = 1.0
+offset       = 0.0
+scan_ms      = 5000
+registro     = "intervalo"
+
+[[tag]]
+nombre       = "FCA0203.Falla.F031.Seg"
+plc          = "mitsu_q1"
+direccion    = "D6482"
+tipo         = "int32"
+escala       = 1.0
+offset       = 0.0
+scan_ms      = 5000
+registro     = "intervalo"
+
+[[tag]]
+nombre       = "FCA0203.Falla.F032.Activa"
+plc          = "mitsu_q1"
+direccion    = "M1875"
+tipo         = "bit"
+escala       = 1.0
+offset       = 0.0
+scan_ms      = 2000
+registro     = "intervalo"
+
+[[tag]]
+nombre       = "FCA0203.Falla.F032.Veces"
+plc          = "mitsu_q1"
+direccion    = "D6332"
+tipo         = "int16"
+escala       = 1.0
+offset       = 0.0
+scan_ms      = 5000
+registro     = "intervalo"
+
+[[tag]]
+nombre       = "FCA0203.Falla.F032.Seg"
+plc          = "mitsu_q1"
+direccion    = "D6484"
+tipo         = "int32"
+escala       = 1.0
+offset       = 0.0
+scan_ms      = 5000
+registro     = "intervalo"
+
+[[tag]]
+nombre       = "FCA0203.Falla.F033.Activa"
+plc          = "mitsu_q1"
+direccion    = "M1876"
+tipo         = "bit"
+escala       = 1.0
+offset       = 0.0
+scan_ms      = 2000
+registro     = "intervalo"
+
+[[tag]]
+nombre       = "FCA0203.Falla.F033.Veces"
+plc          = "mitsu_q1"
+direccion    = "D6333"
+tipo         = "int16"
+escala       = 1.0
+offset       = 0.0
+scan_ms      = 5000
+registro     = "intervalo"
+
+[[tag]]
+nombre       = "FCA0203.Falla.F033.Seg"
+plc          = "mitsu_q1"
+direccion    = "D6486"
+tipo         = "int32"
+escala       = 1.0
+offset       = 0.0
+scan_ms      = 5000
+registro     = "intervalo"
+
+[[tag]]
+nombre       = "FCA0203.Falla.F034.Activa"
+plc          = "mitsu_q1"
+direccion    = "M1877"
+tipo         = "bit"
+escala       = 1.0
+offset       = 0.0
+scan_ms      = 2000
+registro     = "intervalo"
+
+[[tag]]
+nombre       = "FCA0203.Falla.F034.Veces"
+plc          = "mitsu_q1"
+direccion    = "D6334"
+tipo         = "int16"
+escala       = 1.0
+offset       = 0.0
+scan_ms      = 5000
+registro     = "intervalo"
+
+[[tag]]
+nombre       = "FCA0203.Falla.F034.Seg"
+plc          = "mitsu_q1"
+direccion    = "D6488"
+tipo         = "int32"
+escala       = 1.0
+offset       = 0.0
+scan_ms      = 5000
+registro     = "intervalo"
+
+[[tag]]
+nombre       = "FCA0203.Falla.F035.Activa"
+plc          = "mitsu_q1"
+direccion    = "M1880"
+tipo         = "bit"
+escala       = 1.0
+offset       = 0.0
+scan_ms      = 2000
+registro     = "intervalo"
+
+[[tag]]
+nombre       = "FCA0203.Falla.F035.Veces"
+plc          = "mitsu_q1"
+direccion    = "D6335"
+tipo         = "int16"
+escala       = 1.0
+offset       = 0.0
+scan_ms      = 5000
+registro     = "intervalo"
+
+[[tag]]
+nombre       = "FCA0203.Falla.F035.Seg"
+plc          = "mitsu_q1"
+direccion    = "D6490"
+tipo         = "int32"
+escala       = 1.0
+offset       = 0.0
+scan_ms      = 5000
+registro     = "intervalo"
+
+[[tag]]
+nombre       = "FCA0203.Falla.F036.Activa"
+plc          = "mitsu_q1"
+direccion    = "M1881"
+tipo         = "bit"
+escala       = 1.0
+offset       = 0.0
+scan_ms      = 2000
+registro     = "intervalo"
+
+[[tag]]
+nombre       = "FCA0203.Falla.F036.Veces"
+plc          = "mitsu_q1"
+direccion    = "D6336"
+tipo         = "int16"
+escala       = 1.0
+offset       = 0.0
+scan_ms      = 5000
+registro     = "intervalo"
+
+[[tag]]
+nombre       = "FCA0203.Falla.F036.Seg"
+plc          = "mitsu_q1"
+direccion    = "D6492"
+tipo         = "int32"
+escala       = 1.0
+offset       = 0.0
+scan_ms      = 5000
+registro     = "intervalo"
+
+[[tag]]
+nombre       = "FCA0203.Falla.F037.Activa"
+plc          = "mitsu_q1"
+direccion    = "M1882"
+tipo         = "bit"
+escala       = 1.0
+offset       = 0.0
+scan_ms      = 2000
+registro     = "intervalo"
+
+[[tag]]
+nombre       = "FCA0203.Falla.F037.Veces"
+plc          = "mitsu_q1"
+direccion    = "D6337"
+tipo         = "int16"
+escala       = 1.0
+offset       = 0.0
+scan_ms      = 5000
+registro     = "intervalo"
+
+[[tag]]
+nombre       = "FCA0203.Falla.F037.Seg"
+plc          = "mitsu_q1"
+direccion    = "D6494"
+tipo         = "int32"
+escala       = 1.0
+offset       = 0.0
+scan_ms      = 5000
+registro     = "intervalo"
+
+[[tag]]
+nombre       = "FCA0203.Falla.F038.Activa"
+plc          = "mitsu_q1"
+direccion    = "M1883"
+tipo         = "bit"
+escala       = 1.0
+offset       = 0.0
+scan_ms      = 2000
+registro     = "intervalo"
+
+[[tag]]
+nombre       = "FCA0203.Falla.F038.Veces"
+plc          = "mitsu_q1"
+direccion    = "D6338"
+tipo         = "int16"
+escala       = 1.0
+offset       = 0.0
+scan_ms      = 5000
+registro     = "intervalo"
+
+[[tag]]
+nombre       = "FCA0203.Falla.F038.Seg"
+plc          = "mitsu_q1"
+direccion    = "D6496"
+tipo         = "int32"
+escala       = 1.0
+offset       = 0.0
+scan_ms      = 5000
+registro     = "intervalo"
+
+[[tag]]
+nombre       = "FCA0203.Falla.F039.Activa"
+plc          = "mitsu_q1"
+direccion    = "M1884"
+tipo         = "bit"
+escala       = 1.0
+offset       = 0.0
+scan_ms      = 2000
+registro     = "intervalo"
+
+[[tag]]
+nombre       = "FCA0203.Falla.F039.Veces"
+plc          = "mitsu_q1"
+direccion    = "D6339"
+tipo         = "int16"
+escala       = 1.0
+offset       = 0.0
+scan_ms      = 5000
+registro     = "intervalo"
+
+[[tag]]
+nombre       = "FCA0203.Falla.F039.Seg"
+plc          = "mitsu_q1"
+direccion    = "D6498"
+tipo         = "int32"
+escala       = 1.0
+offset       = 0.0
+scan_ms      = 5000
+registro     = "intervalo"
+
+[[tag]]
+nombre       = "FCA0203.Falla.F040.Activa"
+plc          = "mitsu_q1"
+direccion    = "M1885"
+tipo         = "bit"
+escala       = 1.0
+offset       = 0.0
+scan_ms      = 2000
+registro     = "intervalo"
+
+[[tag]]
+nombre       = "FCA0203.Falla.F040.Veces"
+plc          = "mitsu_q1"
+direccion    = "D6340"
+tipo         = "int16"
+escala       = 1.0
+offset       = 0.0
+scan_ms      = 5000
+registro     = "intervalo"
+
+[[tag]]
+nombre       = "FCA0203.Falla.F040.Seg"
+plc          = "mitsu_q1"
+direccion    = "D6500"
+tipo         = "int32"
+escala       = 1.0
+offset       = 0.0
+scan_ms      = 5000
+registro     = "intervalo"
+
+[[tag]]
+nombre       = "FCA0203.Falla.F041.Activa"
+plc          = "mitsu_q1"
+direccion    = "M1886"
+tipo         = "bit"
+escala       = 1.0
+offset       = 0.0
+scan_ms      = 2000
+registro     = "intervalo"
+
+[[tag]]
+nombre       = "FCA0203.Falla.F041.Veces"
+plc          = "mitsu_q1"
+direccion    = "D6341"
+tipo         = "int16"
+escala       = 1.0
+offset       = 0.0
+scan_ms      = 5000
+registro     = "intervalo"
+
+[[tag]]
+nombre       = "FCA0203.Falla.F041.Seg"
+plc          = "mitsu_q1"
+direccion    = "D6502"
+tipo         = "int32"
+escala       = 1.0
+offset       = 0.0
+scan_ms      = 5000
+registro     = "intervalo"
+
+[[tag]]
+nombre       = "FCA0203.Falla.F042.Activa"
+plc          = "mitsu_q1"
+direccion    = "M1887"
+tipo         = "bit"
+escala       = 1.0
+offset       = 0.0
+scan_ms      = 2000
+registro     = "intervalo"
+
+[[tag]]
+nombre       = "FCA0203.Falla.F042.Veces"
+plc          = "mitsu_q1"
+direccion    = "D6342"
+tipo         = "int16"
+escala       = 1.0
+offset       = 0.0
+scan_ms      = 5000
+registro     = "intervalo"
+
+[[tag]]
+nombre       = "FCA0203.Falla.F042.Seg"
+plc          = "mitsu_q1"
+direccion    = "D6504"
+tipo         = "int32"
+escala       = 1.0
+offset       = 0.0
+scan_ms      = 5000
+registro     = "intervalo"
+
+[[tag]]
+nombre       = "FCA0203.Falla.F043.Activa"
+plc          = "mitsu_q1"
+direccion    = "M1888"
+tipo         = "bit"
+escala       = 1.0
+offset       = 0.0
+scan_ms      = 2000
+registro     = "intervalo"
+
+[[tag]]
+nombre       = "FCA0203.Falla.F043.Veces"
+plc          = "mitsu_q1"
+direccion    = "D6343"
+tipo         = "int16"
+escala       = 1.0
+offset       = 0.0
+scan_ms      = 5000
+registro     = "intervalo"
+
+[[tag]]
+nombre       = "FCA0203.Falla.F043.Seg"
+plc          = "mitsu_q1"
+direccion    = "D6506"
+tipo         = "int32"
+escala       = 1.0
+offset       = 0.0
+scan_ms      = 5000
+registro     = "intervalo"
+
+[[tag]]
+nombre       = "FCA0203.Falla.F044.Activa"
+plc          = "mitsu_q1"
+direccion    = "M1889"
+tipo         = "bit"
+escala       = 1.0
+offset       = 0.0
+scan_ms      = 2000
+registro     = "intervalo"
+
+[[tag]]
+nombre       = "FCA0203.Falla.F044.Veces"
+plc          = "mitsu_q1"
+direccion    = "D6344"
+tipo         = "int16"
+escala       = 1.0
+offset       = 0.0
+scan_ms      = 5000
+registro     = "intervalo"
+
+[[tag]]
+nombre       = "FCA0203.Falla.F044.Seg"
+plc          = "mitsu_q1"
+direccion    = "D6508"
+tipo         = "int32"
+escala       = 1.0
+offset       = 0.0
+scan_ms      = 5000
+registro     = "intervalo"
+
+[[tag]]
+nombre       = "FCA0203.Falla.F045.Activa"
+plc          = "mitsu_q1"
+direccion    = "M1890"
+tipo         = "bit"
+escala       = 1.0
+offset       = 0.0
+scan_ms      = 2000
+registro     = "intervalo"
+
+[[tag]]
+nombre       = "FCA0203.Falla.F045.Veces"
+plc          = "mitsu_q1"
+direccion    = "D6345"
+tipo         = "int16"
+escala       = 1.0
+offset       = 0.0
+scan_ms      = 5000
+registro     = "intervalo"
+
+[[tag]]
+nombre       = "FCA0203.Falla.F045.Seg"
+plc          = "mitsu_q1"
+direccion    = "D6510"
+tipo         = "int32"
+escala       = 1.0
+offset       = 0.0
+scan_ms      = 5000
+registro     = "intervalo"
+
+[[tag]]
+nombre       = "FCA0203.Falla.F046.Activa"
+plc          = "mitsu_q1"
+direccion    = "M1891"
+tipo         = "bit"
+escala       = 1.0
+offset       = 0.0
+scan_ms      = 2000
+registro     = "intervalo"
+
+[[tag]]
+nombre       = "FCA0203.Falla.F046.Veces"
+plc          = "mitsu_q1"
+direccion    = "D6346"
+tipo         = "int16"
+escala       = 1.0
+offset       = 0.0
+scan_ms      = 5000
+registro     = "intervalo"
+
+[[tag]]
+nombre       = "FCA0203.Falla.F046.Seg"
+plc          = "mitsu_q1"
+direccion    = "D6512"
+tipo         = "int32"
+escala       = 1.0
+offset       = 0.0
+scan_ms      = 5000
+registro     = "intervalo"
+
+[[tag]]
+nombre       = "FCA0203.Falla.F047.Activa"
+plc          = "mitsu_q1"
+direccion    = "M1892"
+tipo         = "bit"
+escala       = 1.0
+offset       = 0.0
+scan_ms      = 2000
+registro     = "intervalo"
+
+[[tag]]
+nombre       = "FCA0203.Falla.F047.Veces"
+plc          = "mitsu_q1"
+direccion    = "D6347"
+tipo         = "int16"
+escala       = 1.0
+offset       = 0.0
+scan_ms      = 5000
+registro     = "intervalo"
+
+[[tag]]
+nombre       = "FCA0203.Falla.F047.Seg"
+plc          = "mitsu_q1"
+direccion    = "D6514"
+tipo         = "int32"
+escala       = 1.0
+offset       = 0.0
+scan_ms      = 5000
+registro     = "intervalo"
+
+[[tag]]
+nombre       = "FCA0203.Falla.F048.Activa"
+plc          = "mitsu_q1"
+direccion    = "M1893"
+tipo         = "bit"
+escala       = 1.0
+offset       = 0.0
+scan_ms      = 2000
+registro     = "intervalo"
+
+[[tag]]
+nombre       = "FCA0203.Falla.F048.Veces"
+plc          = "mitsu_q1"
+direccion    = "D6348"
+tipo         = "int16"
+escala       = 1.0
+offset       = 0.0
+scan_ms      = 5000
+registro     = "intervalo"
+
+[[tag]]
+nombre       = "FCA0203.Falla.F048.Seg"
+plc          = "mitsu_q1"
+direccion    = "D6516"
+tipo         = "int32"
+escala       = 1.0
+offset       = 0.0
+scan_ms      = 5000
+registro     = "intervalo"
+
+[[tag]]
+nombre       = "FCA0203.Falla.F049.Activa"
+plc          = "mitsu_q1"
+direccion    = "M2840"
+tipo         = "bit"
+escala       = 1.0
+offset       = 0.0
+scan_ms      = 2000
+registro     = "intervalo"
+
+[[tag]]
+nombre       = "FCA0203.Falla.F049.Veces"
+plc          = "mitsu_q1"
+direccion    = "D6349"
+tipo         = "int16"
+escala       = 1.0
+offset       = 0.0
+scan_ms      = 5000
+registro     = "intervalo"
+
+[[tag]]
+nombre       = "FCA0203.Falla.F049.Seg"
+plc          = "mitsu_q1"
+direccion    = "D6518"
+tipo         = "int32"
+escala       = 1.0
+offset       = 0.0
+scan_ms      = 5000
+registro     = "intervalo"
+
+[[tag]]
+nombre       = "FCA0203.Falla.F050.Activa"
+plc          = "mitsu_q1"
+direccion    = "M2841"
+tipo         = "bit"
+escala       = 1.0
+offset       = 0.0
+scan_ms      = 2000
+registro     = "intervalo"
+
+[[tag]]
+nombre       = "FCA0203.Falla.F050.Veces"
+plc          = "mitsu_q1"
+direccion    = "D6350"
+tipo         = "int16"
+escala       = 1.0
+offset       = 0.0
+scan_ms      = 5000
+registro     = "intervalo"
+
+[[tag]]
+nombre       = "FCA0203.Falla.F050.Seg"
+plc          = "mitsu_q1"
+direccion    = "D6520"
+tipo         = "int32"
+escala       = 1.0
+offset       = 0.0
+scan_ms      = 5000
+registro     = "intervalo"
+
+[[tag]]
+nombre       = "FCA0203.Falla.F051.Activa"
+plc          = "mitsu_q1"
+direccion    = "M2842"
+tipo         = "bit"
+escala       = 1.0
+offset       = 0.0
+scan_ms      = 2000
+registro     = "intervalo"
+
+[[tag]]
+nombre       = "FCA0203.Falla.F051.Veces"
+plc          = "mitsu_q1"
+direccion    = "D6351"
+tipo         = "int16"
+escala       = 1.0
+offset       = 0.0
+scan_ms      = 5000
+registro     = "intervalo"
+
+[[tag]]
+nombre       = "FCA0203.Falla.F051.Seg"
+plc          = "mitsu_q1"
+direccion    = "D6522"
+tipo         = "int32"
+escala       = 1.0
+offset       = 0.0
+scan_ms      = 5000
+registro     = "intervalo"
+
+[[tag]]
+nombre       = "FCA0203.Falla.F052.Activa"
+plc          = "mitsu_q1"
+direccion    = "M2843"
+tipo         = "bit"
+escala       = 1.0
+offset       = 0.0
+scan_ms      = 2000
+registro     = "intervalo"
+
+[[tag]]
+nombre       = "FCA0203.Falla.F052.Veces"
+plc          = "mitsu_q1"
+direccion    = "D6352"
+tipo         = "int16"
+escala       = 1.0
+offset       = 0.0
+scan_ms      = 5000
+registro     = "intervalo"
+
+[[tag]]
+nombre       = "FCA0203.Falla.F052.Seg"
+plc          = "mitsu_q1"
+direccion    = "D6524"
+tipo         = "int32"
+escala       = 1.0
+offset       = 0.0
+scan_ms      = 5000
+registro     = "intervalo"
+
+[[tag]]
+nombre       = "FCA0203.Falla.F053.Activa"
+plc          = "mitsu_q1"
+direccion    = "M2844"
+tipo         = "bit"
+escala       = 1.0
+offset       = 0.0
+scan_ms      = 2000
+registro     = "intervalo"
+
+[[tag]]
+nombre       = "FCA0203.Falla.F053.Veces"
+plc          = "mitsu_q1"
+direccion    = "D6353"
+tipo         = "int16"
+escala       = 1.0
+offset       = 0.0
+scan_ms      = 5000
+registro     = "intervalo"
+
+[[tag]]
+nombre       = "FCA0203.Falla.F053.Seg"
+plc          = "mitsu_q1"
+direccion    = "D6526"
+tipo         = "int32"
+escala       = 1.0
+offset       = 0.0
+scan_ms      = 5000
+registro     = "intervalo"
+
+[[tag]]
+nombre       = "FCA0203.Falla.F054.Activa"
+plc          = "mitsu_q1"
+direccion    = "M2860"
+tipo         = "bit"
+escala       = 1.0
+offset       = 0.0
+scan_ms      = 2000
+registro     = "intervalo"
+
+[[tag]]
+nombre       = "FCA0203.Falla.F054.Veces"
+plc          = "mitsu_q1"
+direccion    = "D6354"
+tipo         = "int16"
+escala       = 1.0
+offset       = 0.0
+scan_ms      = 5000
+registro     = "intervalo"
+
+[[tag]]
+nombre       = "FCA0203.Falla.F054.Seg"
+plc          = "mitsu_q1"
+direccion    = "D6528"
+tipo         = "int32"
+escala       = 1.0
+offset       = 0.0
+scan_ms      = 5000
+registro     = "intervalo"
+
+[[tag]]
+nombre       = "FCA0203.Falla.F055.Activa"
+plc          = "mitsu_q1"
+direccion    = "M2900"
+tipo         = "bit"
+escala       = 1.0
+offset       = 0.0
+scan_ms      = 2000
+registro     = "intervalo"
+
+[[tag]]
+nombre       = "FCA0203.Falla.F055.Veces"
+plc          = "mitsu_q1"
+direccion    = "D6355"
+tipo         = "int16"
+escala       = 1.0
+offset       = 0.0
+scan_ms      = 5000
+registro     = "intervalo"
+
+[[tag]]
+nombre       = "FCA0203.Falla.F055.Seg"
+plc          = "mitsu_q1"
+direccion    = "D6530"
+tipo         = "int32"
+escala       = 1.0
+offset       = 0.0
+scan_ms      = 5000
+registro     = "intervalo"
+
+[[tag]]
+nombre       = "FCA0203.Falla.F056.Activa"
+plc          = "mitsu_q1"
+direccion    = "M2901"
+tipo         = "bit"
+escala       = 1.0
+offset       = 0.0
+scan_ms      = 2000
+registro     = "intervalo"
+
+[[tag]]
+nombre       = "FCA0203.Falla.F056.Veces"
+plc          = "mitsu_q1"
+direccion    = "D6356"
+tipo         = "int16"
+escala       = 1.0
+offset       = 0.0
+scan_ms      = 5000
+registro     = "intervalo"
+
+[[tag]]
+nombre       = "FCA0203.Falla.F056.Seg"
+plc          = "mitsu_q1"
+direccion    = "D6532"
+tipo         = "int32"
+escala       = 1.0
+offset       = 0.0
+scan_ms      = 5000
+registro     = "intervalo"
+
+[[tag]]
+nombre       = "FCA0203.Falla.F057.Activa"
+plc          = "mitsu_q1"
+direccion    = "M2902"
+tipo         = "bit"
+escala       = 1.0
+offset       = 0.0
+scan_ms      = 2000
+registro     = "intervalo"
+
+[[tag]]
+nombre       = "FCA0203.Falla.F057.Veces"
+plc          = "mitsu_q1"
+direccion    = "D6357"
+tipo         = "int16"
+escala       = 1.0
+offset       = 0.0
+scan_ms      = 5000
+registro     = "intervalo"
+
+[[tag]]
+nombre       = "FCA0203.Falla.F057.Seg"
+plc          = "mitsu_q1"
+direccion    = "D6534"
+tipo         = "int32"
+escala       = 1.0
+offset       = 0.0
+scan_ms      = 5000
+registro     = "intervalo"
+
+[[tag]]
+nombre       = "FCA0203.Falla.F058.Activa"
+plc          = "mitsu_q1"
+direccion    = "M2903"
+tipo         = "bit"
+escala       = 1.0
+offset       = 0.0
+scan_ms      = 2000
+registro     = "intervalo"
+
+[[tag]]
+nombre       = "FCA0203.Falla.F058.Veces"
+plc          = "mitsu_q1"
+direccion    = "D6358"
+tipo         = "int16"
+escala       = 1.0
+offset       = 0.0
+scan_ms      = 5000
+registro     = "intervalo"
+
+[[tag]]
+nombre       = "FCA0203.Falla.F058.Seg"
+plc          = "mitsu_q1"
+direccion    = "D6536"
+tipo         = "int32"
+escala       = 1.0
+offset       = 0.0
+scan_ms      = 5000
+registro     = "intervalo"
+
+[[tag]]
+nombre       = "FCA0203.Falla.F059.Activa"
+plc          = "mitsu_q1"
+direccion    = "M2904"
+tipo         = "bit"
+escala       = 1.0
+offset       = 0.0
+scan_ms      = 2000
+registro     = "intervalo"
+
+[[tag]]
+nombre       = "FCA0203.Falla.F059.Veces"
+plc          = "mitsu_q1"
+direccion    = "D6359"
+tipo         = "int16"
+escala       = 1.0
+offset       = 0.0
+scan_ms      = 5000
+registro     = "intervalo"
+
+[[tag]]
+nombre       = "FCA0203.Falla.F059.Seg"
+plc          = "mitsu_q1"
+direccion    = "D6538"
+tipo         = "int32"
+escala       = 1.0
+offset       = 0.0
+scan_ms      = 5000
+registro     = "intervalo"
+
+[[tag]]
+nombre       = "FCA0203.Falla.F060.Activa"
+plc          = "mitsu_q1"
+direccion    = "M2905"
+tipo         = "bit"
+escala       = 1.0
+offset       = 0.0
+scan_ms      = 2000
+registro     = "intervalo"
+
+[[tag]]
+nombre       = "FCA0203.Falla.F060.Veces"
+plc          = "mitsu_q1"
+direccion    = "D6360"
+tipo         = "int16"
+escala       = 1.0
+offset       = 0.0
+scan_ms      = 5000
+registro     = "intervalo"
+
+[[tag]]
+nombre       = "FCA0203.Falla.F060.Seg"
+plc          = "mitsu_q1"
+direccion    = "D6540"
+tipo         = "int32"
+escala       = 1.0
+offset       = 0.0
+scan_ms      = 5000
+registro     = "intervalo"
+
+[[tag]]
+nombre       = "FCA0203.Falla.F061.Activa"
+plc          = "mitsu_q1"
+direccion    = "M2906"
+tipo         = "bit"
+escala       = 1.0
+offset       = 0.0
+scan_ms      = 2000
+registro     = "intervalo"
+
+[[tag]]
+nombre       = "FCA0203.Falla.F061.Veces"
+plc          = "mitsu_q1"
+direccion    = "D6361"
+tipo         = "int16"
+escala       = 1.0
+offset       = 0.0
+scan_ms      = 5000
+registro     = "intervalo"
+
+[[tag]]
+nombre       = "FCA0203.Falla.F061.Seg"
+plc          = "mitsu_q1"
+direccion    = "D6542"
+tipo         = "int32"
+escala       = 1.0
+offset       = 0.0
+scan_ms      = 5000
+registro     = "intervalo"
+
+[[tag]]
+nombre       = "FCA0203.Falla.F062.Activa"
+plc          = "mitsu_q1"
+direccion    = "M2907"
+tipo         = "bit"
+escala       = 1.0
+offset       = 0.0
+scan_ms      = 2000
+registro     = "intervalo"
+
+[[tag]]
+nombre       = "FCA0203.Falla.F062.Veces"
+plc          = "mitsu_q1"
+direccion    = "D6362"
+tipo         = "int16"
+escala       = 1.0
+offset       = 0.0
+scan_ms      = 5000
+registro     = "intervalo"
+
+[[tag]]
+nombre       = "FCA0203.Falla.F062.Seg"
+plc          = "mitsu_q1"
+direccion    = "D6544"
+tipo         = "int32"
+escala       = 1.0
+offset       = 0.0
+scan_ms      = 5000
+registro     = "intervalo"
+
+[[tag]]
+nombre       = "FCA0203.Falla.F063.Activa"
+plc          = "mitsu_q1"
+direccion    = "M2908"
+tipo         = "bit"
+escala       = 1.0
+offset       = 0.0
+scan_ms      = 2000
+registro     = "intervalo"
+
+[[tag]]
+nombre       = "FCA0203.Falla.F063.Veces"
+plc          = "mitsu_q1"
+direccion    = "D6363"
+tipo         = "int16"
+escala       = 1.0
+offset       = 0.0
+scan_ms      = 5000
+registro     = "intervalo"
+
+[[tag]]
+nombre       = "FCA0203.Falla.F063.Seg"
+plc          = "mitsu_q1"
+direccion    = "D6546"
+tipo         = "int32"
+escala       = 1.0
+offset       = 0.0
+scan_ms      = 5000
+registro     = "intervalo"
+
+[[tag]]
+nombre       = "FCA0203.Falla.F064.Activa"
+plc          = "mitsu_q1"
+direccion    = "M2909"
+tipo         = "bit"
+escala       = 1.0
+offset       = 0.0
+scan_ms      = 2000
+registro     = "intervalo"
+
+[[tag]]
+nombre       = "FCA0203.Falla.F064.Veces"
+plc          = "mitsu_q1"
+direccion    = "D6364"
+tipo         = "int16"
+escala       = 1.0
+offset       = 0.0
+scan_ms      = 5000
+registro     = "intervalo"
+
+[[tag]]
+nombre       = "FCA0203.Falla.F064.Seg"
+plc          = "mitsu_q1"
+direccion    = "D6548"
+tipo         = "int32"
+escala       = 1.0
+offset       = 0.0
+scan_ms      = 5000
+registro     = "intervalo"
+
+[[tag]]
+nombre       = "FCA0203.Falla.F065.Activa"
+plc          = "mitsu_q1"
+direccion    = "M2910"
+tipo         = "bit"
+escala       = 1.0
+offset       = 0.0
+scan_ms      = 2000
+registro     = "intervalo"
+
+[[tag]]
+nombre       = "FCA0203.Falla.F065.Veces"
+plc          = "mitsu_q1"
+direccion    = "D6365"
+tipo         = "int16"
+escala       = 1.0
+offset       = 0.0
+scan_ms      = 5000
+registro     = "intervalo"
+
+[[tag]]
+nombre       = "FCA0203.Falla.F065.Seg"
+plc          = "mitsu_q1"
+direccion    = "D6550"
+tipo         = "int32"
+escala       = 1.0
+offset       = 0.0
+scan_ms      = 5000
+registro     = "intervalo"
+
+[[tag]]
+nombre       = "FCA0203.Falla.F066.Activa"
+plc          = "mitsu_q1"
+direccion    = "M2911"
+tipo         = "bit"
+escala       = 1.0
+offset       = 0.0
+scan_ms      = 2000
+registro     = "intervalo"
+
+[[tag]]
+nombre       = "FCA0203.Falla.F066.Veces"
+plc          = "mitsu_q1"
+direccion    = "D6366"
+tipo         = "int16"
+escala       = 1.0
+offset       = 0.0
+scan_ms      = 5000
+registro     = "intervalo"
+
+[[tag]]
+nombre       = "FCA0203.Falla.F066.Seg"
+plc          = "mitsu_q1"
+direccion    = "D6552"
+tipo         = "int32"
+escala       = 1.0
+offset       = 0.0
+scan_ms      = 5000
+registro     = "intervalo"
+
+[[tag]]
+nombre       = "FCA0203.Falla.F067.Activa"
+plc          = "mitsu_q1"
+direccion    = "M2912"
+tipo         = "bit"
+escala       = 1.0
+offset       = 0.0
+scan_ms      = 2000
+registro     = "intervalo"
+
+[[tag]]
+nombre       = "FCA0203.Falla.F067.Veces"
+plc          = "mitsu_q1"
+direccion    = "D6367"
+tipo         = "int16"
+escala       = 1.0
+offset       = 0.0
+scan_ms      = 5000
+registro     = "intervalo"
+
+[[tag]]
+nombre       = "FCA0203.Falla.F067.Seg"
+plc          = "mitsu_q1"
+direccion    = "D6554"
+tipo         = "int32"
+escala       = 1.0
+offset       = 0.0
+scan_ms      = 5000
+registro     = "intervalo"
+
+[[tag]]
+nombre       = "FCA0203.Falla.F068.Activa"
+plc          = "mitsu_q1"
+direccion    = "M2913"
+tipo         = "bit"
+escala       = 1.0
+offset       = 0.0
+scan_ms      = 2000
+registro     = "intervalo"
+
+[[tag]]
+nombre       = "FCA0203.Falla.F068.Veces"
+plc          = "mitsu_q1"
+direccion    = "D6368"
+tipo         = "int16"
+escala       = 1.0
+offset       = 0.0
+scan_ms      = 5000
+registro     = "intervalo"
+
+[[tag]]
+nombre       = "FCA0203.Falla.F068.Seg"
+plc          = "mitsu_q1"
+direccion    = "D6556"
+tipo         = "int32"
+escala       = 1.0
+offset       = 0.0
+scan_ms      = 5000
+registro     = "intervalo"
+
+[[tag]]
+nombre       = "FCA0203.Falla.F069.Activa"
+plc          = "mitsu_q1"
+direccion    = "M2914"
+tipo         = "bit"
+escala       = 1.0
+offset       = 0.0
+scan_ms      = 2000
+registro     = "intervalo"
+
+[[tag]]
+nombre       = "FCA0203.Falla.F069.Veces"
+plc          = "mitsu_q1"
+direccion    = "D6369"
+tipo         = "int16"
+escala       = 1.0
+offset       = 0.0
+scan_ms      = 5000
+registro     = "intervalo"
+
+[[tag]]
+nombre       = "FCA0203.Falla.F069.Seg"
+plc          = "mitsu_q1"
+direccion    = "D6558"
+tipo         = "int32"
+escala       = 1.0
+offset       = 0.0
+scan_ms      = 5000
+registro     = "intervalo"
+
+[[tag]]
+nombre       = "FCA0203.Falla.F070.Activa"
+plc          = "mitsu_q1"
+direccion    = "M2915"
+tipo         = "bit"
+escala       = 1.0
+offset       = 0.0
+scan_ms      = 2000
+registro     = "intervalo"
+
+[[tag]]
+nombre       = "FCA0203.Falla.F070.Veces"
+plc          = "mitsu_q1"
+direccion    = "D6370"
+tipo         = "int16"
+escala       = 1.0
+offset       = 0.0
+scan_ms      = 5000
+registro     = "intervalo"
+
+[[tag]]
+nombre       = "FCA0203.Falla.F070.Seg"
+plc          = "mitsu_q1"
+direccion    = "D6560"
+tipo         = "int32"
+escala       = 1.0
+offset       = 0.0
+scan_ms      = 5000
+registro     = "intervalo"
+
+[[tag]]
+nombre       = "FCA0203.Falla.F071.Activa"
+plc          = "mitsu_q1"
+direccion    = "M2976"
+tipo         = "bit"
+escala       = 1.0
+offset       = 0.0
+scan_ms      = 2000
+registro     = "intervalo"
+
+[[tag]]
+nombre       = "FCA0203.Falla.F071.Veces"
+plc          = "mitsu_q1"
+direccion    = "D6371"
+tipo         = "int16"
+escala       = 1.0
+offset       = 0.0
+scan_ms      = 5000
+registro     = "intervalo"
+
+[[tag]]
+nombre       = "FCA0203.Falla.F071.Seg"
+plc          = "mitsu_q1"
+direccion    = "D6562"
+tipo         = "int32"
+escala       = 1.0
+offset       = 0.0
+scan_ms      = 5000
+registro     = "intervalo"
+
+[[tag]]
+nombre       = "FCA0203.Falla.F072.Activa"
+plc          = "mitsu_q1"
+direccion    = "M3840"
+tipo         = "bit"
+escala       = 1.0
+offset       = 0.0
+scan_ms      = 2000
+registro     = "intervalo"
+
+[[tag]]
+nombre       = "FCA0203.Falla.F072.Veces"
+plc          = "mitsu_q1"
+direccion    = "D6372"
+tipo         = "int16"
+escala       = 1.0
+offset       = 0.0
+scan_ms      = 5000
+registro     = "intervalo"
+
+[[tag]]
+nombre       = "FCA0203.Falla.F072.Seg"
+plc          = "mitsu_q1"
+direccion    = "D6564"
+tipo         = "int32"
+escala       = 1.0
+offset       = 0.0
+scan_ms      = 5000
+registro     = "intervalo"
+
+[[tag]]
+nombre       = "FCA0203.Falla.F073.Activa"
+plc          = "mitsu_q1"
+direccion    = "M3841"
+tipo         = "bit"
+escala       = 1.0
+offset       = 0.0
+scan_ms      = 2000
+registro     = "intervalo"
+
+[[tag]]
+nombre       = "FCA0203.Falla.F073.Veces"
+plc          = "mitsu_q1"
+direccion    = "D6373"
+tipo         = "int16"
+escala       = 1.0
+offset       = 0.0
+scan_ms      = 5000
+registro     = "intervalo"
+
+[[tag]]
+nombre       = "FCA0203.Falla.F073.Seg"
+plc          = "mitsu_q1"
+direccion    = "D6566"
+tipo         = "int32"
+escala       = 1.0
+offset       = 0.0
+scan_ms      = 5000
+registro     = "intervalo"
+
+[[tag]]
+nombre       = "FCA0203.Falla.F074.Activa"
+plc          = "mitsu_q1"
+direccion    = "M3842"
+tipo         = "bit"
+escala       = 1.0
+offset       = 0.0
+scan_ms      = 2000
+registro     = "intervalo"
+
+[[tag]]
+nombre       = "FCA0203.Falla.F074.Veces"
+plc          = "mitsu_q1"
+direccion    = "D6374"
+tipo         = "int16"
+escala       = 1.0
+offset       = 0.0
+scan_ms      = 5000
+registro     = "intervalo"
+
+[[tag]]
+nombre       = "FCA0203.Falla.F074.Seg"
+plc          = "mitsu_q1"
+direccion    = "D6568"
+tipo         = "int32"
+escala       = 1.0
+offset       = 0.0
+scan_ms      = 5000
+registro     = "intervalo"
+
+[[tag]]
+nombre       = "FCA0203.Falla.F075.Activa"
+plc          = "mitsu_q1"
+direccion    = "M3843"
+tipo         = "bit"
+escala       = 1.0
+offset       = 0.0
+scan_ms      = 2000
+registro     = "intervalo"
+
+[[tag]]
+nombre       = "FCA0203.Falla.F075.Veces"
+plc          = "mitsu_q1"
+direccion    = "D6375"
+tipo         = "int16"
+escala       = 1.0
+offset       = 0.0
+scan_ms      = 5000
+registro     = "intervalo"
+
+[[tag]]
+nombre       = "FCA0203.Falla.F075.Seg"
+plc          = "mitsu_q1"
+direccion    = "D6570"
+tipo         = "int32"
+escala       = 1.0
+offset       = 0.0
+scan_ms      = 5000
+registro     = "intervalo"
+
+[[tag]]
+nombre       = "FCA0203.Falla.F076.Activa"
+plc          = "mitsu_q1"
+direccion    = "M3844"
+tipo         = "bit"
+escala       = 1.0
+offset       = 0.0
+scan_ms      = 2000
+registro     = "intervalo"
+
+[[tag]]
+nombre       = "FCA0203.Falla.F076.Veces"
+plc          = "mitsu_q1"
+direccion    = "D6376"
+tipo         = "int16"
+escala       = 1.0
+offset       = 0.0
+scan_ms      = 5000
+registro     = "intervalo"
+
+[[tag]]
+nombre       = "FCA0203.Falla.F076.Seg"
+plc          = "mitsu_q1"
+direccion    = "D6572"
+tipo         = "int32"
+escala       = 1.0
+offset       = 0.0
+scan_ms      = 5000
+registro     = "intervalo"
+
+[[tag]]
+nombre       = "FCA0203.Falla.F077.Activa"
+plc          = "mitsu_q1"
+direccion    = "M3853"
+tipo         = "bit"
+escala       = 1.0
+offset       = 0.0
+scan_ms      = 2000
+registro     = "intervalo"
+
+[[tag]]
+nombre       = "FCA0203.Falla.F077.Veces"
+plc          = "mitsu_q1"
+direccion    = "D6377"
+tipo         = "int16"
+escala       = 1.0
+offset       = 0.0
+scan_ms      = 5000
+registro     = "intervalo"
+
+[[tag]]
+nombre       = "FCA0203.Falla.F077.Seg"
+plc          = "mitsu_q1"
+direccion    = "D6574"
+tipo         = "int32"
+escala       = 1.0
+offset       = 0.0
+scan_ms      = 5000
+registro     = "intervalo"
+
+[[tag]]
+nombre       = "FCA0203.Falla.F078.Activa"
+plc          = "mitsu_q1"
+direccion    = "M3854"
+tipo         = "bit"
+escala       = 1.0
+offset       = 0.0
+scan_ms      = 2000
+registro     = "intervalo"
+
+[[tag]]
+nombre       = "FCA0203.Falla.F078.Veces"
+plc          = "mitsu_q1"
+direccion    = "D6378"
+tipo         = "int16"
+escala       = 1.0
+offset       = 0.0
+scan_ms      = 5000
+registro     = "intervalo"
+
+[[tag]]
+nombre       = "FCA0203.Falla.F078.Seg"
+plc          = "mitsu_q1"
+direccion    = "D6576"
+tipo         = "int32"
+escala       = 1.0
+offset       = 0.0
+scan_ms      = 5000
+registro     = "intervalo"
+
+[[tag]]
+nombre       = "FCA0203.Falla.F079.Activa"
+plc          = "mitsu_q1"
+direccion    = "M3856"
+tipo         = "bit"
+escala       = 1.0
+offset       = 0.0
+scan_ms      = 2000
+registro     = "intervalo"
+
+[[tag]]
+nombre       = "FCA0203.Falla.F079.Veces"
+plc          = "mitsu_q1"
+direccion    = "D6379"
+tipo         = "int16"
+escala       = 1.0
+offset       = 0.0
+scan_ms      = 5000
+registro     = "intervalo"
+
+[[tag]]
+nombre       = "FCA0203.Falla.F079.Seg"
+plc          = "mitsu_q1"
+direccion    = "D6578"
+tipo         = "int32"
+escala       = 1.0
+offset       = 0.0
+scan_ms      = 5000
+registro     = "intervalo"
+
+[[tag]]
+nombre       = "FCA0203.Falla.F080.Activa"
+plc          = "mitsu_q1"
+direccion    = "M3857"
+tipo         = "bit"
+escala       = 1.0
+offset       = 0.0
+scan_ms      = 2000
+registro     = "intervalo"
+
+[[tag]]
+nombre       = "FCA0203.Falla.F080.Veces"
+plc          = "mitsu_q1"
+direccion    = "D6380"
+tipo         = "int16"
+escala       = 1.0
+offset       = 0.0
+scan_ms      = 5000
+registro     = "intervalo"
+
+[[tag]]
+nombre       = "FCA0203.Falla.F080.Seg"
+plc          = "mitsu_q1"
+direccion    = "D6580"
+tipo         = "int32"
+escala       = 1.0
+offset       = 0.0
+scan_ms      = 5000
+registro     = "intervalo"
+
+[[tag]]
+nombre       = "FCA0203.Falla.F081.Activa"
+plc          = "mitsu_q1"
+direccion    = "M3858"
+tipo         = "bit"
+escala       = 1.0
+offset       = 0.0
+scan_ms      = 2000
+registro     = "intervalo"
+
+[[tag]]
+nombre       = "FCA0203.Falla.F081.Veces"
+plc          = "mitsu_q1"
+direccion    = "D6381"
+tipo         = "int16"
+escala       = 1.0
+offset       = 0.0
+scan_ms      = 5000
+registro     = "intervalo"
+
+[[tag]]
+nombre       = "FCA0203.Falla.F081.Seg"
+plc          = "mitsu_q1"
+direccion    = "D6582"
+tipo         = "int32"
+escala       = 1.0
+offset       = 0.0
+scan_ms      = 5000
+registro     = "intervalo"
+
+[[tag]]
+nombre       = "FCA0203.Falla.F082.Activa"
+plc          = "mitsu_q1"
+direccion    = "M3500"
+tipo         = "bit"
+escala       = 1.0
+offset       = 0.0
+scan_ms      = 2000
+registro     = "intervalo"
+
+[[tag]]
+nombre       = "FCA0203.Falla.F082.Veces"
+plc          = "mitsu_q1"
+direccion    = "D6382"
+tipo         = "int16"
+escala       = 1.0
+offset       = 0.0
+scan_ms      = 5000
+registro     = "intervalo"
+
+[[tag]]
+nombre       = "FCA0203.Falla.F082.Seg"
+plc          = "mitsu_q1"
+direccion    = "D6584"
+tipo         = "int32"
+escala       = 1.0
+offset       = 0.0
+scan_ms      = 5000
+registro     = "intervalo"
+
+[[tag]]
+nombre       = "FCA0203.Falla.F083.Activa"
+plc          = "mitsu_q1"
+direccion    = "M3501"
+tipo         = "bit"
+escala       = 1.0
+offset       = 0.0
+scan_ms      = 2000
+registro     = "intervalo"
+
+[[tag]]
+nombre       = "FCA0203.Falla.F083.Veces"
+plc          = "mitsu_q1"
+direccion    = "D6383"
+tipo         = "int16"
+escala       = 1.0
+offset       = 0.0
+scan_ms      = 5000
+registro     = "intervalo"
+
+[[tag]]
+nombre       = "FCA0203.Falla.F083.Seg"
+plc          = "mitsu_q1"
+direccion    = "D6586"
+tipo         = "int32"
+escala       = 1.0
+offset       = 0.0
+scan_ms      = 5000
+registro     = "intervalo"
+
+[[tag]]
+nombre       = "FCA0203.Falla.F084.Activa"
+plc          = "mitsu_q1"
+direccion    = "M3502"
+tipo         = "bit"
+escala       = 1.0
+offset       = 0.0
+scan_ms      = 2000
+registro     = "intervalo"
+
+[[tag]]
+nombre       = "FCA0203.Falla.F084.Veces"
+plc          = "mitsu_q1"
+direccion    = "D6384"
+tipo         = "int16"
+escala       = 1.0
+offset       = 0.0
+scan_ms      = 5000
+registro     = "intervalo"
+
+[[tag]]
+nombre       = "FCA0203.Falla.F084.Seg"
+plc          = "mitsu_q1"
+direccion    = "D6588"
+tipo         = "int32"
+escala       = 1.0
+offset       = 0.0
+scan_ms      = 5000
+registro     = "intervalo"
+
+[[tag]]
+nombre       = "FCA0203.Falla.F085.Activa"
+plc          = "mitsu_q1"
+direccion    = "M3503"
+tipo         = "bit"
+escala       = 1.0
+offset       = 0.0
+scan_ms      = 2000
+registro     = "intervalo"
+
+[[tag]]
+nombre       = "FCA0203.Falla.F085.Veces"
+plc          = "mitsu_q1"
+direccion    = "D6385"
+tipo         = "int16"
+escala       = 1.0
+offset       = 0.0
+scan_ms      = 5000
+registro     = "intervalo"
+
+[[tag]]
+nombre       = "FCA0203.Falla.F085.Seg"
+plc          = "mitsu_q1"
+direccion    = "D6590"
+tipo         = "int32"
+escala       = 1.0
+offset       = 0.0
+scan_ms      = 5000
+registro     = "intervalo"
+
+[[tag]]
+nombre       = "FCA0203.Falla.F086.Activa"
+plc          = "mitsu_q1"
+direccion    = "M3860"
+tipo         = "bit"
+escala       = 1.0
+offset       = 0.0
+scan_ms      = 2000
+registro     = "intervalo"
+
+[[tag]]
+nombre       = "FCA0203.Falla.F086.Veces"
+plc          = "mitsu_q1"
+direccion    = "D6386"
+tipo         = "int16"
+escala       = 1.0
+offset       = 0.0
+scan_ms      = 5000
+registro     = "intervalo"
+
+[[tag]]
+nombre       = "FCA0203.Falla.F086.Seg"
+plc          = "mitsu_q1"
+direccion    = "D6592"
+tipo         = "int32"
+escala       = 1.0
+offset       = 0.0
+scan_ms      = 5000
+registro     = "intervalo"
+
+[[tag]]
+nombre       = "FCA0203.Falla.F087.Activa"
+plc          = "mitsu_q1"
+direccion    = "M3900"
+tipo         = "bit"
+escala       = 1.0
+offset       = 0.0
+scan_ms      = 2000
+registro     = "intervalo"
+
+[[tag]]
+nombre       = "FCA0203.Falla.F087.Veces"
+plc          = "mitsu_q1"
+direccion    = "D6387"
+tipo         = "int16"
+escala       = 1.0
+offset       = 0.0
+scan_ms      = 5000
+registro     = "intervalo"
+
+[[tag]]
+nombre       = "FCA0203.Falla.F087.Seg"
+plc          = "mitsu_q1"
+direccion    = "D6594"
+tipo         = "int32"
+escala       = 1.0
+offset       = 0.0
+scan_ms      = 5000
+registro     = "intervalo"
+
+[[tag]]
+nombre       = "FCA0203.Falla.F088.Activa"
+plc          = "mitsu_q1"
+direccion    = "M3901"
+tipo         = "bit"
+escala       = 1.0
+offset       = 0.0
+scan_ms      = 2000
+registro     = "intervalo"
+
+[[tag]]
+nombre       = "FCA0203.Falla.F088.Veces"
+plc          = "mitsu_q1"
+direccion    = "D6388"
+tipo         = "int16"
+escala       = 1.0
+offset       = 0.0
+scan_ms      = 5000
+registro     = "intervalo"
+
+[[tag]]
+nombre       = "FCA0203.Falla.F088.Seg"
+plc          = "mitsu_q1"
+direccion    = "D6596"
+tipo         = "int32"
+escala       = 1.0
+offset       = 0.0
+scan_ms      = 5000
+registro     = "intervalo"
+
+[[tag]]
+nombre       = "FCA0203.Falla.F089.Activa"
+plc          = "mitsu_q1"
+direccion    = "M3902"
+tipo         = "bit"
+escala       = 1.0
+offset       = 0.0
+scan_ms      = 2000
+registro     = "intervalo"
+
+[[tag]]
+nombre       = "FCA0203.Falla.F089.Veces"
+plc          = "mitsu_q1"
+direccion    = "D6389"
+tipo         = "int16"
+escala       = 1.0
+offset       = 0.0
+scan_ms      = 5000
+registro     = "intervalo"
+
+[[tag]]
+nombre       = "FCA0203.Falla.F089.Seg"
+plc          = "mitsu_q1"
+direccion    = "D6598"
+tipo         = "int32"
+escala       = 1.0
+offset       = 0.0
+scan_ms      = 5000
+registro     = "intervalo"
+
+[[tag]]
+nombre       = "FCA0203.Falla.F090.Activa"
+plc          = "mitsu_q1"
+direccion    = "M3903"
+tipo         = "bit"
+escala       = 1.0
+offset       = 0.0
+scan_ms      = 2000
+registro     = "intervalo"
+
+[[tag]]
+nombre       = "FCA0203.Falla.F090.Veces"
+plc          = "mitsu_q1"
+direccion    = "D6390"
+tipo         = "int16"
+escala       = 1.0
+offset       = 0.0
+scan_ms      = 5000
+registro     = "intervalo"
+
+[[tag]]
+nombre       = "FCA0203.Falla.F090.Seg"
+plc          = "mitsu_q1"
+direccion    = "D6600"
+tipo         = "int32"
+escala       = 1.0
+offset       = 0.0
+scan_ms      = 5000
+registro     = "intervalo"
+
+[[tag]]
+nombre       = "FCA0203.Falla.F091.Activa"
+plc          = "mitsu_q1"
+direccion    = "M3904"
+tipo         = "bit"
+escala       = 1.0
+offset       = 0.0
+scan_ms      = 2000
+registro     = "intervalo"
+
+[[tag]]
+nombre       = "FCA0203.Falla.F091.Veces"
+plc          = "mitsu_q1"
+direccion    = "D6391"
+tipo         = "int16"
+escala       = 1.0
+offset       = 0.0
+scan_ms      = 5000
+registro     = "intervalo"
+
+[[tag]]
+nombre       = "FCA0203.Falla.F091.Seg"
+plc          = "mitsu_q1"
+direccion    = "D6602"
+tipo         = "int32"
+escala       = 1.0
+offset       = 0.0
+scan_ms      = 5000
+registro     = "intervalo"
+
+[[tag]]
+nombre       = "FCA0203.Falla.F092.Activa"
+plc          = "mitsu_q1"
+direccion    = "M3905"
+tipo         = "bit"
+escala       = 1.0
+offset       = 0.0
+scan_ms      = 2000
+registro     = "intervalo"
+
+[[tag]]
+nombre       = "FCA0203.Falla.F092.Veces"
+plc          = "mitsu_q1"
+direccion    = "D6392"
+tipo         = "int16"
+escala       = 1.0
+offset       = 0.0
+scan_ms      = 5000
+registro     = "intervalo"
+
+[[tag]]
+nombre       = "FCA0203.Falla.F092.Seg"
+plc          = "mitsu_q1"
+direccion    = "D6604"
+tipo         = "int32"
+escala       = 1.0
+offset       = 0.0
+scan_ms      = 5000
+registro     = "intervalo"
+
+[[tag]]
+nombre       = "FCA0203.Falla.F093.Activa"
+plc          = "mitsu_q1"
+direccion    = "M3906"
+tipo         = "bit"
+escala       = 1.0
+offset       = 0.0
+scan_ms      = 2000
+registro     = "intervalo"
+
+[[tag]]
+nombre       = "FCA0203.Falla.F093.Veces"
+plc          = "mitsu_q1"
+direccion    = "D6393"
+tipo         = "int16"
+escala       = 1.0
+offset       = 0.0
+scan_ms      = 5000
+registro     = "intervalo"
+
+[[tag]]
+nombre       = "FCA0203.Falla.F093.Seg"
+plc          = "mitsu_q1"
+direccion    = "D6606"
+tipo         = "int32"
+escala       = 1.0
+offset       = 0.0
+scan_ms      = 5000
+registro     = "intervalo"
+
+[[tag]]
+nombre       = "FCA0203.Falla.F094.Activa"
+plc          = "mitsu_q1"
+direccion    = "M3907"
+tipo         = "bit"
+escala       = 1.0
+offset       = 0.0
+scan_ms      = 2000
+registro     = "intervalo"
+
+[[tag]]
+nombre       = "FCA0203.Falla.F094.Veces"
+plc          = "mitsu_q1"
+direccion    = "D6394"
+tipo         = "int16"
+escala       = 1.0
+offset       = 0.0
+scan_ms      = 5000
+registro     = "intervalo"
+
+[[tag]]
+nombre       = "FCA0203.Falla.F094.Seg"
+plc          = "mitsu_q1"
+direccion    = "D6608"
+tipo         = "int32"
+escala       = 1.0
+offset       = 0.0
+scan_ms      = 5000
+registro     = "intervalo"
+
+[[tag]]
+nombre       = "FCA0203.Falla.F095.Activa"
+plc          = "mitsu_q1"
+direccion    = "M3908"
+tipo         = "bit"
+escala       = 1.0
+offset       = 0.0
+scan_ms      = 2000
+registro     = "intervalo"
+
+[[tag]]
+nombre       = "FCA0203.Falla.F095.Veces"
+plc          = "mitsu_q1"
+direccion    = "D6395"
+tipo         = "int16"
+escala       = 1.0
+offset       = 0.0
+scan_ms      = 5000
+registro     = "intervalo"
+
+[[tag]]
+nombre       = "FCA0203.Falla.F095.Seg"
+plc          = "mitsu_q1"
+direccion    = "D6610"
+tipo         = "int32"
+escala       = 1.0
+offset       = 0.0
+scan_ms      = 5000
+registro     = "intervalo"
+
+[[tag]]
+nombre       = "FCA0203.Falla.F096.Activa"
+plc          = "mitsu_q1"
+direccion    = "M3909"
+tipo         = "bit"
+escala       = 1.0
+offset       = 0.0
+scan_ms      = 2000
+registro     = "intervalo"
+
+[[tag]]
+nombre       = "FCA0203.Falla.F096.Veces"
+plc          = "mitsu_q1"
+direccion    = "D6396"
+tipo         = "int16"
+escala       = 1.0
+offset       = 0.0
+scan_ms      = 5000
+registro     = "intervalo"
+
+[[tag]]
+nombre       = "FCA0203.Falla.F096.Seg"
+plc          = "mitsu_q1"
+direccion    = "D6612"
+tipo         = "int32"
+escala       = 1.0
+offset       = 0.0
+scan_ms      = 5000
+registro     = "intervalo"
+
+[[tag]]
+nombre       = "FCA0203.Falla.F097.Activa"
+plc          = "mitsu_q1"
+direccion    = "M3910"
+tipo         = "bit"
+escala       = 1.0
+offset       = 0.0
+scan_ms      = 2000
+registro     = "intervalo"
+
+[[tag]]
+nombre       = "FCA0203.Falla.F097.Veces"
+plc          = "mitsu_q1"
+direccion    = "D6397"
+tipo         = "int16"
+escala       = 1.0
+offset       = 0.0
+scan_ms      = 5000
+registro     = "intervalo"
+
+[[tag]]
+nombre       = "FCA0203.Falla.F097.Seg"
+plc          = "mitsu_q1"
+direccion    = "D6614"
+tipo         = "int32"
+escala       = 1.0
+offset       = 0.0
+scan_ms      = 5000
+registro     = "intervalo"
+
+[[tag]]
+nombre       = "FCA0203.Falla.F098.Activa"
+plc          = "mitsu_q1"
+direccion    = "M3911"
+tipo         = "bit"
+escala       = 1.0
+offset       = 0.0
+scan_ms      = 2000
+registro     = "intervalo"
+
+[[tag]]
+nombre       = "FCA0203.Falla.F098.Veces"
+plc          = "mitsu_q1"
+direccion    = "D6398"
+tipo         = "int16"
+escala       = 1.0
+offset       = 0.0
+scan_ms      = 5000
+registro     = "intervalo"
+
+[[tag]]
+nombre       = "FCA0203.Falla.F098.Seg"
+plc          = "mitsu_q1"
+direccion    = "D6616"
+tipo         = "int32"
+escala       = 1.0
+offset       = 0.0
+scan_ms      = 5000
+registro     = "intervalo"
+
+[[tag]]
+nombre       = "FCA0203.Falla.F099.Activa"
+plc          = "mitsu_q1"
+direccion    = "M3912"
+tipo         = "bit"
+escala       = 1.0
+offset       = 0.0
+scan_ms      = 2000
+registro     = "intervalo"
+
+[[tag]]
+nombre       = "FCA0203.Falla.F099.Veces"
+plc          = "mitsu_q1"
+direccion    = "D6399"
+tipo         = "int16"
+escala       = 1.0
+offset       = 0.0
+scan_ms      = 5000
+registro     = "intervalo"
+
+[[tag]]
+nombre       = "FCA0203.Falla.F099.Seg"
+plc          = "mitsu_q1"
+direccion    = "D6618"
+tipo         = "int32"
+escala       = 1.0
+offset       = 0.0
+scan_ms      = 5000
+registro     = "intervalo"
+
+[[tag]]
+nombre       = "FCA0203.Falla.F100.Activa"
+plc          = "mitsu_q1"
+direccion    = "M3913"
+tipo         = "bit"
+escala       = 1.0
+offset       = 0.0
+scan_ms      = 2000
+registro     = "intervalo"
+
+[[tag]]
+nombre       = "FCA0203.Falla.F100.Veces"
+plc          = "mitsu_q1"
+direccion    = "D6400"
+tipo         = "int16"
+escala       = 1.0
+offset       = 0.0
+scan_ms      = 5000
+registro     = "intervalo"
+
+[[tag]]
+nombre       = "FCA0203.Falla.F100.Seg"
+plc          = "mitsu_q1"
+direccion    = "D6620"
+tipo         = "int32"
+escala       = 1.0
+offset       = 0.0
+scan_ms      = 5000
+registro     = "intervalo"
+
+[[tag]]
+nombre       = "FCA0203.Falla.F101.Activa"
+plc          = "mitsu_q1"
+direccion    = "M3914"
+tipo         = "bit"
+escala       = 1.0
+offset       = 0.0
+scan_ms      = 2000
+registro     = "intervalo"
+
+[[tag]]
+nombre       = "FCA0203.Falla.F101.Veces"
+plc          = "mitsu_q1"
+direccion    = "D6401"
+tipo         = "int16"
+escala       = 1.0
+offset       = 0.0
+scan_ms      = 5000
+registro     = "intervalo"
+
+[[tag]]
+nombre       = "FCA0203.Falla.F101.Seg"
+plc          = "mitsu_q1"
+direccion    = "D6622"
+tipo         = "int32"
+escala       = 1.0
+offset       = 0.0
+scan_ms      = 5000
+registro     = "intervalo"
+
+[[tag]]
+nombre       = "FCA0203.Falla.F102.Activa"
+plc          = "mitsu_q1"
+direccion    = "M3915"
+tipo         = "bit"
+escala       = 1.0
+offset       = 0.0
+scan_ms      = 2000
+registro     = "intervalo"
+
+[[tag]]
+nombre       = "FCA0203.Falla.F102.Veces"
+plc          = "mitsu_q1"
+direccion    = "D6402"
+tipo         = "int16"
+escala       = 1.0
+offset       = 0.0
+scan_ms      = 5000
+registro     = "intervalo"
+
+[[tag]]
+nombre       = "FCA0203.Falla.F102.Seg"
+plc          = "mitsu_q1"
+direccion    = "D6624"
+tipo         = "int32"
+escala       = 1.0
+offset       = 0.0
+scan_ms      = 5000
+registro     = "intervalo"
+
+[[tag]]
+nombre       = "FCA0203.Falla.F103.Activa"
+plc          = "mitsu_q1"
+direccion    = "M3976"
+tipo         = "bit"
+escala       = 1.0
+offset       = 0.0
+scan_ms      = 2000
+registro     = "intervalo"
+
+[[tag]]
+nombre       = "FCA0203.Falla.F103.Veces"
+plc          = "mitsu_q1"
+direccion    = "D6403"
+tipo         = "int16"
+escala       = 1.0
+offset       = 0.0
+scan_ms      = 5000
+registro     = "intervalo"
+
+[[tag]]
+nombre       = "FCA0203.Falla.F103.Seg"
+plc          = "mitsu_q1"
+direccion    = "D6626"
+tipo         = "int32"
+escala       = 1.0
+offset       = 0.0
+scan_ms      = 5000
+registro     = "intervalo"
+
+[[tag]]
+nombre       = "FCA0203.Falla.Ult.01.Codigo"
+plc          = "mitsu_q1"
+direccion    = "D6800"
+tipo         = "int16"
+escala       = 1.0
+offset       = 0.0
+scan_ms      = 5000
+registro     = "intervalo"
+
+[[tag]]
+nombre       = "FCA0203.Falla.Ult.01.Fecha"
+plc          = "mitsu_q1"
+direccion    = "D6801"
+tipo         = "int16"
+escala       = 1.0
+offset       = 0.0
+scan_ms      = 5000
+registro     = "intervalo"
+
+[[tag]]
+nombre       = "FCA0203.Falla.Ult.01.Hora"
+plc          = "mitsu_q1"
+direccion    = "D6802"
+tipo         = "int16"
+escala       = 1.0
+offset       = 0.0
+scan_ms      = 5000
+registro     = "intervalo"
+
+[[tag]]
+nombre       = "FCA0203.Falla.Ult.02.Codigo"
+plc          = "mitsu_q1"
+direccion    = "D6803"
+tipo         = "int16"
+escala       = 1.0
+offset       = 0.0
+scan_ms      = 5000
+registro     = "intervalo"
+
+[[tag]]
+nombre       = "FCA0203.Falla.Ult.02.Fecha"
+plc          = "mitsu_q1"
+direccion    = "D6804"
+tipo         = "int16"
+escala       = 1.0
+offset       = 0.0
+scan_ms      = 5000
+registro     = "intervalo"
+
+[[tag]]
+nombre       = "FCA0203.Falla.Ult.02.Hora"
+plc          = "mitsu_q1"
+direccion    = "D6805"
+tipo         = "int16"
+escala       = 1.0
+offset       = 0.0
+scan_ms      = 5000
+registro     = "intervalo"
+
+[[tag]]
+nombre       = "FCA0203.Falla.Ult.03.Codigo"
+plc          = "mitsu_q1"
+direccion    = "D6806"
+tipo         = "int16"
+escala       = 1.0
+offset       = 0.0
+scan_ms      = 5000
+registro     = "intervalo"
+
+[[tag]]
+nombre       = "FCA0203.Falla.Ult.03.Fecha"
+plc          = "mitsu_q1"
+direccion    = "D6807"
+tipo         = "int16"
+escala       = 1.0
+offset       = 0.0
+scan_ms      = 5000
+registro     = "intervalo"
+
+[[tag]]
+nombre       = "FCA0203.Falla.Ult.03.Hora"
+plc          = "mitsu_q1"
+direccion    = "D6808"
+tipo         = "int16"
+escala       = 1.0
+offset       = 0.0
+scan_ms      = 5000
+registro     = "intervalo"
+
+[[tag]]
+nombre       = "FCA0203.Falla.Ult.04.Codigo"
+plc          = "mitsu_q1"
+direccion    = "D6809"
+tipo         = "int16"
+escala       = 1.0
+offset       = 0.0
+scan_ms      = 5000
+registro     = "intervalo"
+
+[[tag]]
+nombre       = "FCA0203.Falla.Ult.04.Fecha"
+plc          = "mitsu_q1"
+direccion    = "D6810"
+tipo         = "int16"
+escala       = 1.0
+offset       = 0.0
+scan_ms      = 5000
+registro     = "intervalo"
+
+[[tag]]
+nombre       = "FCA0203.Falla.Ult.04.Hora"
+plc          = "mitsu_q1"
+direccion    = "D6811"
+tipo         = "int16"
+escala       = 1.0
+offset       = 0.0
+scan_ms      = 5000
+registro     = "intervalo"
+
+[[tag]]
+nombre       = "FCA0203.Falla.Ult.05.Codigo"
+plc          = "mitsu_q1"
+direccion    = "D6812"
+tipo         = "int16"
+escala       = 1.0
+offset       = 0.0
+scan_ms      = 5000
+registro     = "intervalo"
+
+[[tag]]
+nombre       = "FCA0203.Falla.Ult.05.Fecha"
+plc          = "mitsu_q1"
+direccion    = "D6813"
+tipo         = "int16"
+escala       = 1.0
+offset       = 0.0
+scan_ms      = 5000
+registro     = "intervalo"
+
+[[tag]]
+nombre       = "FCA0203.Falla.Ult.05.Hora"
+plc          = "mitsu_q1"
+direccion    = "D6814"
+tipo         = "int16"
+escala       = 1.0
+offset       = 0.0
+scan_ms      = 5000
+registro     = "intervalo"
+
+[[tag]]
+nombre       = "FCA0203.Falla.Ult.06.Codigo"
+plc          = "mitsu_q1"
+direccion    = "D6815"
+tipo         = "int16"
+escala       = 1.0
+offset       = 0.0
+scan_ms      = 5000
+registro     = "intervalo"
+
+[[tag]]
+nombre       = "FCA0203.Falla.Ult.06.Fecha"
+plc          = "mitsu_q1"
+direccion    = "D6816"
+tipo         = "int16"
+escala       = 1.0
+offset       = 0.0
+scan_ms      = 5000
+registro     = "intervalo"
+
+[[tag]]
+nombre       = "FCA0203.Falla.Ult.06.Hora"
+plc          = "mitsu_q1"
+direccion    = "D6817"
+tipo         = "int16"
+escala       = 1.0
+offset       = 0.0
+scan_ms      = 5000
+registro     = "intervalo"
+
+[[tag]]
+nombre       = "FCA0203.Falla.Ult.07.Codigo"
+plc          = "mitsu_q1"
+direccion    = "D6818"
+tipo         = "int16"
+escala       = 1.0
+offset       = 0.0
+scan_ms      = 5000
+registro     = "intervalo"
+
+[[tag]]
+nombre       = "FCA0203.Falla.Ult.07.Fecha"
+plc          = "mitsu_q1"
+direccion    = "D6819"
+tipo         = "int16"
+escala       = 1.0
+offset       = 0.0
+scan_ms      = 5000
+registro     = "intervalo"
+
+[[tag]]
+nombre       = "FCA0203.Falla.Ult.07.Hora"
+plc          = "mitsu_q1"
+direccion    = "D6820"
+tipo         = "int16"
+escala       = 1.0
+offset       = 0.0
+scan_ms      = 5000
+registro     = "intervalo"
+
+[[tag]]
+nombre       = "FCA0203.Falla.Ult.08.Codigo"
+plc          = "mitsu_q1"
+direccion    = "D6821"
+tipo         = "int16"
+escala       = 1.0
+offset       = 0.0
+scan_ms      = 5000
+registro     = "intervalo"
+
+[[tag]]
+nombre       = "FCA0203.Falla.Ult.08.Fecha"
+plc          = "mitsu_q1"
+direccion    = "D6822"
+tipo         = "int16"
+escala       = 1.0
+offset       = 0.0
+scan_ms      = 5000
+registro     = "intervalo"
+
+[[tag]]
+nombre       = "FCA0203.Falla.Ult.08.Hora"
+plc          = "mitsu_q1"
+direccion    = "D6823"
+tipo         = "int16"
+escala       = 1.0
+offset       = 0.0
+scan_ms      = 5000
+registro     = "intervalo"
+
+[[tag]]
+nombre       = "FCA0203.Falla.Ult.09.Codigo"
+plc          = "mitsu_q1"
+direccion    = "D6824"
+tipo         = "int16"
+escala       = 1.0
+offset       = 0.0
+scan_ms      = 5000
+registro     = "intervalo"
+
+[[tag]]
+nombre       = "FCA0203.Falla.Ult.09.Fecha"
+plc          = "mitsu_q1"
+direccion    = "D6825"
+tipo         = "int16"
+escala       = 1.0
+offset       = 0.0
+scan_ms      = 5000
+registro     = "intervalo"
+
+[[tag]]
+nombre       = "FCA0203.Falla.Ult.09.Hora"
+plc          = "mitsu_q1"
+direccion    = "D6826"
+tipo         = "int16"
+escala       = 1.0
+offset       = 0.0
+scan_ms      = 5000
+registro     = "intervalo"
+
+[[tag]]
+nombre       = "FCA0203.Falla.Ult.10.Codigo"
+plc          = "mitsu_q1"
+direccion    = "D6827"
+tipo         = "int16"
+escala       = 1.0
+offset       = 0.0
+scan_ms      = 5000
+registro     = "intervalo"
+
+[[tag]]
+nombre       = "FCA0203.Falla.Ult.10.Fecha"
+plc          = "mitsu_q1"
+direccion    = "D6828"
+tipo         = "int16"
+escala       = 1.0
+offset       = 0.0
+scan_ms      = 5000
+registro     = "intervalo"
+
+[[tag]]
+nombre       = "FCA0203.Falla.Ult.10.Hora"
+plc          = "mitsu_q1"
+direccion    = "D6829"
+tipo         = "int16"
+escala       = 1.0
+offset       = 0.0
+scan_ms      = 5000
+registro     = "intervalo"
+
+[[tag]]
+nombre       = "FCA0203.Falla.Ult.11.Codigo"
+plc          = "mitsu_q1"
+direccion    = "D6830"
+tipo         = "int16"
+escala       = 1.0
+offset       = 0.0
+scan_ms      = 5000
+registro     = "intervalo"
+
+[[tag]]
+nombre       = "FCA0203.Falla.Ult.11.Fecha"
+plc          = "mitsu_q1"
+direccion    = "D6831"
+tipo         = "int16"
+escala       = 1.0
+offset       = 0.0
+scan_ms      = 5000
+registro     = "intervalo"
+
+[[tag]]
+nombre       = "FCA0203.Falla.Ult.11.Hora"
+plc          = "mitsu_q1"
+direccion    = "D6832"
+tipo         = "int16"
+escala       = 1.0
+offset       = 0.0
+scan_ms      = 5000
+registro     = "intervalo"
+
+[[tag]]
+nombre       = "FCA0203.Falla.Ult.12.Codigo"
+plc          = "mitsu_q1"
+direccion    = "D6833"
+tipo         = "int16"
+escala       = 1.0
+offset       = 0.0
+scan_ms      = 5000
+registro     = "intervalo"
+
+[[tag]]
+nombre       = "FCA0203.Falla.Ult.12.Fecha"
+plc          = "mitsu_q1"
+direccion    = "D6834"
+tipo         = "int16"
+escala       = 1.0
+offset       = 0.0
+scan_ms      = 5000
+registro     = "intervalo"
+
+[[tag]]
+nombre       = "FCA0203.Falla.Ult.12.Hora"
+plc          = "mitsu_q1"
+direccion    = "D6835"
+tipo         = "int16"
+escala       = 1.0
+offset       = 0.0
+scan_ms      = 5000
+registro     = "intervalo"
+
+[[tag]]
+nombre       = "FCA0203.Falla.Ult.13.Codigo"
+plc          = "mitsu_q1"
+direccion    = "D6836"
+tipo         = "int16"
+escala       = 1.0
+offset       = 0.0
+scan_ms      = 5000
+registro     = "intervalo"
+
+[[tag]]
+nombre       = "FCA0203.Falla.Ult.13.Fecha"
+plc          = "mitsu_q1"
+direccion    = "D6837"
+tipo         = "int16"
+escala       = 1.0
+offset       = 0.0
+scan_ms      = 5000
+registro     = "intervalo"
+
+[[tag]]
+nombre       = "FCA0203.Falla.Ult.13.Hora"
+plc          = "mitsu_q1"
+direccion    = "D6838"
+tipo         = "int16"
+escala       = 1.0
+offset       = 0.0
+scan_ms      = 5000
+registro     = "intervalo"
+
+[[tag]]
+nombre       = "FCA0203.Falla.Ult.14.Codigo"
+plc          = "mitsu_q1"
+direccion    = "D6839"
+tipo         = "int16"
+escala       = 1.0
+offset       = 0.0
+scan_ms      = 5000
+registro     = "intervalo"
+
+[[tag]]
+nombre       = "FCA0203.Falla.Ult.14.Fecha"
+plc          = "mitsu_q1"
+direccion    = "D6840"
+tipo         = "int16"
+escala       = 1.0
+offset       = 0.0
+scan_ms      = 5000
+registro     = "intervalo"
+
+[[tag]]
+nombre       = "FCA0203.Falla.Ult.14.Hora"
+plc          = "mitsu_q1"
+direccion    = "D6841"
+tipo         = "int16"
+escala       = 1.0
+offset       = 0.0
+scan_ms      = 5000
+registro     = "intervalo"
+
+[[tag]]
+nombre       = "FCA0203.Falla.Ult.15.Codigo"
+plc          = "mitsu_q1"
+direccion    = "D6842"
+tipo         = "int16"
+escala       = 1.0
+offset       = 0.0
+scan_ms      = 5000
+registro     = "intervalo"
+
+[[tag]]
+nombre       = "FCA0203.Falla.Ult.15.Fecha"
+plc          = "mitsu_q1"
+direccion    = "D6843"
+tipo         = "int16"
+escala       = 1.0
+offset       = 0.0
+scan_ms      = 5000
+registro     = "intervalo"
+
+[[tag]]
+nombre       = "FCA0203.Falla.Ult.15.Hora"
+plc          = "mitsu_q1"
+direccion    = "D6844"
+tipo         = "int16"
+escala       = 1.0
+offset       = 0.0
+scan_ms      = 5000
+registro     = "intervalo"
+
+[[tag]]
+nombre       = "FCA0203.Falla.Ult.16.Codigo"
+plc          = "mitsu_q1"
+direccion    = "D6845"
+tipo         = "int16"
+escala       = 1.0
+offset       = 0.0
+scan_ms      = 5000
+registro     = "intervalo"
+
+[[tag]]
+nombre       = "FCA0203.Falla.Ult.16.Fecha"
+plc          = "mitsu_q1"
+direccion    = "D6846"
+tipo         = "int16"
+escala       = 1.0
+offset       = 0.0
+scan_ms      = 5000
+registro     = "intervalo"
+
+[[tag]]
+nombre       = "FCA0203.Falla.Ult.16.Hora"
+plc          = "mitsu_q1"
+direccion    = "D6847"
+tipo         = "int16"
+escala       = 1.0
+offset       = 0.0
+scan_ms      = 5000
+registro     = "intervalo"
+
+[[tag]]
+nombre       = "FCA0203.Falla.Ult.17.Codigo"
+plc          = "mitsu_q1"
+direccion    = "D6848"
+tipo         = "int16"
+escala       = 1.0
+offset       = 0.0
+scan_ms      = 5000
+registro     = "intervalo"
+
+[[tag]]
+nombre       = "FCA0203.Falla.Ult.17.Fecha"
+plc          = "mitsu_q1"
+direccion    = "D6849"
+tipo         = "int16"
+escala       = 1.0
+offset       = 0.0
+scan_ms      = 5000
+registro     = "intervalo"
+
+[[tag]]
+nombre       = "FCA0203.Falla.Ult.17.Hora"
+plc          = "mitsu_q1"
+direccion    = "D6850"
+tipo         = "int16"
+escala       = 1.0
+offset       = 0.0
+scan_ms      = 5000
+registro     = "intervalo"
+
+[[tag]]
+nombre       = "FCA0203.Falla.Ult.18.Codigo"
+plc          = "mitsu_q1"
+direccion    = "D6851"
+tipo         = "int16"
+escala       = 1.0
+offset       = 0.0
+scan_ms      = 5000
+registro     = "intervalo"
+
+[[tag]]
+nombre       = "FCA0203.Falla.Ult.18.Fecha"
+plc          = "mitsu_q1"
+direccion    = "D6852"
+tipo         = "int16"
+escala       = 1.0
+offset       = 0.0
+scan_ms      = 5000
+registro     = "intervalo"
+
+[[tag]]
+nombre       = "FCA0203.Falla.Ult.18.Hora"
+plc          = "mitsu_q1"
+direccion    = "D6853"
+tipo         = "int16"
+escala       = 1.0
+offset       = 0.0
+scan_ms      = 5000
+registro     = "intervalo"
+
+[[tag]]
+nombre       = "FCA0203.Falla.Ult.19.Codigo"
+plc          = "mitsu_q1"
+direccion    = "D6854"
+tipo         = "int16"
+escala       = 1.0
+offset       = 0.0
+scan_ms      = 5000
+registro     = "intervalo"
+
+[[tag]]
+nombre       = "FCA0203.Falla.Ult.19.Fecha"
+plc          = "mitsu_q1"
+direccion    = "D6855"
+tipo         = "int16"
+escala       = 1.0
+offset       = 0.0
+scan_ms      = 5000
+registro     = "intervalo"
+
+[[tag]]
+nombre       = "FCA0203.Falla.Ult.19.Hora"
+plc          = "mitsu_q1"
+direccion    = "D6856"
+tipo         = "int16"
+escala       = 1.0
+offset       = 0.0
+scan_ms      = 5000
+registro     = "intervalo"
+
+[[tag]]
+nombre       = "FCA0203.Falla.Ult.20.Codigo"
+plc          = "mitsu_q1"
+direccion    = "D6857"
+tipo         = "int16"
+escala       = 1.0
+offset       = 0.0
+scan_ms      = 5000
+registro     = "intervalo"
+
+[[tag]]
+nombre       = "FCA0203.Falla.Ult.20.Fecha"
+plc          = "mitsu_q1"
+direccion    = "D6858"
+tipo         = "int16"
+escala       = 1.0
+offset       = 0.0
+scan_ms      = 5000
+registro     = "intervalo"
+
+[[tag]]
+nombre       = "FCA0203.Falla.Ult.20.Hora"
+plc          = "mitsu_q1"
+direccion    = "D6859"
 tipo         = "int16"
 escala       = 1.0
 offset       = 0.0

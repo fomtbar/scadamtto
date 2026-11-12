@@ -60,7 +60,13 @@ export function Mantenimiento({ vista }: { vista: Vista }) {
             {vista.plcVivo ? "Corriendo" : "Sin vida"}
           </dd>
           <dt className="text-tenue">Última lectura del adquisidor</dt>
-          <dd className="num text-right">{vista.segDesdeLectura === null ? "—" : `hace ${antiguedad(vista.segDesdeLectura)}`}</dd>
+          <dd className="num texto-tono text-right" data-tono={vista.adquisidorAdelantadoSeg !== null ? "aviso" : "neutro"}>
+            {vista.segDesdeLectura === null
+              ? "—"
+              : vista.adquisidorAdelantadoSeg !== null
+                ? `reloj ${antiguedad(vista.adquisidorAdelantadoSeg)} adelantado`
+                : `hace ${antiguedad(Math.max(0, vista.segDesdeLectura))}`}
+          </dd>
           <dt className="text-tenue">Reloj del PLC</dt>
           <dd className="num texto-tono text-right" data-tono={vista.reloj.aviso ? "aviso" : "neutro"}>
             {vista.reloj.plc ?? "—"}

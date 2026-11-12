@@ -1,4 +1,5 @@
 import type { Tags } from "./dominio";
+import { FALLAS, N_ULTIMAS } from "./fallas";
 
 /**
  * Datos de ejemplo para DATOS_DEMO=si: sirven para ver la pantalla sin base
@@ -79,6 +80,34 @@ export function tagsDemo(ahora: Date, variante: Variante = "normal"): Tags {
     poner(p + "PiezasJ2", activo ? Math.round((15 + pseudo(h + 3) * 6) * fraccion) : 0);
     poner(p + "SegProd", activo ? Math.round((2600 + r * 700) * fraccion) : 0);
     poner(p + "SegFalla", activo ? Math.round(r * 420 * fraccion) : 0);
+  }
+
+  // Fallas: algunas frecuentes (alambre, gas, confirmacion de pieza) y el
+  // resto en cero, como en una celda real.
+  const frecuentes: Record<string, [number, number]> = {
+    M1868: [41, 2380], M1884: [37, 2110], M1867: [22, 5400], M1883: [19, 4920],
+    M1866: [12, 3010], M2903: [28, 840], M3905: [24, 760], M2841: [9, 1260],
+    M3843: [7, 980], M1840: [5, 4100], M1843: [14, 1650], M1873: [3, 2700], M1889: [2, 1900],
+  };
+  const activaAhora = variante === "falla" ? "M1884" : estado === 4 ? "M1868" : null;
+  for (const f of FALLAS) {
+    const k = `Falla.F${String(f.codigo).padStart(3, "0")}.`;
+    const [veces, seg] = frecuentes[f.dispositivo] ?? [0, 0];
+    poner(k + "Activa", f.dispositivo === activaAhora ? 1 : 0);
+    poner(k + "Veces", veces);
+    poner(k + "Seg", seg);
+  }
+  const porDispositivo = new Map(FALLAS.map((f) => [f.dispositivo, f.codigo]));
+  const registro = ["M1868", "M3905", "M1884", "M1867", "M2903", "M1843", "M1868", "M2841", "M1866", "M1884", "M3843", "M2903"];
+  if (activaAhora) registro.unshift(activaAhora);
+  for (let n = 1; n <= N_ULTIMAS; n++) {
+    const p = `Falla.Ult.${String(n).padStart(2, "0")}.`;
+    const dev = registro[n - 1];
+    // Una cada ~50 min hacia atras.
+    const t = new Date(ahora.getTime() - (n - 1) * 50 * 60_000 - 7 * 60_000);
+    poner(p + "Codigo", dev ? porDispositivo.get(dev)! : 0);
+    poner(p + "Fecha", dev ? (t.getMonth() + 1) * 100 + t.getDate() : 0);
+    poner(p + "Hora", dev ? t.getHours() * 100 + t.getMinutes() : 0);
   }
   return tags;
 }

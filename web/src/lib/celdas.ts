@@ -15,6 +15,8 @@ export type Celda = {
   /** Prefijo de las tags en la base. */
   prefijo: string;
   descripcion: string;
+  /** Solapa preparada sin datos todavia: muestra "Próximamente". */
+  enDesarrollo?: boolean;
 };
 
 export const CELDAS: Celda[] = [
@@ -23,6 +25,13 @@ export const CELDAS: Celda[] = [
     nombre: "FCA 02/03",
     prefijo: "FCA0203",
     descripcion: "Soldadura de butacas · 2 robots Yaskawa · 2 jigs",
+  },
+  {
+    id: "tub01",
+    nombre: "TUB 01",
+    prefijo: "TUB01",
+    descripcion: "",
+    enDesarrollo: true,
   },
 ];
 

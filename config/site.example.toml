@@ -33,3 +33,5 @@ tabla     = "RegistroPLC"      # usada en modo "historial"
 usuario   = "fmasino"
 password  = "poner-aca"     # o dejar fuera y usar SCADAMTTO_DB_PASSWORD
 timeout_s = 30.0
+hora_servidor = true        # fechas con el reloj del SQL Server (recomendado):
+                            # una PC con la hora corrida no ensucia la base

@@ -58,6 +58,13 @@ En `modo = "historial"` conviene `registro = "cambio"` con `banda_muerta` y
 La password de la base puede ir en `site.toml` o en la variable de entorno
 `SCADAMTTO_DB_PASSWORD`, que tiene prioridad.
 
+**Reloj:** con `hora_servidor = true` (el valor por defecto), `FechaHora` y
+`FechaLectura` salen del reloj del **SQL Server**. El adquisidor manda cuánto
+hace que leyó cada muestra y el servidor lo resta de `SYSDATETIME()`. Así una
+PC de adquisición con la hora corrida no afecta la base, y las muestras que
+quedaron en el buffer durante un corte conservan su hora real. Con `false` se
+usa el reloj de esta PC, que era el comportamiento anterior.
+
 ## Cómo escribe en la base
 
 Hay dos modos, en `[db].modo` de `site.toml`.

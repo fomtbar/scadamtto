@@ -7,6 +7,8 @@
  * plc/bloque_scada/LEEME.md en la raiz del proyecto.
  */
 
+import { FALLAS, N_ULTIMAS, type DefFalla } from "./fallas";
+
 /** Una fila de ValorActual, ya sin el prefijo de la celda en la clave. */
 export type Lectura = {
   /** null si la ultima lectura fallo. */
@@ -39,11 +41,40 @@ export type Hora = {
 
 export type Senal = { clave: string; texto: string; activa: boolean; tono: Tono; grupo: string };
 
+export type FallaAcumulada = { def: DefFalla; veces: number; seg: number; activa: boolean };
+
+export type FallaReciente = {
+  /** 1 = la mas nueva. */
+  orden: number;
+  codigo: number;
+  /** null si el codigo no esta en el catalogo (programa del PLC mas nuevo que la web). */
+  def: DefFalla | null;
+  /** "dd/mm hh:mm", con "/aa" si es de otro anio. */
+  cuando: string;
+  activa: boolean;
+};
+
+export type VistaFallas = {
+  /** El adquisidor ya trae las tags de fallas (bloque SCADA con la seccion 10). */
+  hayTags: boolean;
+  activas: DefFalla[];
+  ultimas: FallaReciente[];
+  /** Solo las que aparecieron alguna vez, de mas veces a menos. */
+  acumulado: FallaAcumulada[];
+};
+
 export type Vista = {
   hayDatos: boolean;
   /** El adquisidor no leyo en el ultimo minuto: los valores pueden ser viejos. */
   desactualizado: boolean;
   segDesdeLectura: number | null;
+  /**
+   * La ultima lectura figura en el futuro: el reloj con que el adquisidor
+   * fecha las filas (el de su PC, si no usa hora_servidor) esta adelantado
+   * respecto del SQL Server. Segundos de adelanto, o null si esta bien.
+   * Mientras pase, el aviso de "dato desactualizado" no puede funcionar.
+   */
+  adquisidorAdelantadoSeg: number | null;
   /** El contador de vida del PLC sigue cambiando. */
   plcVivo: boolean;
   celda: Estado;
@@ -55,11 +86,14 @@ export type Vista = {
   senales: Senal[];
   contadores: { texto: string; valor: number | null }[];
   reloj: { plc: string | null; servidor: string; difMin: number | null; aviso: boolean };
+  fallas: VistaFallas;
 };
 
 export const SEG_DESACTUALIZADO = 60;
 export const SEG_VIDA = 15;
 export const MIN_RELOJ = 5;
+/** Tolerancia para considerar que una lectura "del futuro" es un reloj corrido. */
+export const SEG_RELOJ_ADQUISIDOR = 30;
 
 const ESTADOS: Record<number, Omit<Estado, "codigo">> = {
   0: { texto: "Sin modo", tono: "neutro" },
@@ -132,6 +166,58 @@ export function tablaHoras(tags: Tags, hoy: number, horaActual: number, anio: nu
   return horas;
 }
 
+const dos = (n: number) => String(n).padStart(2, "0");
+
+/**
+ * Fecha de una falla del registro del PLC. El PLC guarda MMDD sin anio: si
+ * el MMDD es posterior a hoy, la falla es del anio anterior.
+ */
+export function cuandoFalla(mmdd: number, hhmm: number, hoy: number, anio: number): string {
+  const delAnio = mmdd > hoy ? anio - 1 : anio;
+  const texto = `${dos(mmdd % 100)}/${dos(Math.floor(mmdd / 100))} ${dos(Math.floor(hhmm / 100))}:${dos(hhmm % 100)}`;
+  return delAnio === anio ? texto : `${texto.slice(0, 5)}/${String(delAnio).slice(2)}${texto.slice(5)}`;
+}
+
+const POR_CODIGO = new Map(FALLAS.map((f) => [f.codigo, f]));
+
+/**
+ * Fallas: activas ahora, registro de las ultimas (D6800..) y acumulado por
+ * tipo (veces y segundos activa). Ver plc/bloque_scada/fallas.py.
+ */
+export function vistaFallas(tags: Tags, hoy: number, anio: number): VistaFallas {
+  const clave = (c: number) => `Falla.F${String(c).padStart(3, "0")}`;
+  const activa = (c: number) => bit(tags, `${clave(c)}.Activa`);
+  const hayTags = `${clave(1)}.Veces` in tags || "Falla.Ult.01.Codigo" in tags;
+
+  const ultimas: FallaReciente[] = [];
+  for (let n = 1; n <= N_ULTIMAS; n++) {
+    const pre = `Falla.Ult.${dos(n)}.`;
+    const codigo = valor(tags, pre + "Codigo");
+    const mmdd = valor(tags, pre + "Fecha");
+    const hhmm = valor(tags, pre + "Hora");
+    // Codigo 0 = renglon todavia vacio (el registro se llena de a uno).
+    if (!codigo || mmdd === null || hhmm === null || mmdd < 101 || mmdd > 1231) continue;
+    ultimas.push({
+      orden: n,
+      codigo,
+      def: POR_CODIGO.get(codigo) ?? null,
+      cuando: cuandoFalla(mmdd, hhmm, hoy, anio),
+      activa: activa(codigo),
+    });
+  }
+
+  const acumulado = FALLAS.map((def) => ({
+    def,
+    veces: valor(tags, `${clave(def.codigo)}.Veces`) ?? 0,
+    seg: valor(tags, `${clave(def.codigo)}.Seg`) ?? 0,
+    activa: activa(def.codigo),
+  }))
+    .filter((f) => f.veces > 0 || f.seg > 0)
+    .sort((a, b) => b.veces - a.veces || b.seg - a.seg);
+
+  return { hayTags, activas: FALLAS.filter((f) => activa(f.codigo)), ultimas, acumulado };
+}
+
 const SENALES: Omit<Senal, "activa">[] = [
   { clave: "Celda.Emergencia", texto: "Parada de emergencia", tono: "falla", grupo: "Celda" },
   { clave: "Celda.FallaGeneral", texto: "Falla general", tono: "falla", grupo: "Celda" },
@@ -191,7 +277,6 @@ export function construirVista(tags: Tags, ahoraServidor: string): Vista {
     const plc = new Date(srv.anio, Math.floor(fechaPlc! / 100) - 1, fechaPlc! % 100, Math.floor(horaPlc! / 100), horaPlc! % 100);
     const ser = new Date(srv.anio, srv.mes - 1, srv.dia, srv.hora, srv.minuto);
     difMin = Math.round((plc.getTime() - ser.getTime()) / 60_000);
-    const dos = (n: number) => String(n).padStart(2, "0");
     plcTexto = `${dos(fechaPlc! % 100)}/${dos(Math.floor(fechaPlc! / 100))} ${dos(Math.floor(horaPlc! / 100))}:${dos(horaPlc! % 100)}`;
   }
 
@@ -219,6 +304,8 @@ export function construirVista(tags: Tags, ahoraServidor: string): Vista {
     hayDatos,
     desactualizado,
     segDesdeLectura,
+    adquisidorAdelantadoSeg:
+      segDesdeLectura !== null && segDesdeLectura < -SEG_RELOJ_ADQUISIDOR ? -segDesdeLectura : null,
     plcVivo,
     celda: estadoDe(valor(tags, "Celda.Estado")),
     auto: bit(tags, "Celda.Auto"),
@@ -241,6 +328,7 @@ export function construirVista(tags: Tags, ahoraServidor: string): Vista {
       difMin,
       aviso: difMin !== null && Math.abs(difMin) > MIN_RELOJ,
     },
+    fallas: vistaFallas(tags, hoy, srv.anio),
   };
 }
 
